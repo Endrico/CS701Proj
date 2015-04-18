@@ -22,14 +22,12 @@ END mem;
 ARCHITECTURE behaviour OF mem IS
 	type DMEMORY is array(16383 downto 0) of std_logic_vector(15 downto 0); --16K Memory
 	constant dataInit : DMEMORY := (
-  x"4010",x"0006",x"0000",
-  x"4020",x"000A",x"0000",
-  x"F821",x"0000",x"0000",
-  x"4030",x"00AA",x"0000",
-  x"4040",x"0092",x"0000",
-  x"C843",x"0000",x"0000",
-        x"BEEF", --Address 0
-        x"1234", --Address 1
+x"4010",x"0006",x"0000",
+x"4020",x"000A",x"0000",
+x"F821",x"0000",x"0000",
+x"4030",x"9695",x"0000",
+x"4040",x"4C3A",x"0000",
+x"C843",x"0000",x"0000",
 		others => x"0000");
 	signal DATA_MEM : DMEMORY := dataInit;
 BEGIN
