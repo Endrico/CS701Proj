@@ -22,27 +22,7 @@ END prog_mem;
 ARCHITECTURE behaviour OF prog_mem IS
 	type DMEMORY is array(0 to 65535) of std_logic_vector(15 downto 0); --16K Memory
 	constant dataInit : DMEMORY := (
-	x"3400",
-	x"4010",
-	x"0001",
-	x"4040",
-	x"0010",
-	x"4344",
-	x"0001",
-	x"5C40",
-	x"0000",
-	x"F811",
-	x"F700",
-	x"CC01",
-	x"FA00",
-	x"4030",
-	x"FFFF",
-	x"4333",
-	x"0001",
-	x"5C30",
-	x"0005",
-	x"5800",
-	x"000F",
+	--PROGRAM HERE
 		others => x"0000");
 	signal DATA_MEM : DMEMORY := dataInit;
 BEGIN
