@@ -4,11 +4,11 @@
 
 void Register::my_Register()
 {
-  if(Ld_Reg) {
+  if(RST) {
+    Reg_temp = 0;
+  } else if(Ld_Reg) {
     Reg_temp = Input;
   }
   Output = Reg_temp;
 }
-
-
 

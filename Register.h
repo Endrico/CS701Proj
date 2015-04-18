@@ -9,10 +9,11 @@ SC_MODULE(Register)
 {
   //Port
   sc_in<bool> CLK;
+  sc_in<bool> RST;
   sc_in<bool> Ld_Reg;
   sc_in<sc_uint<16> > Input;
   
-  sc_out<sc_uint<16> > Output
+  sc_out<sc_uint<16> > Output;
   
   // Variables
   sc_uint<16> Reg_temp;
@@ -27,3 +28,4 @@ SC_MODULE(Register)
 };
 
 #endif // __Register_h_
+
