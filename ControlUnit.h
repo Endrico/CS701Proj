@@ -16,8 +16,12 @@ SC_MODULE(ControlUnit)
   sc_out<bool> mem_sel;
   sc_out<bool> WE;
 
+  sc_in<bool> zout;
   sc_out<bool> ld_IR;
   sc_out<bool> clrz;
+  sc_out<bool> clrer;
+  sc_out<bool> clreot;
+  sc_out<bool> seteot;
   sc_out<bool> wr_en;
   sc_out<bool> ER_Ld_Reg;
   sc_out<bool> SIP_Ld_Reg;
@@ -26,10 +30,13 @@ SC_MODULE(ControlUnit)
   sc_out<bool> mux_B_sel;
   sc_out<bool> PC_reg_ld;
   sc_out<bool> data_write;
+  sc_out<bool> mux_DMR_sel;
+  sc_out<bool> mux_DMW_sel;
   sc_out<sc_uint<2> > alu_op;
   sc_out<sc_uint<2> > mux_A_sel;
   sc_out<sc_uint<2> > mux_PC_sel;
   sc_out<sc_uint<2> > mux_RF_sel;
+  sc_out<sc_uint<2> > mux_DM_Data_sel;
   sc_out<sc_uint<4> > sel_x;
   sc_out<sc_uint<4> > sel_z;
   sc_out<sc_uint<4> > wr_dest;
