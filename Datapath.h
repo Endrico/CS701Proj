@@ -3,6 +3,7 @@
 
 #include "systemc.h"
 #include "ALU.h"
+#include "MAX.h"
 #include "IR.h"
 #include "RF.h"
 #include "PC.h"
@@ -20,22 +21,30 @@ SC_MODULE(datapath)
   sc_in<sc_uint<16> > SIPi;
 
   // Control Signals
+  sc_out<bool> zout;
   sc_in<bool> ld_IR;
-  sc_in<sc_uint<2> > alu_op;
   sc_in<bool> clrz;
-  sc_in<sc_uint<4> > sel_x;
-  sc_in<sc_uint<4> > sel_z;
+  sc_in<bool> clrer; //TODO Assign
+  sc_in<bool> clreot; //TODO Assign
+  sc_in<bool> seteot; //TODO Assign
   sc_in<bool> wr_en;
-  sc_in<sc_uint<4> > wr_dest;
+  sc_in<bool> ER_Ld_Reg; //TODO Assign
   sc_in<bool> SIP_Ld_Reg;
   sc_in<bool> SOP_Ld_Reg;
   sc_in<bool> SVOP_Ld_Reg;
-  sc_in<sc_uint<2> > mux_A_sel;
   sc_in<bool> mux_B_sel;
-  sc_in<sc_uint<2> > mux_PC_sel;
   sc_in<bool> PC_reg_ld;
-  sc_in<sc_uint<2> > mux_RF_sel;
   sc_in<bool> data_write;
+  sc_in<bool> mux_DMR_sel;
+  sc_in<bool> mux_DMW_sel;
+  sc_in<sc_uint<2> > alu_op;
+  sc_in<sc_uint<2> > mux_A_sel;
+  sc_in<sc_uint<2> > mux_PC_sel;
+  sc_in<sc_uint<2> > mux_RF_sel;
+  sc_in<sc_uint<2> > mux_DM_Data_sel;
+  sc_in<sc_uint<4> > sel_x;
+  sc_in<sc_uint<4> > sel_z;
+  sc_in<sc_uint<4> > wr_dest;
 
   // ENV out
   sc_out<bool> CLR_IRQ;
@@ -50,41 +59,37 @@ SC_MODULE(datapath)
   sc_out<sc_uint<12> > ADDR;
 
   // Instruction code
-  sc_out<sc_uint<32> > I_code;
+  sc_out<sc_uint<16> > instruction;
 
   // Internal Connections
+  sc_signal<sc_uint<32> > I_code;
   sc_signal<sc_uint<16> > I_in;
   sc_signal<sc_uint<16> > alu_A;
   sc_signal<sc_uint<16> > alu_B;
   sc_signal<sc_uint<16> > alu_out;
-  sc_signal<bool> alu_Z;
+  sc_signal<sc_uint<16> > max_out;
   sc_signal<sc_uint<16> > wr_data;
   sc_signal<sc_uint<16> > SIP;
   sc_signal<sc_uint<16> > operand;
   sc_signal<sc_uint<16> > DM_out;
 
   sc_signal<sc_uint<16> > Rx;
-  sc_signal<sc_uint<16> > mux_A_in_2;
-  sc_signal<sc_uint<16> > mux_A_in_3;
-  sc_signal<sc_uint<16> > mux_A_in_4;
-
   sc_signal<sc_uint<16> > Rz;
-  sc_signal<sc_uint<16> > mux_B_in_2;
 
-  sc_signal<sc_uint<8> > mux_DCPR_in_1;
-  sc_signal<sc_uint<8> > mux_DCPR_in_2;
-  sc_signal<sc_uint<8> > mux_DCPR_in_3;
-  sc_signal<sc_uint<8> > mux_DCPR_in_4;
+  sc_signal<sc_uint<8> > mux_DPCR_in_1;
+  sc_signal<sc_uint<8> > mux_DPCR_in_2;
+  sc_signal<sc_uint<8> > mux_DPCR_in_3;
+  sc_signal<sc_uint<8> > mux_DPCR_in_4;
 
 
   // Mem transformed signals
   sc_signal<sc_logic> lg_CLK;
 
-  sc_signal<sc_lv<16> > DM_data_in;
-  sc_signal<sc_lv<16> > DM_rdaddress;
-  sc_signal<sc_lv<16> > DM_wraddress;
-  sc_signal<sc_logic> DM_wren;
-  sc_signal<sc_lv<16> > DM_q;
+  sc_signal<sc_lv<16> > DM_data_in; // From: mux_DM_Data_out
+  sc_signal<sc_lv<16> > DM_rdaddress; // From: data_rdadd
+  sc_signal<sc_lv<16> > DM_wraddress; // From: data_wradd
+  sc_signal<sc_logic> DM_wren; // From: data_write
+  sc_signal<sc_lv<16> > DM_q; // To: DM_out
 
   sc_signal<sc_lv<16> > PM_data;
   sc_signal<sc_lv<16> > PM_rdaddress;
@@ -100,19 +105,20 @@ SC_MODULE(datapath)
   void datatransform();
 
   ALU *my_ALU;
+  MAX *my_MAX;
   IR *my_IR;
   RF *my_RF;
   PC *my_PC;
-  DPRR *my_DPRR; //TODO
-  DPCR *my_DPCR; //TODO
+  DPRR *my_DPRR; //TODO Create
+  DPCR *my_DPCR; //TODO Create
   data_mem *my_Data_mem;
   prog_mem *my_Prog_mem;
   Register *SIP, *SOP, *SVOP;
-  ER *my_ER; //TODO
-  EOT *my_EOT; //TODO
+  ER *my_ER; //TODO Create
+  EOT *my_EOT; //TODO Create
   Mul4<16> *A_sel;
   Mul2<16> *B_sel;
-  Mul4<8> *DCPR_sel;
+  Mul4<8> *DPCR_sel;
   Mul7<16> *RF_sel;
   Mul2<16> *DMR_sel;
   Mul2<16> *DMW_sel;
@@ -130,7 +136,12 @@ SC_MODULE(datapath)
     my_ALU->A(alu_A);
     my_ALU->B(alu_B);
     my_ALU->out(alu_out);
-    my_ALU->Z(alu_Z);
+    my_ALU->Z(zout);
+
+    my_MAX = new MAX("my_MAX");
+    my_MAX->A(alu_A);
+    my_MAX->B(alu_B);
+    my_MAX->out(max_out);
 
     A_sel = new Mul4<16>("A_sel");
     A_sel->in1(Rx);
@@ -146,13 +157,13 @@ SC_MODULE(datapath)
     B_sel->out(alu_B);
     B_sel->select(mux_B_sel);
 
-    DCPR_sel = new Mul4<8>("DCPR_sel");
-    DCPR_sel->in1(mux_DCPR_in_1);
-    DCPR_sel->in2(mux_DCPR_in_2);
-    DCPR_sel->in3(mux_DCPR_in_3);
-    DCPR_sel->in4(mux_DCPR_in_4);
-    DCPR_sel->out(alu_DCPR);
-    DCPR_sel->select(mux_DCPR_sel);
+    DPCR_sel = new Mul4<8>("DPCR_sel");
+    DPCR_sel->in1(mux_DPCR_in_1);
+    DPCR_sel->in2(mux_DPCR_in_2);
+    DPCR_sel->in3(mux_DPCR_in_3);
+    DPCR_sel->in4(mux_DPCR_in_4);
+    DPCR_sel->out(alu_DPCR);
+    DPCR_sel->select(mux_DPCR_sel);
 
     RF_sel = new Mul7<16>("RF_sel");
     RF_sel->in1(operand);

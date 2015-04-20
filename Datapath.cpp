@@ -15,5 +15,8 @@ void Datapath::datatransform() {
   PM_wraddress = uint16_null.read();
   PM_wren = static_cast<sc_logic> (bool_null.read());
   I_in = PM_q.read().to_uint();
+
+  operand = I_code.read().range(15,0);
+  instruction = I_code.read().range(31,16);
 }
 
