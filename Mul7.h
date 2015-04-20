@@ -3,17 +3,18 @@
 
 #include "systemc.h"
 
+template<int SIZE>
 SC_MODULE(Mul7)
 {
   sc_in<sc_bv<3> > select;
-  sc_in<sc_int<16> > in1;
-  sc_in<sc_int<16> > in2;
-  sc_in<sc_int<16> > in3;
-  sc_in<sc_int<16> > in4;
-  sc_in<sc_int<16> > in5;
-  sc_in<sc_int<16> > in6;
-  sc_in<sc_int<16> > in7;
-  sc_out<sc_int<16> > out;
+  sc_in<sc_int<SIZE> > in1;
+  sc_in<sc_int<SIZE> > in2;
+  sc_in<sc_int<SIZE> > in3;
+  sc_in<sc_int<SIZE> > in4;
+  sc_in<sc_int<SIZE> > in5;
+  sc_in<sc_int<SIZE> > in6;
+  sc_in<sc_int<SIZE> > in7;
+  sc_out<sc_int<SIZE> > out;
 
   void my_Mul7( );
 

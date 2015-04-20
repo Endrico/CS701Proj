@@ -3,14 +3,15 @@
 
 #include "systemc.h"
 
+template<int SIZE>
 SC_MODULE(Mul4)
 {
-  sc_in<sc_bv<2> > select;
-  sc_in<sc_int<16> > in1;
-  sc_in<sc_int<16> > in2;
-  sc_in<sc_int<16> > in3;
-  sc_in<sc_int<16> > in4;
-  sc_out<sc_int<16> > out;
+  sc_in<sc_uint<2> > select;
+  sc_in<sc_uint<SIZE> > in1;
+  sc_in<sc_uint<SIZE> > in2;
+  sc_in<sc_uint<SIZE> > in3;
+  sc_in<sc_uint<SIZE> > in4;
+  sc_out<sc_uint<SIZE> > out;
 
   void my_mul4( );
 
