@@ -95,6 +95,7 @@ SC_MODULE(datapath)
 
   sc_signal<bool> bool_null;
   sc_signal<sc_uint<16> > uint16_null;
+  sc_signal<sc_uint<16> > const_1;
 
   void datatransform();
 
@@ -104,15 +105,15 @@ SC_MODULE(datapath)
   PC *my_PC;
   DPRR *my_DPRR; //TODO
   DPCR *my_DPCR; //TODO
-  data_mem *my_Data_mem; //TODO
-  prog_mem *my_Prog_mem; //TODO
+  data_mem *my_Data_mem;
+  prog_mem *my_Prog_mem;
   Register *SIP, *SOP, *SVOP;
   ER *my_ER; //TODO
   EOT *my_EOT; //TODO
   Mul4<16> *A_sel;
   Mul2<16> *B_sel;
   Mul4<8> *DCPR_sel;
-  Mul4<16> *RF_sel;
+  Mul7<16> *RF_sel;
   Mul2<16> *DMR_sel;
   Mul2<16> *DMW_sel;
   Mul4<16> *DM_Data_sel;
@@ -121,6 +122,7 @@ SC_MODULE(datapath)
   {
     bool_null = 0;
     uint16_null = 0;
+    const_1 = 1;
 
     my_ALU = new ALU("my_ALU");
     my_ALU->clrz(clrz);
@@ -133,8 +135,8 @@ SC_MODULE(datapath)
     A_sel = new Mul4<16>("A_sel");
     A_sel->in1(Rx);
     A_sel->in2(operand);
-    A_sel->in3(mux_A_in_3);
-    A_sel->in4(mux_A_in_4);
+    A_sel->in3(const_1);
+    A_sel->in4(mem_FIFO);
     A_sel->out(alu_A);
     A_sel->select(mux_A_sel);
 
@@ -152,11 +154,14 @@ SC_MODULE(datapath)
     DCPR_sel->out(alu_DCPR);
     DCPR_sel->select(mux_DCPR_sel);
 
-    RF_sel = new Mul4<16>("RF_sel");
+    RF_sel = new Mul7<16>("RF_sel");
     RF_sel->in1(operand);
-    RF_sel->in2(alu_out);
-    RF_sel->in3(DM_out);
-    RF_sel->in4(SIP);
+    RF_sel->in2(Rx);
+    RF_sel->in3(alu_out);
+    RF_sel->in4(max_out);
+    RF_sel->in5(SIP);
+    RF_sel->in6(ER_0);
+    RF_sel->in7(DM_out);
     RF_sel->out(wr_data);
     RF_sel->select(mux_RF_sel);
 
