@@ -35,7 +35,7 @@ SC_MODULE(PC)
   // Instantiating Modules
   // Program Counter Block
   Register *my_PCR;
-  Mul4 *my_PCMul;
+  Mul4<16> *my_PCMul;
   PCAdder *my_PCAdder;  
 
   SC_CTOR(PC)
@@ -49,7 +49,7 @@ SC_MODULE(PC)
     my_PCR->Output(Prog_mem_out);
 
     // Program Counter Multiplexer
-    my_PCMul = new Mul4("my_PCMul");
+    my_PCMul = new Mul4<16>("my_PCMul");
     //Input
     my_PCMul->select(PC_mux_in);
     my_PCMul->in1(PC1);
