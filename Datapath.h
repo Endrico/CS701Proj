@@ -241,8 +241,9 @@ SC_MODULE(datapath)
     my_PC->PC_mux_in(mux_PC_sel);
     my_PC->Operand(operand);
     my_PC->Rx(Rx);
-    my_PC->Data_out(PC_out);
+    my_PC->Data_out(uint16_null);
     my_PC->PC_reg_ld(PC_reg_ld);
+    my_PC->Prog_mem_out(PC_out);
 
     SIP = new Register("SIP");
     SIP->CLK(CLK);
