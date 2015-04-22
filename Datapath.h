@@ -7,8 +7,9 @@
 #include "IR.h"
 #include "RF.h"
 #include "PC.h"
-#include "DPRR.h"
-#include "DPCR.h"
+#include "DPRegisters"
+//#include "DPRR.h"
+//#include "DPCR.h"
 #include "data_mem.h"
 #include "prog_mem.h"
 #include "Register.h"
@@ -24,14 +25,14 @@ SC_MODULE(datapath)
   sc_out<bool> zout;
   sc_in<bool> ld_IR;
   sc_in<bool> clrz;
-  sc_in<bool> clrer; //TODO Assign
-  sc_in<bool> clreot; //TODO Assign
-  sc_in<bool> seteot; //TODO Assign
+  sc_in<bool> clrer; //TODO Assign // DONE 
+  sc_in<bool> clreot; //TODO Assign // DONE
+  sc_in<bool> seteot; //TODO Assign //DONE
   sc_in<bool> wr_en;
-  sc_in<bool> ER_Ld_Reg; //TODO Assign
   sc_in<bool> SIP_Ld_Reg;
   sc_in<bool> SOP_Ld_Reg;
   sc_in<bool> SVOP_Ld_Reg;
+  sc_in<bool> DPCR_Ld_Reg;
   sc_in<bool> mux_B_sel;
   sc_in<bool> PC_reg_ld;
   sc_in<bool> data_write;
@@ -50,7 +51,8 @@ SC_MODULE(datapath)
   sc_out<bool> CLR_IRQ;
   sc_out<bool> EOT;
   sc_out<bool> DPC;
-  sc_out<sc_uint<8> > DPCR;
+  sc_in<bool> ER_Ld_Reg; //TODO Assign // DONE
+  sc_out<sc_uint<32> > DPCR; // Changed this nee to check
   sc_out<sc_uint<4> > CCD;
   sc_out<sc_uint<4> > PCD;
   sc_out<sc_uint<16> > SOPi;
@@ -80,8 +82,7 @@ SC_MODULE(datapath)
   sc_signal<sc_uint<8> > mux_DPCR_in_2;
   sc_signal<sc_uint<8> > mux_DPCR_in_3;
   sc_signal<sc_uint<8> > mux_DPCR_in_4;
-
-
+  
   // Mem transformed signals
   sc_signal<sc_logic> lg_CLK;
 
@@ -99,7 +100,7 @@ SC_MODULE(datapath)
   sc_signal<sc_uint<16> > PC_out;
 
   sc_signal<bool> bool_null;
-  sc_signal<sc_uint<16> > uint16_null;
+  sc_signal<sc_uint<16> > uint16_null; // NEED TO CHANGE
   sc_signal<sc_uint<16> > const_1;
 
   void datatransform();
@@ -109,13 +110,13 @@ SC_MODULE(datapath)
   IR *my_IR;
   RF *my_RF;
   PC *my_PC;
-  DPRR *my_DPRR; //TODO Create
-  DPCR *my_DPCR; //TODO Create
+  DPRegisters *my_DPRR; //TODO Create // Dunno about this one as it only interacts with the CU from what I can see
+  DPRegisters *my_DPCR; //TODO Create // Done
   data_mem *my_Data_mem;
   prog_mem *my_Prog_mem;
   Register *SIP, *SOP, *SVOP;
-  ER *my_ER; //TODO Create
-  EOT *my_EOT; //TODO Create
+  ER *my_ER; //TODO Create // DONE
+  EOT *my_EOT; //TODO Create // DONE
   Mul4<16> *A_sel;
   Mul2<16> *B_sel;
   Mul4<8> *DPCR_sel;
@@ -129,7 +130,24 @@ SC_MODULE(datapath)
     bool_null = 0;
     uint16_null = 0;
     const_1 = 1;
-
+	
+	my_DPCR = new DPRegisters("my_DPRR");
+	my_DPCR->CLK(CLK);
+	my_DPCR->RST(RST;);
+	my_DPCR->Ld_Reg(DPCR_Ld_Reg;);
+	my_DPCR->Input(alu_DPCR);
+	my_DPCR->Output(DPCR);
+	
+	my_ER = new my_ER("my_ER");
+	my_ER->CLR(clrer);
+	my_ER->SET(ER_Ld_Reg);
+	my_ER->OUT(ER_0);
+	
+	my_EOT = new EOT("my_EOT");
+	my_EOT->CLR(clreot);
+	my_EOT->SET(seteot);
+	my_EOT->OUT(EOT);
+	
     my_ALU = new ALU("my_ALU");
     my_ALU->clrz(clrz);
     my_ALU->alu_op(alu_op);
