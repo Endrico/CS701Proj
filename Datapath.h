@@ -100,7 +100,7 @@ SC_MODULE(datapath)
   sc_signal<sc_uint<16> > PC_out;
 
   sc_signal<bool> bool_null;
-  sc_signal<sc_uint<16> > uint16_null; // NEED TO CHANGE
+  sc_signal<sc_uint<16> > uint16_null;
   sc_signal<sc_uint<16> > const_1;
 
   void datatransform();
@@ -210,7 +210,7 @@ SC_MODULE(datapath)
     DM_Data_sel->in1(Rx);
     DM_Data_sel->in2(operand);
     DM_Data_sel->in3(PC_out);
-    DM_Data_sel->in4(uint16_null);
+    DM_Data_sel->in4(uint16_null); // snet null signal because it doesnt have this input.
     DM_Data_sel->out(mux_DM_Data_out);
     DM_Data_sel->select(mux_DM_Data_sel);
 
@@ -259,7 +259,7 @@ SC_MODULE(datapath)
     my_PC->PC_mux_in(mux_PC_sel);
     my_PC->Operand(operand);
     my_PC->Rx(Rx);
-    my_PC->Data_out(uint16_null);
+    my_PC->Data_out(DM_q);
     my_PC->PC_reg_ld(PC_reg_ld);
     my_PC->Prog_mem_out(PC_out);
 
