@@ -1,6 +1,6 @@
 start NOOP ;starting the program
 		LDR R1 #1
-		LDR R4 #16 ;16 bits before looping
+		LDR R4 #16 ;16 bits before looping -- get to here sofar
 count	SUBV R4 R4 #1
 		PRESENT R4 start ;if R4=0 go to start
 		ADD R1 R1 R1 ;double the number
