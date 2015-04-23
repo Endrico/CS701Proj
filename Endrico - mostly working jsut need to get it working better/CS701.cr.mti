@@ -1,0 +1,88 @@
+C:/Modelsim_work/IR.cpp {1 {sccom -work work C:/Modelsim_work/IR.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/DPRegisters.cpp {1 {sccom -work work C:/Modelsim_work/DPRegisters.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+C:/Modelsim_work/DPRegisters.cpp:13:2: warning: no newline at end of file
+
+} {} {}} C:/Modelsim_work/MAX.cpp {1 {sccom -work work C:/Modelsim_work/MAX.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/data_mem.vhd {1 {vcom -work work -2002 -explicit -vopt C:/Modelsim_work/data_mem.vhd
+Model Technology ModelSim SE vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity data_mem
+-- Compiling architecture behaviour of data_mem
+
+} {} {}} C:/Modelsim_work/Datapath.cpp {1 {sccom -work work C:/Modelsim_work/Datapath.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/Mul2.cpp {1 {sccom -work work C:/Modelsim_work/Mul2.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/EOT.cpp {1 {sccom -work work C:/Modelsim_work/EOT.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/RF.cpp {1 {sccom -work work C:/Modelsim_work/RF.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/Proc_tb.cpp {1 {sccom -work work C:/Modelsim_work/Proc_tb.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+Exported modules:
+	assignment_test_bench
+
+} {} {}} C:/Modelsim_work/ControlUnit.cpp {1 {sccom -work work C:/Modelsim_work/ControlUnit.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/ALU.cpp {1 {sccom -work work C:/Modelsim_work/ALU.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/Mul4.cpp {1 {sccom -work work C:/Modelsim_work/Mul4.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/PCAdder.cpp {1 {sccom -work work C:/Modelsim_work/PCAdder.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/Register.cpp {1 {sccom -work work C:/Modelsim_work/Register.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/Mul7.cpp {1 {sccom -work work C:/Modelsim_work/Mul7.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}} C:/Modelsim_work/prog_mem.vhd {1 {vcom -work work -2002 -explicit -vopt C:/Modelsim_work/prog_mem.vhd
+Model Technology ModelSim SE vcom 10.1c Compiler 2012.07 Jul 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity prog_mem
+-- Compiling architecture behaviour of prog_mem
+
+} {} {}} C:/Modelsim_work/ER.cpp {1 {sccom -work work C:/Modelsim_work/ER.cpp
+
+Model Technology ModelSim SE sccom 10.1c compiler 2012.07 Jul 27 2012
+
+} {} {}}
