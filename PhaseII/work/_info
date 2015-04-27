@@ -85,24 +85,59 @@ R14
 R15
 !s100 NmiRIk`5Znl78AZE>JdzU0
 !i10b 1
+Esingle_register
+Z22 w1430105858
+R5
+R6
+R7
+Z23 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
+Z24 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
+l0
+L4
+V7do_Uc@PJ_^9TS1VbUZME3
+R10
+32
+Z25 !s108 1430105977.327000
+Z26 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
+Z27 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
+R14
+R15
+!s100 :?i8GSgOjDBG5LjJCcl;F3
+!i10b 1
+Abehaviour
+R5
+R6
+DEx4 work 15 single_register 0 22 7do_Uc@PJ_^9TS1VbUZME3
+l15
+L14
+Vhd[5AR_HG@BYE?Hk7C03T0
+R10
+32
+R25
+R26
+R27
+R14
+R15
+!s100 oHhcOOb3MF[G`zndmTnW42
+!i10b 1
 Etest_alu
-Z22 w1430099948
+Z28 w1430099948
 R2
 R3
 R4
 R5
 R6
 R7
-Z23 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
-Z24 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
+Z29 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
+Z30 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
 l0
 L6
 VE@c;R58KJT@TKMU@<OVJS2
 R10
 32
-Z25 !s108 1430099955.859000
-Z26 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
-Z27 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
+Z31 !s108 1430099955.859000
+Z32 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
+Z33 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
 R14
 R15
 !s100 [^=A3`lZSf@eKI[MeLQjh1
@@ -119,33 +154,74 @@ L9
 Vk3M<_IehCTn^MSCE^A>a>0
 R10
 32
-R25
-R26
-R27
+R31
+R32
+R33
 R14
 R15
 !s100 PeUcaV5O6e;K7KzIfihYV3
 !i10b 1
 Etest_max
-Z28 w1430104347
+Z34 w1430104347
 R2
 R3
 R4
 R5
 R6
 R7
-Z29 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
-Z30 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
+Z35 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
+Z36 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
 l0
 L6
 VmCWW_SKN1B23MHN]bS7N43
+R10
+32
+Z37 !s108 1430104384.357000
+Z38 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+Z39 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+R14
+R15
 !s100 g=5b[8HZOkcAiD`G[Q<be3
+!i10b 1
+Abhvr
+R2
+R3
+R4
+R5
+R6
+DEx4 work 8 test_max 0 22 mCWW_SKN1B23MHN]bS7N43
+l19
+L9
+Vka^65P>?lfPF5:?EKRnnG0
+R10
+32
+R37
+R38
+R39
+R14
+R15
+!s100 z8:8Ydj8[SHE327Vj:4d10
+!i10b 1
+Etest_single_register
+Z40 w1430106092
+R2
+R3
+R4
+R5
+R6
+R7
+Z41 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
+Z42 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
+l0
+L6
+VIlH`Ig@24c@[Db0NfeV@_2
+!s100 QfA@AlVWcU0e0SWVJe8AZ0
 R10
 32
 !i10b 1
-Z31 !s108 1430104384.357000
-Z32 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
-Z33 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+Z43 !s108 1430106114.600000
+Z44 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
+Z45 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
 R14
 R15
 Abhvr
@@ -154,16 +230,16 @@ R3
 R4
 R5
 R6
-Z34 DEx4 work 8 test_max 0 22 mCWW_SKN1B23MHN]bS7N43
-l19
+Z46 DEx4 work 20 test_single_register 0 22 IlH`Ig@24c@[Db0NfeV@_2
+l23
 L9
-Z35 Vka^65P>?lfPF5:?EKRnnG0
-Z36 !s100 z8:8Ydj8[SHE327Vj:4d10
+VNb3c[Y7zHGPW3:C?5>zAc3
+!s100 0=gHU3_;L8<S]cYeOWZ1?0
 R10
 32
 !i10b 1
-R31
-R32
-R33
+R43
+R44
+R45
 R14
 R15
