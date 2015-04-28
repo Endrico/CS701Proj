@@ -7,7 +7,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-ENTITY data_mem IS
+ENTITY prog_mem IS
 	PORT
 	(
 		clock		: IN STD_LOGIC  := '1';
@@ -17,12 +17,19 @@ ENTITY data_mem IS
 		wren		: IN STD_LOGIC  := '0';
 		q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
 	);
-END data_mem;
+END prog_mem;
 
-ARCHITECTURE behaviour OF data_mem IS
+ARCHITECTURE behaviour OF prog_mem IS
 	type DMEMORY is array(0 to 65535) of std_logic_vector(15 downto 0); --16K Memory
 	constant dataInit : DMEMORY := (
-	--PROGRAM HERE
+  x"4010",x"0006",x"001A",
+  x"4020",x"000A",x"002A",
+  x"F821",x"000B",x"002B",
+  x"4030",x"00AA",x"0040",
+  x"4040",x"0092",x"00F0",
+  x"C843",x"00C0",x"000D",
+        x"BEEF", --Address 0
+        x"1234", --Address 1
 		others => x"0000");
 	signal DATA_MEM : DMEMORY := dataInit;
 BEGIN
