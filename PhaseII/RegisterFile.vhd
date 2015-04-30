@@ -7,6 +7,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+
 ENTITY RF IS
 	PORT
 	(
@@ -17,7 +18,8 @@ ENTITY RF IS
 		wraddress		: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 		wren		: IN STD_LOGIC  := '0';
 		Out_X		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-		Out_Z		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+		Out_Z		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+		Out_R7	: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
 	);
 END RF;
 
@@ -37,6 +39,7 @@ BEGIN
 			end if;
 			Out_X <= DATA_MEM(to_integer(unsigned(Sel_X(15 downto 0))));
 			Out_Z <= DATA_MEM(to_integer(unsigned(Sel_Z(15 downto 0))));
+			Out_R7<= DATA_MEM(7);
 		end if;
 	end process memory_access;   
 	

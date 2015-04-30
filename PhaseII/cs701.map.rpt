@@ -1,5 +1,5 @@
 Analysis & Synthesis report for cs701
-Mon Apr 27 17:05:41 2015
+Tue Apr 28 15:29:40 2015
 Quartus II 32-bit Version 12.0 Build 263 08/02/2012 Service Pack 2 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Mon Apr 27 17:05:41 2015             ;
+; Analysis & Synthesis Status        ; Failed - Tue Apr 28 15:29:40 2015             ;
 ; Quartus II 32-bit Version          ; 12.0 Build 263 08/02/2012 SP 2 SJ Web Edition ;
 ; Revision Name                      ; cs701                                         ;
 ; Top-level Entity Name              ; Datapath                                      ;
@@ -145,7 +145,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -156,7 +156,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 12.0 Build 263 08/02/2012 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Apr 27 17:05:35 2015
+    Info: Processing started: Tue Apr 28 15:29:36 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off cs701 -c cs701
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file single_register.vhd
@@ -197,26 +197,39 @@ Info (12021): Found 2 design units, including 1 entities, in source file pcadd.v
 Info (12021): Found 2 design units, including 1 entities, in source file register_32.vhd
     Info (12022): Found design unit 1: register_32-behaviour
     Info (12023): Found entity 1: register_32
+Info (12021): Found 2 design units, including 1 entities, in source file register_1bit.vhd
+    Info (12022): Found design unit 1: register_1bit-behaviour
+    Info (12023): Found entity 1: register_1bit
+Info (12021): Found 2 design units, including 1 entities, in source file register_er.vhd
+    Info (12022): Found design unit 1: register_ER-behaviour
+    Info (12023): Found entity 1: register_ER
 Info (12127): Elaborating entity "Datapath" for the top level hierarchy
+Error (275024): Width mismatch in port "In0[15..0]" of instance "RF_MUX" and type Mux8 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In3[15..0]" of instance "PC_MUX" and type Mux4 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In1[15..0]" of instance "MUX_B" and type Mux2 -- source is ""RZ_OUT""
+Error (275024): Width mismatch in port "In0[15..0]" of instance "MUX_B" and type Mux2 -- source is ""RX_OUT""
+Error (275044): Port "clrz" of type ALU of instance "inst" is missing source signal
+Error (275044): Port "alu_op[1..0]" of type ALU of instance "inst" is missing source signal
+Error (275024): Width mismatch in port "In3[15..0]" of instance "MUX_A" and type Mux4 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In1[15..0]" of instance "DMR_MUX" and type Mux2 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In1[15..0]" of instance "DMW_MUX" and type Mux2 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In2[15..0]" of instance "DM_DATA_MUX" and type Mux4 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "input[15..0]" of instance "SOP" and type single_register -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "input[15..0]" of instance "SVOP" and type single_register -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "In0[15..0]" of instance "DPCR_MUX" and type Mux4 -- source is ""RX_OUT""
+Error (275024): Width mismatch in port "input[31..0]" of instance "inst8" and type register_32 -- source is ""Output[15..0]" (ID Mux4:DPCR_MUX)"
 Error (275044): Port "Sel_X[3..0]" of type RF of instance "inst3" is missing source signal
 Error (275044): Port "Sel_Z[3..0]" of type RF of instance "inst3" is missing source signal
 Error (275044): Port "wraddress[3..0]" of type RF of instance "inst3" is missing source signal
 Error (275044): Port "wren" of type RF of instance "inst3" is missing source signal
-Error (275024): Width mismatch in port "In1[15..0]" of instance "MUX_B" and type Mux2 -- source is ""RZ_OUT""
-Error (275044): Port "clrz" of type ALU of instance "inst" is missing source signal
-Error (275044): Port "alu_op[1..0]" of type ALU of instance "inst" is missing source signal
-Error (275024): Width mismatch in port "In3[15..0]" of instance "MUX_A" and type Mux4 -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "input[15..0]" of instance "SOP" and type single_register -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "input[15..0]" of instance "SVOP" and type single_register -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "In0[15..0]" of instance "DPCR_MUX" and type Mux4 -- source is ""RX_OUT""
-Error (275023): Width mismatch in RX_OUT -- source is ""Out_X[15..0]" (ID RF:inst3)"
-Error (275023): Width mismatch in RZ_OUT -- source is ""Out_Z[15..0]" (ID RF:inst3)"
 Error (275023): Width mismatch in IR_OUT[15..0] -- source is ""output[31..0]" (ID instruction_register:inst1)"
+Error (275023): Width mismatch in RZ_OUT -- source is ""Out_Z[15..0]" (ID RF:inst3)"
+Error (275023): Width mismatch in RX_OUT -- source is ""Out_X[15..0]" (ID RF:inst3)"
 Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus II 32-bit Analysis & Synthesis was unsuccessful. 15 errors, 1 warning
-    Error: Peak virtual memory: 340 megabytes
-    Error: Processing ended: Mon Apr 27 17:05:42 2015
-    Error: Elapsed time: 00:00:07
-    Error: Total CPU time (on all processors): 00:00:07
+Error: Quartus II 32-bit Analysis & Synthesis was unsuccessful. 22 errors, 1 warning
+    Error: Peak virtual memory: 347 megabytes
+    Error: Processing ended: Tue Apr 28 15:29:40 2015
+    Error: Elapsed time: 00:00:04
+    Error: Total CPU time (on all processors): 00:00:03
 
 

@@ -20,7 +20,7 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 264 176)
+	(rect 16 16 272 176)
 	(text "RF" (rect 5 0 19 12)(font "Arial" ))
 	(text "inst" (rect 8 144 36 156)(font "Arial" ))
 	(port
@@ -66,20 +66,27 @@ applicable agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 1))
 	)
 	(port
-		(pt 248 32)
+		(pt 256 32)
 		(output)
 		(text "Out_X[15..0]" (rect 0 0 84 12)(font "Arial" ))
-		(text "Out_X[15..0]" (rect 143 27 227 39)(font "Arial" ))
-		(line (pt 248 32)(pt 232 32)(line_width 3))
+		(text "Out_X[15..0]" (rect 151 27 235 39)(font "Arial" ))
+		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(port
-		(pt 248 48)
+		(pt 256 48)
 		(output)
 		(text "Out_Z[15..0]" (rect 0 0 84 12)(font "Arial" ))
-		(text "Out_Z[15..0]" (rect 143 43 227 55)(font "Arial" ))
-		(line (pt 248 48)(pt 232 48)(line_width 3))
+		(text "Out_Z[15..0]" (rect 151 43 235 55)(font "Arial" ))
+		(line (pt 256 48)(pt 240 48)(line_width 3))
+	)
+	(port
+		(pt 256 64)
+		(output)
+		(text "Out_R7[15..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "Out_R7[15..0]" (rect 143 59 235 71)(font "Arial" ))
+		(line (pt 256 64)(pt 240 64)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 232 144)(line_width 1))
+		(rectangle (rect 16 16 240 144)(line_width 1))
 	)
 )
