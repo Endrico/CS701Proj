@@ -23,7 +23,7 @@ applicable agreement for further details.
 	(input)
 	(rect -360 520 -192 536)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "CLK" (rect 5 0 27 12)(font "Arial" ))
+	(text "CLK" (rect 5 0 26 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -55,7 +55,7 @@ applicable agreement for further details.
 	(input)
 	(rect -360 448 -192 464)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "CONST_0" (rect 5 0 55 12)(font "Arial" ))
+	(text "CONST_0" (rect 5 0 54 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -71,7 +71,7 @@ applicable agreement for further details.
 	(input)
 	(rect -360 416 -192 432)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "CONST_1" (rect 5 0 55 12)(font "Arial" ))
+	(text "CONST_1" (rect 5 0 54 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -1095,6 +1095,49 @@ applicable agreement for further details.
 		(rectangle (rect 16 16 208 112))
 	)
 )
+(symbol
+	(rect 2016 -16 2152 112)
+	(text "register_1bit" (rect 5 0 65 12)(font "Arial" ))
+	(text "ZERO_FLAG" (rect 8 112 72 124)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "enable" (rect 0 0 31 12)(font "Arial" ))
+		(text "enable" (rect 21 43 52 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 59 45 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "input" (rect 0 0 23 12)(font "Arial" ))
+		(text "input" (rect 21 75 44 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 136 32)
+		(output)
+		(text "output" (rect 0 0 30 12)(font "Arial" ))
+		(text "output" (rect 90 27 120 39)(font "Arial" ))
+		(line (pt 136 32)(pt 120 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 120 112))
+	)
+)
 (connector
 	(pt 664 16)
 	(pt 760 16)
@@ -2091,10 +2134,6 @@ applicable agreement for further details.
 	(pt 1664 48)
 )
 (connector
-	(pt 1984 -800)
-	(pt 1984 64)
-)
-(connector
 	(pt 1520 224)
 	(pt 1632 224)
 	(bus)
@@ -2121,7 +2160,25 @@ applicable agreement for further details.
 )
 (connector
 	(pt 1952 64)
-	(pt 1984 64)
+	(pt 2016 64)
+)
+(connector
+	(text "RESET" (rect 2008 32 2043 44)(font "Arial" ))
+	(pt 2016 48)
+	(pt 2008 48)
+)
+(connector
+	(text "CLK_OUT" (rect 2008 0 2057 12)(font "Arial" ))
+	(pt 2016 16)
+	(pt 2008 16)
+)
+(connector
+	(pt 2016 32)
+	(pt 1976 32)
+)
+(connector
+	(pt 1976 32)
+	(pt 1976 -784)
 )
 (junction (pt -336 216))
 (junction (pt 392 48))
