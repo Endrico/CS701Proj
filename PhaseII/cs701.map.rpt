@@ -1,5 +1,5 @@
 Analysis & Synthesis report for cs701
-Mon Apr 27 17:05:41 2015
+Tue May 05 03:21:26 2015
 Quartus II 32-bit Version 12.0 Build 263 08/02/2012 Service Pack 2 SJ Web Edition
 
 
@@ -36,11 +36,11 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Mon Apr 27 17:05:41 2015             ;
+; Analysis & Synthesis Status        ; Failed - Tue May 05 03:21:26 2015             ;
 ; Quartus II 32-bit Version          ; 12.0 Build 263 08/02/2012 SP 2 SJ Web Edition ;
 ; Revision Name                      ; cs701                                         ;
-; Top-level Entity Name              ; Datapath                                      ;
-; Family                             ; Cyclone IV E                                  ;
+; Top-level Entity Name              ; Processor                                     ;
+; Family                             ; Cyclone III                                   ;
 ; Total logic elements               ; N/A until Partition Merge                     ;
 ;     Total combinational functions  ; N/A until Partition Merge                     ;
 ;     Dedicated logic registers      ; N/A until Partition Merge                     ;
@@ -58,9 +58,9 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                     ; EP4CE115F29C7      ;                    ;
-; Top-level entity name                                                      ; Datapath           ; cs701              ;
-; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Device                                                                     ; EP3C5E144C7        ;                    ;
+; Top-level entity name                                                      ; Processor          ; cs701              ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
@@ -145,7 +145,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 2      ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -156,67 +156,86 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 12.0 Build 263 08/02/2012 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Apr 27 17:05:35 2015
+    Info: Processing started: Tue May 05 03:21:22 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off cs701 -c cs701
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file single_register.vhd
     Info (12022): Found design unit 1: single_register-behaviour
     Info (12023): Found entity 1: single_register
-Info (12021): Found 2 design units, including 1 entities, in source file instruction_register.vhd
-    Info (12022): Found design unit 1: instruction_register-behaviour
-    Info (12023): Found entity 1: instruction_register
+Info (12021): Found 2 design units, including 1 entities, in source file registerfile.vhd
+    Info (12022): Found design unit 1: RF-behaviour
+    Info (12023): Found entity 1: RF
+Info (12021): Found 2 design units, including 1 entities, in source file register_er.vhd
+    Info (12022): Found design unit 1: register_ER-behaviour
+    Info (12023): Found entity 1: register_ER
+Info (12021): Found 2 design units, including 1 entities, in source file register_32.vhd
+    Info (12022): Found design unit 1: register_32-behaviour
+    Info (12023): Found entity 1: register_32
+Info (12021): Found 2 design units, including 1 entities, in source file register_1bit.vhd
+    Info (12022): Found design unit 1: register_1bit-behaviour
+    Info (12023): Found entity 1: register_1bit
 Info (12021): Found 2 design units, including 1 entities, in source file prog_mem.vhd
     Info (12022): Found design unit 1: prog_mem-behaviour
     Info (12023): Found entity 1: prog_mem
-Info (12021): Found 2 design units, including 1 entities, in source file max.vhd
-    Info (12022): Found design unit 1: MAX-bhvr
-    Info (12023): Found entity 1: MAX
-Info (12021): Found 2 design units, including 1 entities, in source file data_mem.vhd
-    Info (12022): Found design unit 1: data_mem-behaviour
-    Info (12023): Found entity 1: data_mem
-Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
-    Info (12022): Found design unit 1: ALU-bhvr
-    Info (12023): Found entity 1: ALU
+Info (12021): Found 1 design units, including 1 entities, in source file processor.bdf
+    Info (12023): Found entity 1: Processor
+Info (12021): Found 2 design units, including 1 entities, in source file pcadd.vhd
+    Info (12022): Found design unit 1: PCplus1-behavior
+    Info (12023): Found entity 1: PCplus1
+Info (12021): Found 2 design units, including 1 entities, in source file mux8.vhd
+    Info (12022): Found design unit 1: Mux8-behavior
+    Info (12023): Found entity 1: Mux8
 Info (12021): Found 2 design units, including 1 entities, in source file mux4.vhd
     Info (12022): Found design unit 1: Mux4-behavior
     Info (12023): Found entity 1: Mux4
 Info (12021): Found 2 design units, including 1 entities, in source file mux2.vhd
     Info (12022): Found design unit 1: Mux2-behavior
     Info (12023): Found entity 1: Mux2
-Info (12021): Found 2 design units, including 1 entities, in source file mux8.vhd
-    Info (12022): Found design unit 1: Mux8-behavior
-    Info (12023): Found entity 1: Mux8
-Info (12021): Found 2 design units, including 1 entities, in source file registerfile.vhd
-    Info (12022): Found design unit 1: RF-behaviour
-    Info (12023): Found entity 1: RF
-Info (12021): Found 1 design units, including 1 entities, in source file datapath.bdf
+Info (12021): Found 2 design units, including 1 entities, in source file max.vhd
+    Info (12022): Found design unit 1: MAX-bhvr
+    Info (12023): Found entity 1: MAX
+Info (12021): Found 2 design units, including 1 entities, in source file instruction_register.vhd
+    Info (12022): Found design unit 1: instruction_register-behaviour
+    Info (12023): Found entity 1: instruction_register
+Info (12021): Found 2 design units, including 1 entities, in source file datapath.vhd
+    Info (12022): Found design unit 1: Datapath-bdf_type
     Info (12023): Found entity 1: Datapath
-Info (12021): Found 2 design units, including 1 entities, in source file pcadd.vhd
-    Info (12022): Found design unit 1: PCplus1-behavior
-    Info (12023): Found entity 1: PCplus1
-Info (12021): Found 2 design units, including 1 entities, in source file register_32.vhd
-    Info (12022): Found design unit 1: register_32-behaviour
-    Info (12023): Found entity 1: register_32
-Info (12127): Elaborating entity "Datapath" for the top level hierarchy
-Error (275044): Port "Sel_X[3..0]" of type RF of instance "inst3" is missing source signal
-Error (275044): Port "Sel_Z[3..0]" of type RF of instance "inst3" is missing source signal
-Error (275044): Port "wraddress[3..0]" of type RF of instance "inst3" is missing source signal
-Error (275044): Port "wren" of type RF of instance "inst3" is missing source signal
-Error (275024): Width mismatch in port "In1[15..0]" of instance "MUX_B" and type Mux2 -- source is ""RZ_OUT""
-Error (275044): Port "clrz" of type ALU of instance "inst" is missing source signal
-Error (275044): Port "alu_op[1..0]" of type ALU of instance "inst" is missing source signal
-Error (275024): Width mismatch in port "In3[15..0]" of instance "MUX_A" and type Mux4 -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "input[15..0]" of instance "SOP" and type single_register -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "input[15..0]" of instance "SVOP" and type single_register -- source is ""RX_OUT""
-Error (275024): Width mismatch in port "In0[15..0]" of instance "DPCR_MUX" and type Mux4 -- source is ""RX_OUT""
-Error (275023): Width mismatch in RX_OUT -- source is ""Out_X[15..0]" (ID RF:inst3)"
-Error (275023): Width mismatch in RZ_OUT -- source is ""Out_Z[15..0]" (ID RF:inst3)"
-Error (275023): Width mismatch in IR_OUT[15..0] -- source is ""output[31..0]" (ID instruction_register:inst1)"
-Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus II 32-bit Analysis & Synthesis was unsuccessful. 15 errors, 1 warning
-    Error: Peak virtual memory: 340 megabytes
-    Error: Processing ended: Mon Apr 27 17:05:42 2015
-    Error: Elapsed time: 00:00:07
-    Error: Total CPU time (on all processors): 00:00:07
+Info (12021): Found 2 design units, including 1 entities, in source file data_mem.vhd
+    Info (12022): Found design unit 1: data_mem-behaviour
+    Info (12023): Found entity 1: data_mem
+Info (12021): Found 2 design units, including 1 entities, in source file controlunit.vhd
+    Info (12022): Found design unit 1: CONTROLUNIT-bhvr
+    Info (12023): Found entity 1: CONTROLUNIT
+Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
+    Info (12022): Found design unit 1: ALU-bhvr
+    Info (12023): Found entity 1: ALU
+Info (12127): Elaborating entity "Processor" for the top level hierarchy
+Warning (275013): Port "CLK" of type Datapath and instance "inst" is missing source signal
+Warning (275013): Port "CLK" of type CONTROLUNIT and instance "inst1" is missing source signal
+Info (12128): Elaborating entity "Datapath" for hierarchy "Datapath:inst"
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(195): used explicit default value for signal "const_0" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(196): used explicit default value for signal "const_1" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(197): used explicit default value for signal "const_logic_0" because signal was never assigned a value
+Warning (10541): VHDL Signal Declaration warning at Datapath.vhd(198): used implicit default value for signal "r_seven" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10873): Using initial value X (don't care) for net "DPCR[31..16]" at Datapath.vhd(177)
+Info (12128): Elaborating entity "ALU" for hierarchy "Datapath:inst|ALU:b2v_ALU_inst"
+Info (12128): Elaborating entity "register_32" for hierarchy "Datapath:inst|register_32:b2v_DCPR_reg"
+Info (12128): Elaborating entity "Mux4" for hierarchy "Datapath:inst|Mux4:b2v_DM_DATA_MUX"
+Info (12128): Elaborating entity "data_mem" for hierarchy "Datapath:inst|data_mem:b2v_DM_inst"
+Info (12128): Elaborating entity "Mux2" for hierarchy "Datapath:inst|Mux2:b2v_DMR_MUX"
+Info (12128): Elaborating entity "instruction_register" for hierarchy "Datapath:inst|instruction_register:b2v_inst1"
+Info (12128): Elaborating entity "prog_mem" for hierarchy "Datapath:inst|prog_mem:b2v_inst2"
+Info (12128): Elaborating entity "PCplus1" for hierarchy "Datapath:inst|PCplus1:b2v_inst4"
+Info (12128): Elaborating entity "MAX" for hierarchy "Datapath:inst|MAX:b2v_MAX_inst"
+Info (12128): Elaborating entity "single_register" for hierarchy "Datapath:inst|single_register:b2v_PC_REGISTER"
+Info (12128): Elaborating entity "RF" for hierarchy "Datapath:inst|RF:b2v_RF_inst"
+Error (10393): VHDL error at RegisterFile.vhd(38): left bound (15) of slice must belong to range (3 downto 0) of corresponding object File: D:/quarus_workspace/RegisterFile.vhd Line: 38
+Error (10657): VHDL Subprogram error at RegisterFile.vhd(38):  failed to elaborate call to subprogram "TO_INTEGER" File: D:/quarus_workspace/RegisterFile.vhd Line: 38
+Error (12152): Can't elaborate user hierarchy "Datapath:inst|RF:b2v_RF_inst" File: D:/quarus_workspace/Datapath.vhd Line: 324
+Error: Quartus II 32-bit Analysis & Synthesis was unsuccessful. 3 errors, 8 warnings
+    Error: Peak virtual memory: 375 megabytes
+    Error: Processing ended: Tue May 05 03:21:26 2015
+    Error: Elapsed time: 00:00:04
+    Error: Total CPU time (on all processors): 00:00:04
 
 
