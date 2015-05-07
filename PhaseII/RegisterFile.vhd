@@ -35,10 +35,10 @@ BEGIN
 	begin
 		if (clock'event and clock='1') then
 			if (wren = '1') then
-				DATA_MEM(to_integer(unsigned(wraddress(15 downto 0)))) <= data;
+				DATA_MEM(to_integer(unsigned(wraddress(3 downto 0)))) <= data;
 			end if;
-			Out_X <= DATA_MEM(to_integer(unsigned(Sel_X(15 downto 0))));
-			Out_Z <= DATA_MEM(to_integer(unsigned(Sel_Z(15 downto 0))));
+			Out_X <= DATA_MEM(to_integer(unsigned(Sel_X(3 downto 0))));
+			Out_Z <= DATA_MEM(to_integer(unsigned(Sel_Z(3 downto 0))));
 			Out_R7<= DATA_MEM(7);
 		end if;
 	end process memory_access;   

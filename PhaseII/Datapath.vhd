@@ -24,43 +24,59 @@ LIBRARY work;
 ENTITY Datapath IS 
 	PORT
 	(
-		pin_name5 :  IN  STD_LOGIC;
-		PC_ld_reg :  IN  STD_LOGIC;
-		CLK :  IN  STD_LOGIC;
-		RST :  IN  STD_LOGIC;
-		clrz :  IN  STD_LOGIC;
-		mux_B_sel :  IN  STD_LOGIC;
-		wr_en :  IN  STD_LOGIC;
-		alu_op :  IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
-		mux_A_sel :  IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
-		mux_PC_sel :  IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
-		pin_name2 :  IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
-		pin_name3 :  IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
-		pin_name4 :  IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
-		zout :  OUT  STD_LOGIC;
-		dpcr_en	:	IN STD_LOGIC; 											--DPCR enable port
-		instruction :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		mux_dm_sel : IN STD_LOGIC_VECTOR(1 downto 0);
-		mux_dmr_sel : IN STD_LOGIC;
-		mux_dmw_sel : IN STD_LOGIC;
-		mux_dpcr_sel : IN STD_LOGIC_VECTOR(1 downto 0);
-		ir_sel : IN STD_LOGIC;
-		ir_en	: IN STD_LOGIC;
-		mux_rf_sel : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-		en_sip	:	IN STD_LOGIC;
-		en_sop	:	IN STD_LOGIC;
-		en_svop	:	IN STD_LOGIC;
-		SIP_IN	:	IN STD_LOGIC_VECTOR(15 DOWNTO 0) ;
-		SOP_OUT	:	OUT STD_LOGIC_VECTOR(15 DOWNTO 0) ;
-		SVOP_OUT	:	OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		wr_en_rf 		:  IN  	STD_LOGIC;
+		PC_ld_reg 		:  IN 	STD_LOGIC;
+		CLK 				:  IN  	STD_LOGIC;
+		RST 				:  IN  	STD_LOGIC;
+		mux_B_sel 		:  IN  	STD_LOGIC;
+		wr_en_datamem 	:  IN  	STD_LOGIC;
+		alu_op 			:  IN  	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		mux_A_sel 		:  IN  	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		mux_PC_sel 		:  IN  	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		x_sel 			:  IN  	STD_LOGIC_VECTOR(3 DOWNTO 0);
+		z_sel				:  IN  	STD_LOGIC_VECTOR(3 DOWNTO 0);
+		wr_addr_rf 		:  IN  	STD_LOGIC_VECTOR(3 DOWNTO 0);
+		
+		dpcr_en			:	IN 	STD_LOGIC; 											--DPCR enable port
+		dpcr_out			:	OUT 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		
+		dprr_en			:	IN 	STD_LOGIC; 	
+		dprr_in			:	IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		
+		clr_eot			: 	IN 	STD_LOGIC;
+		eot_en			: 	IN 	STD_LOGIC;
+		eot_out			: 	OUT 	STD_LOGIC;
+		eot_in			: 	IN 	STD_LOGIC;
+		
+		clr_er			: 	IN 	STD_LOGIC;
+		er_en				:	IN 	STD_LOGIC;
+		er_in				: 	IN 	STD_LOGIC;
+		er_out			: 	OUT 	STD_LOGIC;
+		
+		instruction 	:  OUT  	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		mux_dm_sel 		: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
+		mux_dmr_sel		: 	IN 	STD_LOGIC;
+		mux_dmw_sel 	: 	IN 	STD_LOGIC;
+		mux_dpcr_sel 	: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
+		ir_sel 			: 	IN 	STD_LOGIC;
+		ir_en				: 	IN 	STD_LOGIC;
+		mux_rf_sel 		: 	IN 	STD_LOGIC_VECTOR(2 DOWNTO 0);
+		en_sip			:	IN 	STD_LOGIC;
+		en_sop			:	IN 	STD_LOGIC;
+		en_svop			:	IN 	STD_LOGIC;
+		SIP_IN			:	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0) ;
+		SOP_OUT			:	OUT 	STD_LOGIC_VECTOR(15 DOWNTO 0) ;
+		SVOP_OUT			:	OUT 	STD_LOGIC_VECTOR(15 DOWNTO 0) ;
+		z_en				: 	IN 	STD_LOGIC;
+		clr_z				: 	IN 	STD_LOGIC;
+		z_ext_out		: 	OUT 	STD_LOGIC
 	);
 END Datapath;
 
 ARCHITECTURE bdf_type OF Datapath IS 
 
 COMPONENT alu
-	PORT(clrz : IN STD_LOGIC;
-		 A : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+	PORT( A : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 alu_op : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 Z : OUT STD_LOGIC;
@@ -74,6 +90,15 @@ COMPONENT register_32
 		 reset : IN STD_LOGIC;
 		 input : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		 output : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+	);
+END COMPONENT;
+
+COMPONENT register_1bit
+	PORT(clk : IN STD_LOGIC;
+		 enable : IN STD_LOGIC;
+		 reset : IN STD_LOGIC;
+		 input : IN STD_LOGIC;
+		 output : OUT STD_LOGIC
 	);
 END COMPONENT;
 
@@ -155,7 +180,8 @@ COMPONENT rf
 		 Sel_Z : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 wraddress : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 Out_X : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 Out_Z : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		 Out_Z : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 Out_R7	: OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -173,38 +199,37 @@ COMPONENT mux8
 	);
 END COMPONENT;
 
-SIGNAL	CLK_OUT :  STD_LOGIC;
-SIGNAL	DPCR :  STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL	IReg :  STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL	PC_out :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	RX_OUT :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	RZ_OUT :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_16 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_17 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_2 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_3 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_4 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_5 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_8 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_18 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_10 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_11 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_12 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_13 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_14 :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL 	const_0 : STD_LOGIC_VECTOR(15 downto 0) := x"0000";
-SIGNAL 	const_1 : STD_LOGIC_VECTOR(15 downto 0) := x"0001";
-SIGNAL 	const_logic_0 : STD_LOGIC := '0';
-SIGNAL 	r_seven	:	STD_LOGIC_VECTOR(15 downto 0);
+SIGNAL	CLK_OUT 	:  STD_LOGIC;
+SIGNAL	DPCR 		:  STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL	IReg 		:  STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL	PC_out 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	RX_OUT 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	RZ_OUT 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_16 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_17 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_2 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_3 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_4 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_5 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_8 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_18 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_10 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_11 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_12 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_13 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	SYNTHESIZED_WIRE_14 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL 	const_0 			: 	STD_LOGIC_VECTOR(15 downto 0) := x"0000";
+SIGNAL 	const_1 			: 	STD_LOGIC_VECTOR(15 downto 0) := x"0001";
+SIGNAL 	const_logic_0 	: 	STD_LOGIC := '0';
+SIGNAL 	r_seven			:	STD_LOGIC_VECTOR(15 downto 0);
+SIGNAL	zout 				:  STD_LOGIC;
+SIGNAL	dprr_out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 
 BEGIN 
 
-
-
 b2v_ALU_inst : alu
-PORT MAP(clrz => clrz,
-		 A => SYNTHESIZED_WIRE_16,
+PORT MAP( A => SYNTHESIZED_WIRE_16,
 		 alu_op => alu_op,
 		 B => SYNTHESIZED_WIRE_17,
 		 Z => zout,
@@ -215,7 +240,36 @@ b2v_DCPR_reg : register_32
 PORT MAP(clk => CLK_OUT,
 			enable => dpcr_en,
 			reset => RST,
-		 input => DPCR);
+		 input => DPCR,
+		 output => dpcr_out);
+		 
+b2v_DPRR_reg : register_32
+PORT MAP(clk => CLK_OUT,
+			enable => dprr_en,
+			reset => RST,
+		 input => dprr_in,
+		 output => dprr_out); -- dprr out needs to split into the data and the address which is sent to the data mem
+		 
+b2v_zero_flag_reg : register_1bit
+PORT MAP(clk => CLK_OUT,
+			enable => z_en, -- changed 
+			reset => clr_z,
+		 input => zout,
+		 output => z_ext_out);
+		 
+b2v_er_reg : register_1bit -- register set high by env, once ER signal received, register value set low, EOT is emmitted
+PORT MAP(clk => CLK_OUT,
+			enable => er_en, -- changed 
+			reset => clr_er,
+			input => er_in,
+			output => er_out);
+		 
+b2v_eot_reg : register_1bit
+PORT MAP(clk => CLK_OUT,
+			enable => eot_en, -- changed 
+			reset => clr_eot,
+			input => eot_in,
+			output => eot_out);
 
 
 b2v_DM_DATA_MUX : mux4
@@ -229,7 +283,7 @@ PORT MAP(In0 => RX_OUT,
 
 b2v_DM_inst : data_mem
 PORT MAP(clock => CLK_OUT,
-		 wren => wr_en,
+		 wren => wr_en_datamem,
 		 data => SYNTHESIZED_WIRE_2,
 		 rdaddress => SYNTHESIZED_WIRE_3,
 		 wraddress => SYNTHESIZED_WIRE_4,
@@ -323,13 +377,13 @@ PORT MAP(clk => CLK_OUT,
 
 b2v_RF_inst : rf
 PORT MAP(clock => CLK_OUT,
-		 wren => pin_name5,
+		 wren => wr_en_rf,
 		 data => SYNTHESIZED_WIRE_11,
-		 Sel_X => pin_name2,
-		 Sel_Z => pin_name3,
-		 wraddress => pin_name4,
+		 Sel_X => x_sel,
+		 Sel_Z => z_sel,
+		 wraddress => wr_addr_rf,
 		 Out_X => RX_OUT,
-		 --Out_R7 => r_seven,
+		 Out_R7 => r_seven,
 		 Out_Z => RZ_OUT);
 
 

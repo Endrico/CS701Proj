@@ -17,7 +17,7 @@ begin
 		begin
 			if (clk = '1' and clk'event) then
 				if (reset = '1') then
-					output <= '0';  -- x stands for hexidecimal 16 bits lonf  therefor four zeros
+					output <= '0';
 				elsif (enable = '1') then
 					output <= input;
 				end if;

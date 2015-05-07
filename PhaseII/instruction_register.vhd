@@ -25,6 +25,7 @@ begin
 					tmp_bot <= x"0000";  -- x stands for hexidecimal 16 bits lonf  therefor four zeros
 				elsif (enable = '1' and sel = '1') then
 					tmp_top <= input;
+					tmp_bot <= x"0000";
 				elsif (enable = '1' and sel = '0') then
 					tmp_bot <= input;
 				end if;

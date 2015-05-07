@@ -6,7 +6,6 @@ use IEEE.NUMERIC_STD.ALL;
 ENTITY ALU IS
 	PORT
 	(
-		clrz : IN STD_LOGIC := '0';
 		alu_op : IN STD_LOGIC_VECTOR(1 downto 0);
 		A, B : IN STD_LOGIC_VECTOR(15 downto 0);
 		alu_out : OUT STD_LOGIC_VECTOR(15 downto 0);
@@ -31,8 +30,7 @@ BEGIN
 			   and_op when alu_op = "10" else
 			   or_op;
 	tmp_z <= '1' when tmp_out = x"0000" else
-			 '0' when clrz = '1' else
-			 tmp_z;
+			 '0';
 	alu_out <= tmp_out;
 	Z <= tmp_z;
 end ARCHITECTURE bhvr;
