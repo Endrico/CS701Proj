@@ -1,0 +1,1412 @@
+Analysis & Synthesis report for cs701
+Wed May 06 17:03:12 2015
+Quartus II 64-Bit Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |Processor|CONTROLUNIT:inst5|STATE
+ 10. User-Specified and Inferred Latches
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Registers Packed Into Inferred Megafunctions
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1|altsyncram_ksg1:auto_generated
+ 16. Source assignments for Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2|altsyncram_ksg1:auto_generated
+ 17. Source assignments for Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated
+ 18. Source assignments for Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0|altsyncram_ur61:auto_generated
+ 19. Parameter Settings for User Entity Instance: Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1
+ 20. Parameter Settings for User Entity Instance: Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2
+ 21. Parameter Settings for Inferred Entity Instance: Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0
+ 22. Parameter Settings for Inferred Entity Instance: Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0
+ 23. altsyncram Parameter Settings by Entity Instance
+ 24. Port Connectivity Checks: "Datapath:inst|Mux8:b2v_RF_MUX"
+ 25. Port Connectivity Checks: "Datapath:inst|RF:b2v_RF_inst"
+ 26. Port Connectivity Checks: "Datapath:inst|Mux4:b2v_MUX_A"
+ 27. Port Connectivity Checks: "Datapath:inst|prog_mem:b2v_inst2"
+ 28. Port Connectivity Checks: "Datapath:inst|Mux4:b2v_DPCR_MUX"
+ 29. Port Connectivity Checks: "Datapath:inst|Mux4:b2v_DM_DATA_MUX"
+ 30. Port Connectivity Checks: "Datapath:inst|register_32:b2v_DPRR_reg"
+ 31. Port Connectivity Checks: "Datapath:inst|register_32:b2v_DCPR_reg"
+ 32. Elapsed Time Per Partition
+ 33. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Wed May 06 17:03:12 2015          ;
+; Quartus II 64-Bit Version          ; 11.0 Build 208 07/03/2011 SP 1 SJ Full Version ;
+; Revision Name                      ; cs701                                          ;
+; Top-level Entity Name              ; Processor                                      ;
+; Family                             ; Cyclone IV E                                   ;
+; Total logic elements               ; 755                                            ;
+;     Total combinational functions  ; 683                                            ;
+;     Dedicated logic registers      ; 140                                            ;
+; Total registers                    ; 140                                            ;
+; Total pins                         ; 52                                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 2,097,664                                      ;
+; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; Processor          ; cs701              ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     1 processor            ; 100.0%      ;
+;     2 processors           ; < 0.1%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                   ;
++-----------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------+
+; File Name with User-Entered Path        ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                         ;
++-----------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------+
+; Processor.bdf                           ; yes             ; User Block Diagram/Schematic File                     ; D:/COMPSYS_701/Processor.bdf                                         ;
+; single_register.vhd                     ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/single_register.vhd                                   ;
+; RegisterFile.vhd                        ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/RegisterFile.vhd                                      ;
+; register_32.vhd                         ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/register_32.vhd                                       ;
+; register_1bit.vhd                       ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/register_1bit.vhd                                     ;
+; prog_mem.vhd                            ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/prog_mem.vhd                                          ;
+; PCadd.vhd                               ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/PCadd.vhd                                             ;
+; Mux8.vhd                                ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/Mux8.vhd                                              ;
+; Mux4.vhd                                ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/Mux4.vhd                                              ;
+; Mux2.vhd                                ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/Mux2.vhd                                              ;
+; MAX.vhd                                 ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/MAX.vhd                                               ;
+; instruction_register.vhd                ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/instruction_register.vhd                              ;
+; Datapath.vhd                            ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/Datapath.vhd                                          ;
+; data_mem.vhd                            ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/data_mem.vhd                                          ;
+; ControlUnit.vhd                         ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/ControlUnit.vhd                                       ;
+; ALU.vhd                                 ; yes             ; User VHDL File                                        ; D:/COMPSYS_701/ALU.vhd                                               ;
+; altsyncram.tdf                          ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/altsyncram.tdf        ;
+; stratix_ram_block.inc                   ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/stratix_ram_block.inc ;
+; lpm_mux.inc                             ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/lpm_mux.inc           ;
+; lpm_decode.inc                          ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/lpm_decode.inc        ;
+; aglobal110.inc                          ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/aglobal110.inc        ;
+; a_rdenreg.inc                           ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/a_rdenreg.inc         ;
+; altrom.inc                              ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/altrom.inc            ;
+; altram.inc                              ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/altram.inc            ;
+; altdpram.inc                            ; yes             ; Megafunction                                          ; c:/altera/11.0/quartus/libraries/megafunctions/altdpram.inc          ;
+; db/altsyncram_ksg1.tdf                  ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/altsyncram_ksg1.tdf                                ;
+; db/altsyncram_pll1.tdf                  ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/altsyncram_pll1.tdf                                ;
+; db/cs701.ram0_data_mem_73ff31ea.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; D:/COMPSYS_701/db/cs701.ram0_data_mem_73ff31ea.hdl.mif               ;
+; db/decode_rsa.tdf                       ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/decode_rsa.tdf                                     ;
+; db/mux_qob.tdf                          ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/mux_qob.tdf                                        ;
+; db/altsyncram_ur61.tdf                  ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/altsyncram_ur61.tdf                                ;
+; db/cs701.ram0_prog_mem_e3d122c6.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; D:/COMPSYS_701/db/cs701.ram0_prog_mem_e3d122c6.hdl.mif               ;
+; db/decode_k8a.tdf                       ; yes             ; Auto-Generated Megafunction                           ; D:/COMPSYS_701/db/decode_k8a.tdf                                     ;
++-----------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 755       ;
+;                                             ;           ;
+; Total combinational functions               ; 683       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 368       ;
+;     -- 3 input functions                    ; 247       ;
+;     -- <=2 input functions                  ; 68        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 637       ;
+;     -- arithmetic mode                      ; 46        ;
+;                                             ;           ;
+; Total registers                             ; 140       ;
+;     -- Dedicated logic registers            ; 140       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 52        ;
+; Total memory bits                           ; 2097664   ;
+; Maximum fan-out node                        ; CLK~input ;
+; Maximum fan-out                             ; 428       ;
+; Total fan-out                               ; 8814      ;
+; Average fan-out                             ; 7.25      ;
++---------------------------------------------+-----------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                   ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                         ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+--------------+
+; |Processor                                   ; 683 (0)           ; 140 (0)      ; 2097664     ; 0            ; 0       ; 0         ; 52   ; 0            ; |Processor                                                                                                                  ;              ;
+;    |CONTROLUNIT:inst5|                       ; 124 (124)         ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|CONTROLUNIT:inst5                                                                                                ;              ;
+;    |Datapath:inst|                           ; 559 (0)           ; 134 (0)      ; 2097664     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst                                                                                                    ;              ;
+;       |ALU:b2v_ALU_inst|                     ; 33 (33)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|ALU:b2v_ALU_inst                                                                                   ;              ;
+;       |MAX:b2v_MAX_inst|                     ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|MAX:b2v_MAX_inst                                                                                   ;              ;
+;       |Mux2:b2v_DMR_MUX|                     ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux2:b2v_DMR_MUX                                                                                   ;              ;
+;       |Mux2:b2v_DMW_MUX|                     ; 15 (15)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux2:b2v_DMW_MUX                                                                                   ;              ;
+;       |Mux2:b2v_MUX_B|                       ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux2:b2v_MUX_B                                                                                     ;              ;
+;       |Mux4:b2v_DM_DATA_MUX|                 ; 32 (32)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux4:b2v_DM_DATA_MUX                                                                               ;              ;
+;       |Mux4:b2v_MUX_A|                       ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux4:b2v_MUX_A                                                                                     ;              ;
+;       |Mux8:b2v_RF_MUX|                      ; 109 (109)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|Mux8:b2v_RF_MUX                                                                                    ;              ;
+;       |PCplus1:b2v_inst4|                    ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|PCplus1:b2v_inst4                                                                                  ;              ;
+;       |RF:b2v_RF_inst|                       ; 0 (0)             ; 0 (0)        ; 512         ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|RF:b2v_RF_inst                                                                                     ;              ;
+;          |altsyncram:DATA_MEM[0][15]__1|     ; 0 (0)             ; 0 (0)        ; 256         ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1                                                       ;              ;
+;             |altsyncram_ksg1:auto_generated| ; 0 (0)             ; 0 (0)        ; 256         ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1|altsyncram_ksg1:auto_generated                        ;              ;
+;          |altsyncram:DATA_MEM[0][15]__2|     ; 0 (0)             ; 0 (0)        ; 256         ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2                                                       ;              ;
+;             |altsyncram_ksg1:auto_generated| ; 0 (0)             ; 0 (0)        ; 256         ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2|altsyncram_ksg1:auto_generated                        ;              ;
+;       |data_mem:b2v_DM_inst|                 ; 106 (0)           ; 3 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|data_mem:b2v_DM_inst                                                                               ;              ;
+;          |altsyncram:DATA_MEM_rtl_0|         ; 106 (0)           ; 3 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0                                                     ;              ;
+;             |altsyncram_pll1:auto_generated| ; 106 (0)           ; 3 (3)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated                      ;              ;
+;                |decode_rsa:decode2|          ; 10 (10)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated|decode_rsa:decode2   ;              ;
+;                |mux_qob:mux3|                ; 96 (96)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated|mux_qob:mux3         ;              ;
+;       |instruction_register:b2v_inst1|       ; 108 (108)         ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|instruction_register:b2v_inst1                                                                     ;              ;
+;       |prog_mem:b2v_inst2|                   ; 8 (0)             ; 3 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|prog_mem:b2v_inst2                                                                                 ;              ;
+;          |altsyncram:DATA_MEM_rtl_0|         ; 8 (0)             ; 3 (0)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0                                                       ;              ;
+;             |altsyncram_ur61:auto_generated| ; 8 (0)             ; 3 (3)        ; 1048576     ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0|altsyncram_ur61:auto_generated                        ;              ;
+;                |decode_k8a:rden_decode|      ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0|altsyncram_ur61:auto_generated|decode_k8a:rden_decode ;              ;
+;       |single_register:b2v_PC_REGISTER|      ; 33 (33)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|single_register:b2v_PC_REGISTER                                                                    ;              ;
+;       |single_register:b2v_SIP|              ; 17 (17)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|single_register:b2v_SIP                                                                            ;              ;
+;       |single_register:b2v_SOP|              ; 17 (17)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|single_register:b2v_SOP                                                                            ;              ;
+;       |single_register:b2v_SVOP|             ; 1 (1)             ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Processor|Datapath:inst|single_register:b2v_SVOP                                                                           ;              ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                 ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
+; Name                                                                                                   ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF                                     ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
+; Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1|altsyncram_ksg1:auto_generated|ALTSYNCRAM   ; AUTO ; Simple Dual Port ; 16           ; 16           ; 16           ; 16           ; 256     ; None                                    ;
+; Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2|altsyncram_ksg1:auto_generated|ALTSYNCRAM   ; AUTO ; Simple Dual Port ; 16           ; 16           ; 16           ; 16           ; 256     ; None                                    ;
+; Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 65536        ; 16           ; 65536        ; 16           ; 1048576 ; db/cs701.ram0_data_mem_73ff31ea.hdl.mif ;
+; Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0|altsyncram_ur61:auto_generated|ALTSYNCRAM   ; AUTO ; ROM              ; 65536        ; 16           ; --           ; --           ; 1048576 ; db/cs701.ram0_prog_mem_e3d122c6.hdl.mif ;
++--------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Processor|CONTROLUNIT:inst5|STATE                                                                                             ;
++-------------+----------+----------+----------+----------+----------+-------------+----------+----------+-------------+------------+------------+
+; Name        ; STATE.T3 ; STATE.T2 ; STATE.T1 ; STATE.T0 ; STATE.E2 ; STATE.E1bis ; STATE.E1 ; STATE.E0 ; STATE.TEST2 ; STATE.TEST ; STATE.Init ;
++-------------+----------+----------+----------+----------+----------+-------------+----------+----------+-------------+------------+------------+
+; STATE.Init  ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ; 0        ; 0        ; 0           ; 0          ; 0          ;
+; STATE.TEST  ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ; 0        ; 0        ; 0           ; 1          ; 1          ;
+; STATE.TEST2 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ; 0        ; 0        ; 1           ; 0          ; 1          ;
+; STATE.E0    ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ; 0        ; 1        ; 0           ; 0          ; 1          ;
+; STATE.E1    ; 0        ; 0        ; 0        ; 0        ; 0        ; 0           ; 1        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.E1bis ; 0        ; 0        ; 0        ; 0        ; 0        ; 1           ; 0        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.E2    ; 0        ; 0        ; 0        ; 0        ; 1        ; 0           ; 0        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.T0    ; 0        ; 0        ; 0        ; 1        ; 0        ; 0           ; 0        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.T1    ; 0        ; 0        ; 1        ; 0        ; 0        ; 0           ; 0        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.T2    ; 0        ; 1        ; 0        ; 0        ; 0        ; 0           ; 0        ; 0        ; 0           ; 0          ; 1          ;
+; STATE.T3    ; 1        ; 0        ; 0        ; 0        ; 0        ; 0           ; 0        ; 0        ; 0           ; 0          ; 1          ;
++-------------+----------+----------+----------+----------+----------+-------------+----------+----------+-------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                          ;
++-----------------------------------------------------+-------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal           ; Free of Timing Hazards ;
++-----------------------------------------------------+-------------------------------+------------------------+
+; CONTROLUNIT:inst5|ld_IR                             ; CONTROLUNIT:inst5|WideOr10    ; yes                    ;
+; CONTROLUNIT:inst5|SOP_Ld_Reg                        ; CONTROLUNIT:inst5|Selector28  ; yes                    ;
+; CONTROLUNIT:inst5|SVOP_Ld_Reg                       ; CONTROLUNIT:inst5|Selector30  ; yes                    ;
+; CONTROLUNIT:inst5|wr_en                             ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|mux_A_sel[0]                      ; CONTROLUNIT:inst5|mux_B_sel   ; yes                    ;
+; CONTROLUNIT:inst5|mux_B_sel                         ; CONTROLUNIT:inst5|mux_B_sel   ; yes                    ;
+; CONTROLUNIT:inst5|mux_RF_sel[0]                     ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|mux_RF_sel[1]                     ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|mux_RF_sel[2]                     ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|alu_op[1]                         ; CONTROLUNIT:inst5|alu_op[1]   ; yes                    ;
+; CONTROLUNIT:inst5|alu_op[0]                         ; CONTROLUNIT:inst5|alu_op[1]   ; yes                    ;
+; CONTROLUNIT:inst5|wr_dest[0]                        ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|wr_dest[1]                        ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|wr_dest[2]                        ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|wr_dest[3]                        ; CONTROLUNIT:inst5|Selector42  ; yes                    ;
+; CONTROLUNIT:inst5|sel_x[0]                          ; CONTROLUNIT:inst5|sel_x[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_x[1]                          ; CONTROLUNIT:inst5|sel_x[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_x[2]                          ; CONTROLUNIT:inst5|sel_x[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_x[3]                          ; CONTROLUNIT:inst5|sel_x[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_ir                            ; CONTROLUNIT:inst5|Selector38  ; yes                    ;
+; CONTROLUNIT:inst5|sel_z[0]                          ; CONTROLUNIT:inst5|sel_z[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_z[1]                          ; CONTROLUNIT:inst5|sel_z[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_z[2]                          ; CONTROLUNIT:inst5|sel_z[3]    ; yes                    ;
+; CONTROLUNIT:inst5|sel_z[3]                          ; CONTROLUNIT:inst5|sel_z[3]    ; yes                    ;
+; CONTROLUNIT:inst5|mux_DMW_sel                       ; CONTROLUNIT:inst5|Selector20  ; yes                    ;
+; CONTROLUNIT:inst5|data_write                        ; CONTROLUNIT:inst5|Selector20  ; yes                    ;
+; CONTROLUNIT:inst5|mux_DM_Data_sel[1]                ; CONTROLUNIT:inst5|Selector20  ; yes                    ;
+; CONTROLUNIT:inst5|mux_DM_Data_sel[0]                ; CONTROLUNIT:inst5|Selector20  ; yes                    ;
+; CONTROLUNIT:inst5|mux_DMR_sel                       ; CONTROLUNIT:inst5|mux_DMR_sel ; yes                    ;
+; CONTROLUNIT:inst5|SIP_Ld_Reg                        ; CONTROLUNIT:inst5|Selector32  ; yes                    ;
+; CONTROLUNIT:inst5|HP[0]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[1]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[2]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[3]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[4]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[5]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[6]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[7]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[8]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[9]$latch                       ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[10]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[11]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[12]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[13]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[14]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|HP[15]$latch                      ; CONTROLUNIT:inst5|STATE.E1bis ; yes                    ;
+; CONTROLUNIT:inst5|DPC$latch                         ; CONTROLUNIT:inst5|Selector17  ; yes                    ;
+; CONTROLUNIT:inst5|mux_PC_sel[0]                     ; CONTROLUNIT:inst5|Selector15  ; yes                    ;
+; CONTROLUNIT:inst5|mux_PC_sel[1]                     ; CONTROLUNIT:inst5|Selector15  ; yes                    ;
+; CONTROLUNIT:inst5|PC_reg_ld                         ; CONTROLUNIT:inst5|WideOr10    ; yes                    ;
+; Number of user-specified and inferred latches = 50  ;                               ;                        ;
++-----------------------------------------------------+-------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-----------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                            ;
++------------------------------------------------------+----------------------------------------+
+; Register name                                        ; Reason for Removal                     ;
++------------------------------------------------------+----------------------------------------+
+; Datapath:inst|register_1bit:b2v_zero_flag_reg|output ; Stuck at GND due to stuck port data_in ;
+; CONTROLUNIT:inst5|STATE.TEST                         ; Merged with CONTROLUNIT:inst5|STATE.T3 ;
+; CONTROLUNIT:inst5|STATE.TEST2                        ; Merged with CONTROLUNIT:inst5|STATE.T3 ;
+; CONTROLUNIT:inst5|STATE.T3                           ; Stuck at GND due to stuck port data_in ;
+; CONTROLUNIT:inst5|STATE.E1                           ; Stuck at GND due to stuck port data_in ;
+; CONTROLUNIT:inst5|STATE.E1bis                        ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 6                ;                                        ;
++------------------------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 140   ;
+; Number of registers using Synchronous Clear  ; 16    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 6     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 96    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions                                                           ;
++---------------------------------------------+---------------------------------------------------+------+
+; Register Name                               ; Megafunction                                      ; Type ;
++---------------------------------------------+---------------------------------------------------+------+
+; Datapath:inst|data_mem:b2v_DM_inst|q[0..15] ; Datapath:inst|data_mem:b2v_DM_inst|DATA_MEM_rtl_0 ; RAM  ;
+; Datapath:inst|prog_mem:b2v_inst2|q[0..15]   ; Datapath:inst|prog_mem:b2v_inst2|DATA_MEM_rtl_0   ; RAM  ;
++---------------------------------------------+---------------------------------------------------+------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                          ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|single_register:b2v_SOP|output[8]          ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|single_register:b2v_SVOP|output[4]         ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|instruction_register:b2v_inst1|tmp_top[14] ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|single_register:b2v_SIP|output[0]          ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|instruction_register:b2v_inst1|tmp_bot[4]  ;                            ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 48 LEs               ; 16 LEs                 ; |Processor|Datapath:inst|single_register:b2v_PC_REGISTER|output[10] ;                            ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; |Processor|CONTROLUNIT:inst5|Mux83                                  ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |Processor|Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[0]             ;                            ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; |Processor|Datapath:inst|Mux4:b2v_MUX_A|Output[3]                   ;                            ;
+; 12:1               ; 16 bits   ; 128 LEs       ; 96 LEs               ; 32 LEs                 ; |Processor|Datapath:inst|Mux8:b2v_RF_MUX|Output[13]                 ;                            ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; |Processor|CONTROLUNIT:inst5|Mux49                                  ;                            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |Processor|CONTROLUNIT:inst5|Selector12                             ;                            ;
+; 13:1               ; 3 bits    ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; |Processor|CONTROLUNIT:inst5|Mux46                                  ;                            ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 10 LEs               ; 2 LEs                  ; |Processor|CONTROLUNIT:inst5|Mux80                                  ;                            ;
+; 13:1               ; 4 bits    ; 32 LEs        ; 4 LEs                ; 28 LEs                 ; |Processor|CONTROLUNIT:inst5|Mux68                                  ;                            ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; |Processor|CONTROLUNIT:inst5|Mux55                                  ;                            ;
+; 11:1               ; 4 bits    ; 28 LEs        ; 4 LEs                ; 24 LEs                 ; |Processor|CONTROLUNIT:inst5|Mux38                                  ;                            ;
++--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1|altsyncram_ksg1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                 ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                  ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2|altsyncram_ksg1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                 ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                  ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0|altsyncram_pll1:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                   ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                    ;
++---------------------------------+--------------------+------+------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0|altsyncram_ur61:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                 ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                  ;
++---------------------------------+--------------------+------+----------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1 ;
++------------------------------------+----------------------+---------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                        ;
++------------------------------------+----------------------+---------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                     ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                  ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                              ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                     ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                     ;
+; WIDTH_A                            ; 16                   ; Untyped                                     ;
+; WIDTHAD_A                          ; 4                    ; Untyped                                     ;
+; NUMWORDS_A                         ; 16                   ; Untyped                                     ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                     ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                     ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                     ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; WIDTH_B                            ; 16                   ; Untyped                                     ;
+; WIDTHAD_B                          ; 4                    ; Untyped                                     ;
+; NUMWORDS_B                         ; 16                   ; Untyped                                     ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                     ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                     ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                     ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                     ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                     ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                     ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                     ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                     ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                     ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                     ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                     ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                     ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                     ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                     ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                     ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                     ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                     ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                     ;
+; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                                     ;
+; CBXI_PARAMETER                     ; altsyncram_ksg1      ; Untyped                                     ;
++------------------------------------+----------------------+---------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2 ;
++------------------------------------+----------------------+---------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                        ;
++------------------------------------+----------------------+---------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                     ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                  ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                              ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                     ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                     ;
+; WIDTH_A                            ; 16                   ; Untyped                                     ;
+; WIDTHAD_A                          ; 4                    ; Untyped                                     ;
+; NUMWORDS_A                         ; 16                   ; Untyped                                     ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                     ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                     ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                     ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                     ;
+; WIDTH_B                            ; 16                   ; Untyped                                     ;
+; WIDTHAD_B                          ; 4                    ; Untyped                                     ;
+; NUMWORDS_B                         ; 16                   ; Untyped                                     ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                     ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                     ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                     ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                     ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                     ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                     ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                     ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                     ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                     ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                     ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                     ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                     ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                     ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                     ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                     ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                     ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                     ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                     ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                     ;
+; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                                     ;
+; CBXI_PARAMETER                     ; altsyncram_ksg1      ; Untyped                                     ;
++------------------------------------+----------------------+---------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0 ;
++------------------------------------+-----------------------------------------+--------------------------------+
+; Parameter Name                     ; Value                                   ; Type                           ;
++------------------------------------+-----------------------------------------+--------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                                       ; Untyped                        ;
+; AUTO_CARRY_CHAINS                  ; ON                                      ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                     ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                ; ON                                      ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                     ; IGNORE_CASCADE                 ;
+; WIDTH_BYTEENA                      ; 1                                       ; Untyped                        ;
+; OPERATION_MODE                     ; DUAL_PORT                               ; Untyped                        ;
+; WIDTH_A                            ; 16                                      ; Untyped                        ;
+; WIDTHAD_A                          ; 16                                      ; Untyped                        ;
+; NUMWORDS_A                         ; 65536                                   ; Untyped                        ;
+; OUTDATA_REG_A                      ; UNREGISTERED                            ; Untyped                        ;
+; ADDRESS_ACLR_A                     ; NONE                                    ; Untyped                        ;
+; OUTDATA_ACLR_A                     ; NONE                                    ; Untyped                        ;
+; WRCONTROL_ACLR_A                   ; NONE                                    ; Untyped                        ;
+; INDATA_ACLR_A                      ; NONE                                    ; Untyped                        ;
+; BYTEENA_ACLR_A                     ; NONE                                    ; Untyped                        ;
+; WIDTH_B                            ; 16                                      ; Untyped                        ;
+; WIDTHAD_B                          ; 16                                      ; Untyped                        ;
+; NUMWORDS_B                         ; 65536                                   ; Untyped                        ;
+; INDATA_REG_B                       ; CLOCK1                                  ; Untyped                        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                                  ; Untyped                        ;
+; RDCONTROL_REG_B                    ; CLOCK1                                  ; Untyped                        ;
+; ADDRESS_REG_B                      ; CLOCK0                                  ; Untyped                        ;
+; OUTDATA_REG_B                      ; UNREGISTERED                            ; Untyped                        ;
+; BYTEENA_REG_B                      ; CLOCK1                                  ; Untyped                        ;
+; INDATA_ACLR_B                      ; NONE                                    ; Untyped                        ;
+; WRCONTROL_ACLR_B                   ; NONE                                    ; Untyped                        ;
+; ADDRESS_ACLR_B                     ; NONE                                    ; Untyped                        ;
+; OUTDATA_ACLR_B                     ; NONE                                    ; Untyped                        ;
+; RDCONTROL_ACLR_B                   ; NONE                                    ; Untyped                        ;
+; BYTEENA_ACLR_B                     ; NONE                                    ; Untyped                        ;
+; WIDTH_BYTEENA_A                    ; 1                                       ; Untyped                        ;
+; WIDTH_BYTEENA_B                    ; 1                                       ; Untyped                        ;
+; RAM_BLOCK_TYPE                     ; AUTO                                    ; Untyped                        ;
+; BYTE_SIZE                          ; 8                                       ; Untyped                        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                ; Untyped                        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                    ; Untyped                        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                    ; Untyped                        ;
+; INIT_FILE                          ; db/cs701.ram0_data_mem_73ff31ea.hdl.mif ; Untyped                        ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                  ; Untyped                        ;
+; MAXIMUM_DEPTH                      ; 0                                       ; Untyped                        ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL                                  ; Untyped                        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                  ; Untyped                        ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                                  ; Untyped                        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                  ; Untyped                        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                         ; Untyped                        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                         ; Untyped                        ;
+; ENABLE_ECC                         ; FALSE                                   ; Untyped                        ;
+; WIDTH_ECCSTATUS                    ; 3                                       ; Untyped                        ;
+; DEVICE_FAMILY                      ; Cyclone IV E                            ; Untyped                        ;
+; CBXI_PARAMETER                     ; altsyncram_pll1                         ; Untyped                        ;
++------------------------------------+-----------------------------------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0 ;
++------------------------------------+-----------------------------------------+------------------------------+
+; Parameter Name                     ; Value                                   ; Type                         ;
++------------------------------------+-----------------------------------------+------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                                       ; Untyped                      ;
+; AUTO_CARRY_CHAINS                  ; ON                                      ; AUTO_CARRY                   ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                     ; IGNORE_CARRY                 ;
+; AUTO_CASCADE_CHAINS                ; ON                                      ; AUTO_CASCADE                 ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                     ; IGNORE_CASCADE               ;
+; WIDTH_BYTEENA                      ; 1                                       ; Untyped                      ;
+; OPERATION_MODE                     ; ROM                                     ; Untyped                      ;
+; WIDTH_A                            ; 16                                      ; Untyped                      ;
+; WIDTHAD_A                          ; 16                                      ; Untyped                      ;
+; NUMWORDS_A                         ; 65536                                   ; Untyped                      ;
+; OUTDATA_REG_A                      ; UNREGISTERED                            ; Untyped                      ;
+; ADDRESS_ACLR_A                     ; NONE                                    ; Untyped                      ;
+; OUTDATA_ACLR_A                     ; NONE                                    ; Untyped                      ;
+; WRCONTROL_ACLR_A                   ; NONE                                    ; Untyped                      ;
+; INDATA_ACLR_A                      ; NONE                                    ; Untyped                      ;
+; BYTEENA_ACLR_A                     ; NONE                                    ; Untyped                      ;
+; WIDTH_B                            ; 1                                       ; Untyped                      ;
+; WIDTHAD_B                          ; 1                                       ; Untyped                      ;
+; NUMWORDS_B                         ; 1                                       ; Untyped                      ;
+; INDATA_REG_B                       ; CLOCK1                                  ; Untyped                      ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                                  ; Untyped                      ;
+; RDCONTROL_REG_B                    ; CLOCK1                                  ; Untyped                      ;
+; ADDRESS_REG_B                      ; CLOCK1                                  ; Untyped                      ;
+; OUTDATA_REG_B                      ; UNREGISTERED                            ; Untyped                      ;
+; BYTEENA_REG_B                      ; CLOCK1                                  ; Untyped                      ;
+; INDATA_ACLR_B                      ; NONE                                    ; Untyped                      ;
+; WRCONTROL_ACLR_B                   ; NONE                                    ; Untyped                      ;
+; ADDRESS_ACLR_B                     ; NONE                                    ; Untyped                      ;
+; OUTDATA_ACLR_B                     ; NONE                                    ; Untyped                      ;
+; RDCONTROL_ACLR_B                   ; NONE                                    ; Untyped                      ;
+; BYTEENA_ACLR_B                     ; NONE                                    ; Untyped                      ;
+; WIDTH_BYTEENA_A                    ; 1                                       ; Untyped                      ;
+; WIDTH_BYTEENA_B                    ; 1                                       ; Untyped                      ;
+; RAM_BLOCK_TYPE                     ; AUTO                                    ; Untyped                      ;
+; BYTE_SIZE                          ; 8                                       ; Untyped                      ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                               ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                    ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                    ; Untyped                      ;
+; INIT_FILE                          ; db/cs701.ram0_prog_mem_e3d122c6.hdl.mif ; Untyped                      ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                  ; Untyped                      ;
+; MAXIMUM_DEPTH                      ; 0                                       ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL                                  ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                  ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                                  ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                  ; Untyped                      ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                         ; Untyped                      ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                         ; Untyped                      ;
+; ENABLE_ECC                         ; FALSE                                   ; Untyped                      ;
+; WIDTH_ECCSTATUS                    ; 3                                       ; Untyped                      ;
+; DEVICE_FAMILY                      ; Cyclone IV E                            ; Untyped                      ;
+; CBXI_PARAMETER                     ; altsyncram_ur61                         ; Untyped                      ;
++------------------------------------+-----------------------------------------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                         ;
++-------------------------------------------+--------------------------------------------------------------+
+; Name                                      ; Value                                                        ;
++-------------------------------------------+--------------------------------------------------------------+
+; Number of entity instances                ; 4                                                            ;
+; Entity Instance                           ; Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1   ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                                                    ;
+;     -- WIDTH_A                            ; 16                                                           ;
+;     -- NUMWORDS_A                         ; 16                                                           ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                 ;
+;     -- WIDTH_B                            ; 16                                                           ;
+;     -- NUMWORDS_B                         ; 16                                                           ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                       ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                 ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                         ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                                     ;
+; Entity Instance                           ; Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2   ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                                                    ;
+;     -- WIDTH_A                            ; 16                                                           ;
+;     -- NUMWORDS_A                         ; 16                                                           ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                 ;
+;     -- WIDTH_B                            ; 16                                                           ;
+;     -- NUMWORDS_B                         ; 16                                                           ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                       ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                 ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                         ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                                     ;
+; Entity Instance                           ; Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0 ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                                                    ;
+;     -- WIDTH_A                            ; 16                                                           ;
+;     -- NUMWORDS_A                         ; 65536                                                        ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                 ;
+;     -- WIDTH_B                            ; 16                                                           ;
+;     -- NUMWORDS_B                         ; 65536                                                        ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                       ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                 ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                         ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                                     ;
+; Entity Instance                           ; Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0   ;
+;     -- OPERATION_MODE                     ; ROM                                                          ;
+;     -- WIDTH_A                            ; 16                                                           ;
+;     -- NUMWORDS_A                         ; 65536                                                        ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                 ;
+;     -- WIDTH_B                            ; 1                                                            ;
+;     -- NUMWORDS_B                         ; 1                                                            ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                       ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                 ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                         ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                    ;
++-------------------------------------------+--------------------------------------------------------------+
+
+
++-----------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|Mux8:b2v_RF_MUX" ;
++------+-------+----------+---------------------------------+
+; Port ; Type  ; Severity ; Details                         ;
++------+-------+----------+---------------------------------+
+; in5  ; Input ; Info     ; Stuck at GND                    ;
+; in7  ; Input ; Info     ; Stuck at GND                    ;
++------+-------+----------+---------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|RF:b2v_RF_inst"                                                                              ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                  ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; out_r7 ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|Mux4:b2v_MUX_A" ;
++------------+-------+----------+--------------------------+
+; Port       ; Type  ; Severity ; Details                  ;
++------------+-------+----------+--------------------------+
+; in2[15..1] ; Input ; Info     ; Stuck at GND             ;
+; in2[0]     ; Input ; Info     ; Stuck at VCC             ;
+; in3        ; Input ; Info     ; Stuck at GND             ;
++------------+-------+----------+--------------------------+
+
+
++--------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|prog_mem:b2v_inst2" ;
++-----------+-------+----------+-------------------------------+
+; Port      ; Type  ; Severity ; Details                       ;
++-----------+-------+----------+-------------------------------+
+; wren      ; Input ; Info     ; Stuck at GND                  ;
+; data      ; Input ; Info     ; Stuck at GND                  ;
+; wraddress ; Input ; Info     ; Stuck at GND                  ;
++-----------+-------+----------+-------------------------------+
+
+
++-------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|Mux4:b2v_DPCR_MUX" ;
++------+-------+----------+-----------------------------------+
+; Port ; Type  ; Severity ; Details                           ;
++------+-------+----------+-----------------------------------+
+; in2  ; Input ; Info     ; Stuck at GND                      ;
++------+-------+----------+-----------------------------------+
+
+
++----------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|Mux4:b2v_DM_DATA_MUX" ;
++------+-------+----------+--------------------------------------+
+; Port ; Type  ; Severity ; Details                              ;
++------+-------+----------+--------------------------------------+
+; in3  ; Input ; Info     ; Stuck at GND                         ;
++------+-------+----------+--------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|register_32:b2v_DPRR_reg"                                               ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; output ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------+
+; Port Connectivity Checks: "Datapath:inst|register_32:b2v_DCPR_reg" ;
++---------------+-------+----------+---------------------------------+
+; Port          ; Type  ; Severity ; Details                         ;
++---------------+-------+----------+---------------------------------+
+; input[31..16] ; Input ; Info     ; Stuck at GND                    ;
++---------------+-------+----------+---------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:11     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Full Version
+    Info: Processing started: Wed May 06 17:02:56 2015
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off cs701 -c cs701
+Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info: Found 1 design units, including 1 entities, in source file processor.bdf
+    Info: Found entity 1: Processor
+Info: Found 2 design units, including 1 entities, in source file single_register.vhd
+    Info: Found design unit 1: single_register-behaviour
+    Info: Found entity 1: single_register
+Info: Found 2 design units, including 1 entities, in source file registerfile.vhd
+    Info: Found design unit 1: RF-behaviour
+    Info: Found entity 1: RF
+Info: Found 2 design units, including 1 entities, in source file register_er.vhd
+    Info: Found design unit 1: register_ER-behaviour
+    Info: Found entity 1: register_ER
+Info: Found 2 design units, including 1 entities, in source file register_32.vhd
+    Info: Found design unit 1: register_32-behaviour
+    Info: Found entity 1: register_32
+Info: Found 2 design units, including 1 entities, in source file register_1bit.vhd
+    Info: Found design unit 1: register_1bit-behaviour
+    Info: Found entity 1: register_1bit
+Info: Found 2 design units, including 1 entities, in source file prog_mem.vhd
+    Info: Found design unit 1: prog_mem-behaviour
+    Info: Found entity 1: prog_mem
+Info: Found 2 design units, including 1 entities, in source file pcadd.vhd
+    Info: Found design unit 1: PCplus1-behavior
+    Info: Found entity 1: PCplus1
+Info: Found 2 design units, including 1 entities, in source file mux8.vhd
+    Info: Found design unit 1: Mux8-behavior
+    Info: Found entity 1: Mux8
+Info: Found 2 design units, including 1 entities, in source file mux4.vhd
+    Info: Found design unit 1: Mux4-behavior
+    Info: Found entity 1: Mux4
+Info: Found 2 design units, including 1 entities, in source file mux2.vhd
+    Info: Found design unit 1: Mux2-behavior
+    Info: Found entity 1: Mux2
+Info: Found 2 design units, including 1 entities, in source file max.vhd
+    Info: Found design unit 1: MAX-bhvr
+    Info: Found entity 1: MAX
+Info: Found 2 design units, including 1 entities, in source file instruction_register.vhd
+    Info: Found design unit 1: instruction_register-behaviour
+    Info: Found entity 1: instruction_register
+Info: Found 2 design units, including 1 entities, in source file datapath.vhd
+    Info: Found design unit 1: Datapath-bdf_type
+    Info: Found entity 1: Datapath
+Info: Found 2 design units, including 1 entities, in source file data_mem.vhd
+    Info: Found design unit 1: data_mem-behaviour
+    Info: Found entity 1: data_mem
+Info: Found 2 design units, including 1 entities, in source file controlunit.vhd
+    Info: Found design unit 1: CONTROLUNIT-bhvr
+    Info: Found entity 1: CONTROLUNIT
+Info: Found 2 design units, including 1 entities, in source file alu.vhd
+    Info: Found design unit 1: ALU-bhvr
+    Info: Found entity 1: ALU
+Info: Elaborating entity "Processor" for the top level hierarchy
+Info: Elaborating entity "CONTROLUNIT" for hierarchy "CONTROLUNIT:inst5"
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(163): signal "DPC" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(163): signal "IRQ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(165): signal "DPC" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(165): signal "IRQ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(166): signal "ld_dprr_done" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(170): signal "IRQ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(170): signal "ld_dprr_done" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(177): signal "HP" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(177): signal "FLMR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(178): signal "HP" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(180): signal "FFMR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(187): signal "HP" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(187): signal "TP" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(191): signal "IRQ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(191): signal "ld_dprr_done" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(201): signal "AM" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(220): signal "OPCODE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(230): signal "AM" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(232): signal "OPCODE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(246): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(252): signal "OPCODE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(255): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(259): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(263): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(267): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(271): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(275): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(279): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(283): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(287): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(292): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(303): signal "zout" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(312): signal "zout" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(317): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(321): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(326): signal "OPCODE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(330): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(343): signal "OPCODE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(346): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(347): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(351): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(355): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(356): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(360): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(364): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(365): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(369): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(372): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(374): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(377): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(382): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(391): signal "RZ" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(394): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at ControlUnit.vhd(401): signal "RX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "wr_en", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "ld_IR", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "sel_ir", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "PC_reg_ld", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "ER_Ld_Reg", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "SIP_Ld_Reg", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "SVOP_Ld_Reg", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "SOP_Ld_Reg", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "clrz", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "clrer", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "clreot", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "seteot", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "data_write", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "CLR_IRQ", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "HP", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "DPC", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "IRQ", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "ld_dprr_done", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_PC_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "alu_op", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "sel_x", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "sel_z", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_A_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_B_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_RF_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "wr_dest", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_DMW_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_DM_Data_sel", which holds its previous value in one or more paths through the process
+Warning (10631): VHDL Process Statement warning at ControlUnit.vhd(132): inferring latch(es) for signal or variable "mux_DMR_sel", which holds its previous value in one or more paths through the process
+Info (10041): Inferred latch for "mux_DMR_sel" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_DM_Data_sel[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_DM_Data_sel[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_DMW_sel" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "wr_dest[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "wr_dest[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "wr_dest[2]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "wr_dest[3]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_RF_sel[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_RF_sel[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_RF_sel[2]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_B_sel" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_A_sel[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_A_sel[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_z[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_z[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_z[2]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_z[3]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_x[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_x[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_x[2]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_x[3]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "alu_op[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "alu_op[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_PC_sel[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "mux_PC_sel[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "ld_dprr_done" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "IRQ" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "DPC" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[0]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[1]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[2]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[3]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[4]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[5]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[6]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[7]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[8]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[9]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[10]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[11]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[12]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[13]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[14]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "HP[15]" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "CLR_IRQ" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "data_write" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "seteot" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "clreot" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "clrer" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "clrz" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "SOP_Ld_Reg" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "SVOP_Ld_Reg" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "SIP_Ld_Reg" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "ER_Ld_Reg" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "PC_reg_ld" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "sel_ir" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "ld_IR" at ControlUnit.vhd(132)
+Info (10041): Inferred latch for "wr_en" at ControlUnit.vhd(132)
+Info: Elaborating entity "Datapath" for hierarchy "Datapath:inst"
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(220): used explicit default value for signal "const_0" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(221): used explicit default value for signal "const_1" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at Datapath.vhd(222): used explicit default value for signal "const_logic_0" because signal was never assigned a value
+Warning (10541): VHDL Signal Declaration warning at Datapath.vhd(223): used implicit default value for signal "r_seven" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at Datapath.vhd(225): object "dprr_out" assigned a value but never read
+Warning (10873): Using initial value X (don't care) for net "DPCR[31..16]" at Datapath.vhd(202)
+Info: Elaborating entity "ALU" for hierarchy "Datapath:inst|ALU:b2v_ALU_inst"
+Info: Elaborating entity "register_32" for hierarchy "Datapath:inst|register_32:b2v_DCPR_reg"
+Info: Elaborating entity "register_1bit" for hierarchy "Datapath:inst|register_1bit:b2v_zero_flag_reg"
+Info: Elaborating entity "Mux4" for hierarchy "Datapath:inst|Mux4:b2v_DM_DATA_MUX"
+Info: Elaborating entity "data_mem" for hierarchy "Datapath:inst|data_mem:b2v_DM_inst"
+Info: Elaborating entity "Mux2" for hierarchy "Datapath:inst|Mux2:b2v_DMR_MUX"
+Info: Elaborating entity "instruction_register" for hierarchy "Datapath:inst|instruction_register:b2v_inst1"
+Info: Elaborating entity "prog_mem" for hierarchy "Datapath:inst|prog_mem:b2v_inst2"
+Info: Elaborating entity "PCplus1" for hierarchy "Datapath:inst|PCplus1:b2v_inst4"
+Info: Elaborating entity "MAX" for hierarchy "Datapath:inst|MAX:b2v_MAX_inst"
+Info: Elaborating entity "single_register" for hierarchy "Datapath:inst|single_register:b2v_PC_REGISTER"
+Info: Elaborating entity "RF" for hierarchy "Datapath:inst|RF:b2v_RF_inst"
+Info: Inferred 2 megafunctions from design logic
+    Info: Inferred altsyncram megafunction from the following design logic: "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1" 
+        Info: Parameter OPERATION_MODE set to DUAL_PORT
+        Info: Parameter WIDTH_A set to 16
+        Info: Parameter WIDTHAD_A set to 4
+        Info: Parameter NUMWORDS_A set to 16
+        Info: Parameter WIDTH_B set to 16
+        Info: Parameter WIDTHAD_B set to 4
+        Info: Parameter NUMWORDS_B set to 16
+        Info: Parameter ADDRESS_ACLR_A set to NONE
+        Info: Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info: Parameter ADDRESS_ACLR_B set to NONE
+        Info: Parameter OUTDATA_ACLR_B set to NONE
+        Info: Parameter ADDRESS_REG_B set to CLOCK0
+        Info: Parameter INDATA_ACLR_A set to NONE
+        Info: Parameter WRCONTROL_ACLR_A set to NONE
+        Info: Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
+    Info: Inferred altsyncram megafunction from the following design logic: "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2" 
+        Info: Parameter OPERATION_MODE set to DUAL_PORT
+        Info: Parameter WIDTH_A set to 16
+        Info: Parameter WIDTHAD_A set to 4
+        Info: Parameter NUMWORDS_A set to 16
+        Info: Parameter WIDTH_B set to 16
+        Info: Parameter WIDTHAD_B set to 4
+        Info: Parameter NUMWORDS_B set to 16
+        Info: Parameter ADDRESS_ACLR_A set to NONE
+        Info: Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info: Parameter ADDRESS_ACLR_B set to NONE
+        Info: Parameter OUTDATA_ACLR_B set to NONE
+        Info: Parameter ADDRESS_REG_B set to CLOCK0
+        Info: Parameter INDATA_ACLR_A set to NONE
+        Info: Parameter WRCONTROL_ACLR_A set to NONE
+        Info: Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
+Info: Elaborating entity "altsyncram" for hierarchy "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1"
+Info: Elaborated megafunction instantiation "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1"
+Info: Instantiated megafunction "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1" with the following parameter:
+    Info: Parameter "OPERATION_MODE" = "DUAL_PORT"
+    Info: Parameter "WIDTH_A" = "16"
+    Info: Parameter "WIDTHAD_A" = "4"
+    Info: Parameter "NUMWORDS_A" = "16"
+    Info: Parameter "WIDTH_B" = "16"
+    Info: Parameter "WIDTHAD_B" = "4"
+    Info: Parameter "NUMWORDS_B" = "16"
+    Info: Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info: Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info: Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info: Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info: Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info: Parameter "INDATA_ACLR_A" = "NONE"
+    Info: Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info: Parameter "READ_DURING_WRITE_MODE_MIXED_PORTS" = "OLD_DATA"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_ksg1.tdf
+    Info: Found entity 1: altsyncram_ksg1
+Info: Elaborating entity "altsyncram_ksg1" for hierarchy "Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1|altsyncram_ksg1:auto_generated"
+Info: Elaborating entity "Mux8" for hierarchy "Datapath:inst|Mux8:b2v_RF_MUX"
+Warning: Tri-state node(s) do not directly drive top-level pin(s)
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux8:b2v_RF_MUX|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_PC_MUX|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_MUX_B|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_MUX_A|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMW_MUX|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux2:b2v_DMR_MUX|Output[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "Datapath:inst|Mux4:b2v_DM_DATA_MUX|Output[15]" feeding internal logic into a wire
+Info: Inferred 2 megafunctions from design logic
+    Info: Inferred altsyncram megafunction from the following design logic: "Datapath:inst|data_mem:b2v_DM_inst|DATA_MEM_rtl_0" 
+        Info: Parameter OPERATION_MODE set to DUAL_PORT
+        Info: Parameter WIDTH_A set to 16
+        Info: Parameter WIDTHAD_A set to 16
+        Info: Parameter NUMWORDS_A set to 65536
+        Info: Parameter WIDTH_B set to 16
+        Info: Parameter WIDTHAD_B set to 16
+        Info: Parameter NUMWORDS_B set to 65536
+        Info: Parameter ADDRESS_ACLR_A set to NONE
+        Info: Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info: Parameter ADDRESS_ACLR_B set to NONE
+        Info: Parameter OUTDATA_ACLR_B set to NONE
+        Info: Parameter ADDRESS_REG_B set to CLOCK0
+        Info: Parameter INDATA_ACLR_A set to NONE
+        Info: Parameter WRCONTROL_ACLR_A set to NONE
+        Info: Parameter INIT_FILE set to db/cs701.ram0_data_mem_73ff31ea.hdl.mif
+        Info: Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
+    Info: Inferred altsyncram megafunction from the following design logic: "Datapath:inst|prog_mem:b2v_inst2|DATA_MEM_rtl_0" 
+        Info: Parameter OPERATION_MODE set to ROM
+        Info: Parameter WIDTH_A set to 16
+        Info: Parameter WIDTHAD_A set to 16
+        Info: Parameter NUMWORDS_A set to 65536
+        Info: Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info: Parameter ADDRESS_ACLR_A set to NONE
+        Info: Parameter OUTDATA_ACLR_A set to NONE
+        Info: Parameter INDATA_ACLR_A set to NONE
+        Info: Parameter WRCONTROL_ACLR_A set to NONE
+        Info: Parameter INIT_FILE set to db/cs701.ram0_prog_mem_e3d122c6.hdl.mif
+Info: Elaborated megafunction instantiation "Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0"
+Info: Instantiated megafunction "Datapath:inst|data_mem:b2v_DM_inst|altsyncram:DATA_MEM_rtl_0" with the following parameter:
+    Info: Parameter "OPERATION_MODE" = "DUAL_PORT"
+    Info: Parameter "WIDTH_A" = "16"
+    Info: Parameter "WIDTHAD_A" = "16"
+    Info: Parameter "NUMWORDS_A" = "65536"
+    Info: Parameter "WIDTH_B" = "16"
+    Info: Parameter "WIDTHAD_B" = "16"
+    Info: Parameter "NUMWORDS_B" = "65536"
+    Info: Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info: Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info: Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info: Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info: Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info: Parameter "INDATA_ACLR_A" = "NONE"
+    Info: Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info: Parameter "INIT_FILE" = "db/cs701.ram0_data_mem_73ff31ea.hdl.mif"
+    Info: Parameter "READ_DURING_WRITE_MODE_MIXED_PORTS" = "OLD_DATA"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_pll1.tdf
+    Info: Found entity 1: altsyncram_pll1
+Info: Found 1 design units, including 1 entities, in source file db/decode_rsa.tdf
+    Info: Found entity 1: decode_rsa
+Info: Found 1 design units, including 1 entities, in source file db/mux_qob.tdf
+    Info: Found entity 1: mux_qob
+Info: Elaborated megafunction instantiation "Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0"
+Info: Instantiated megafunction "Datapath:inst|prog_mem:b2v_inst2|altsyncram:DATA_MEM_rtl_0" with the following parameter:
+    Info: Parameter "OPERATION_MODE" = "ROM"
+    Info: Parameter "WIDTH_A" = "16"
+    Info: Parameter "WIDTHAD_A" = "16"
+    Info: Parameter "NUMWORDS_A" = "65536"
+    Info: Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info: Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info: Parameter "OUTDATA_ACLR_A" = "NONE"
+    Info: Parameter "INDATA_ACLR_A" = "NONE"
+    Info: Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info: Parameter "INIT_FILE" = "db/cs701.ram0_prog_mem_e3d122c6.hdl.mif"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_ur61.tdf
+    Info: Found entity 1: altsyncram_ur61
+Info: Found 1 design units, including 1 entities, in source file db/decode_k8a.tdf
+    Info: Found entity 1: decode_k8a
+Warning: 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[0]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[1]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[2]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[3]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[4]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[5]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[6]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[7]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[8]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[9]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[10]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[11]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[12]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[13]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[14]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|HP[15]$latch" is permanently disabled
+Warning: LATCH primitive "CONTROLUNIT:inst5|DPC$latch" is permanently disabled
+Info: Duplicate LATCH primitives merged into single LATCH primitive
+    Info: Duplicate LATCH primitive "CONTROLUNIT:inst5|mux_B_sel" merged with LATCH primitive "CONTROLUNIT:inst5|mux_A_sel[0]"
+Warning: Latch CONTROLUNIT:inst5|SOP_Ld_Reg has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|SVOP_Ld_Reg has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|wr_en has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal CONTROLUNIT:inst5|STATE.T2
+Warning: Latch CONTROLUNIT:inst5|mux_A_sel[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|mux_RF_sel[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|mux_RF_sel[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|mux_RF_sel[2] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|alu_op[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[29]
+Warning: Latch CONTROLUNIT:inst5|alu_op[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[29]
+Warning: Latch CONTROLUNIT:inst5|wr_dest[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|wr_dest[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|wr_dest[2] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|wr_dest[3] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|sel_x[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|sel_x[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|sel_x[2] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|sel_x[3] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|mux_DMW_sel has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|data_write has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal CONTROLUNIT:inst5|STATE.T2
+Warning: Latch CONTROLUNIT:inst5|mux_DM_Data_sel[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|mux_DM_Data_sel[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[31]
+Warning: Latch CONTROLUNIT:inst5|mux_DMR_sel has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[30]
+Warning: Latch CONTROLUNIT:inst5|SIP_Ld_Reg has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[24]
+Warning: Latch CONTROLUNIT:inst5|mux_PC_sel[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal CONTROLUNIT:inst5|STATE.T2
+Warning: Latch CONTROLUNIT:inst5|mux_PC_sel[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal Datapath:inst|instruction_register:b2v_inst1|output[31]
+Info: Timing-Driven Synthesis is running
+Info: Generating hard_block partition "hard_block:auto_generated_inst"
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "ER"
+Info: Implemented 1127 device resources after synthesis - the final resource count might be different
+    Info: Implemented 19 input pins
+    Info: Implemented 33 output pins
+    Info: Implemented 787 logic cells
+    Info: Implemented 288 RAM segments
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 272 warnings
+    Info: Peak virtual memory: 494 megabytes
+    Info: Processing ended: Wed May 06 17:03:12 2015
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:13
+
+
