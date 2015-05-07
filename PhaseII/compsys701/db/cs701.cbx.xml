@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<LOG_ROOT>
-	<PROJECT NAME="cs701">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__1" CBX_FILE_NAME="altsyncram_e0h1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Processor|Datapath:inst|RF:b2v_RF_inst|altsyncram:DATA_MEM[0][15]__2" CBX_FILE_NAME="altsyncram_e0h1.tdf"/>
-	</PROJECT>
-</LOG_ROOT>
