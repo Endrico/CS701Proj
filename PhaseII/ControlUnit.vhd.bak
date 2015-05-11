@@ -147,12 +147,11 @@ BEGIN
 				clreot <= '0';
 				seteot <= '0';
 				data_write <= '0';
-				mux_PC_sel <= "00";
 			WHEN E0 =>
 				wr_en <= '0';
 				ld_IR <= '0';
 				sel_ir <= '0';					-- added
-				PC_reg_ld <= '1';
+				PC_reg_ld <= '0';
 				ER_Ld_Reg <= '0';
 				SIP_Ld_Reg <= '0';
 				SVOP_Ld_Reg <= '0';
