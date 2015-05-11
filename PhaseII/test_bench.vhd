@@ -46,8 +46,8 @@ architecture behaviour of test_bench is
 	signal		start_hold 	:  STD_LOGIC := '0';
 	signal		start			:  STD_LOGIC := '0';
 	signal		lddprr_done : STD_LOGIC := '0';
-	signal		dpc			: STD_LOGIC := '0';
-	signal		irq			: STD_LOGIC := '1';
+	signal		dpc			: STD_LOGIC := '1';
+	signal		irq			: STD_LOGIC := '0';
 	signal		dprr_in 		:  STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal		FFMR 			:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 	signal		FLMR			:  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -107,11 +107,21 @@ BEGIN
 	
    rst_process :process
    begin
-        RST <= '0';
-        wait for 10 ns;  --for 0.5 ns signal is '0'.
         RST <= '1';
-        wait for 110 ns;  --for next 0.5 ns signal is '1'.
-		  RST <= '0';
+        wait for 10 ns;  --for 0.5 ns signal is '0'.
+        RST <= '0';
+        wait for 2000 ns;  --for next 0.5 ns signal is '1'.
+		  RST <= '1';
+		wait for 10 ns;  --for 0.5 ns signal is '0'.
+			RST <= '0';
+		  wait;
+   end process;
+   
+   start_process :process
+   begin
+        start <= '0';
+        wait for 900 ns;  --for 0.5 ns signal is '0'.
+        start <= '1';
 		  wait;
    end process;
    

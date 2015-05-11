@@ -74,7 +74,7 @@ BEGIN
 	OPCODE <= I_code(13 downto 8);
 	RZ <= I_code(7 downto 4);
 	RX <= I_code(3 downto 0);
-	Process(CLK, RST_L)
+	Process(CLK)
 	BEGIN
 		IF(RST_L = '1') THEN
 			STATE <= Init;
@@ -241,6 +241,7 @@ BEGIN
 							WHEN SEOT_I =>
 								seteot <= '1';
 							WHEN NOOP_I =>
+													-- added but didnt fix issue
 							WHEN PRESENT_I =>
 								clrz <= '1';
 								alu_op <= "00";
