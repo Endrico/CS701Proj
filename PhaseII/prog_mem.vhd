@@ -41,8 +41,8 @@ BEGIN
             if (wren = '1') then
                 DATA_MEM(to_integer(unsigned(wraddress(15 downto 0)))) <= data;
             end if;
-                q <= DATA_MEM(to_integer(unsigned(rdaddress(15 downto 0))));
         end if;
     end process memory_access;   
+	 q <= DATA_MEM(to_integer(unsigned(rdaddress(15 downto 0))));
     
 END behaviour;

@@ -353,8 +353,8 @@ PORT MAP(In0 => RX_OUT,
 
 b2v_MUX_B : mux2
 PORT MAP(Sel => mux_B_sel,
-		 In0 => RX_OUT,
-		 In1 => RZ_OUT,
+		 In0 => RZ_OUT,
+		 In1 => RX_OUT,
 		 Output => SYNTHESIZED_WIRE_17);
 
 
