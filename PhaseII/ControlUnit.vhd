@@ -130,7 +130,7 @@ BEGIN
 		END IF;
 	END Process;
 
-	Process(STATE)
+	Process(STATE, I_code)
 	BEGIN
 		CASE STATE IS
 			WHEN Init =>
@@ -152,7 +152,7 @@ BEGIN
 				wr_en <= '0';
 				ld_IR <= '0';
 				sel_ir <= '0';					-- added
-				PC_reg_ld <= '1';
+				PC_reg_ld <= '1';				-- changed from 1 12/05
 				ER_Ld_Reg <= '0';
 				SIP_Ld_Reg <= '0';
 				SVOP_Ld_Reg <= '0';
@@ -198,7 +198,7 @@ BEGIN
 				ld_IR <= '1';
 				sel_ir <= '1';				-- Added
 				mux_PC_sel <= "00";
-				PC_reg_ld <= '0';
+				PC_reg_ld <= '0';			-- changed from 0 12/05
 			WHEN T1 =>
 				CASE AM IS
 					WHEN Inherent_AM =>
@@ -208,12 +208,12 @@ BEGIN
 						ld_IR <= '1';
 						sel_ir <= '0';			-- added
 						mux_PC_sel <= "00";
-						PC_reg_ld <= '0';
+						PC_reg_ld <= '1';		-- changed 12/05/2015
 					WHEN Direct_AM =>
 						ld_IR <= '1';
 						sel_ir <= '0';			-- added
 						mux_PC_sel <= "00";
-						PC_reg_ld <= '0';
+						PC_reg_ld <= '1';		-- changed 12/05/2015
 					WHEN Register_AM =>
 						ld_IR <= '0';
 						PC_reg_ld <= '0';
@@ -229,6 +229,7 @@ BEGIN
 			WHEN T2 =>
 				ld_IR <= '0';
 				PC_reg_ld <= '0';
+				--sel_ir <= '0';
 				CASE AM IS
 					WHEN Inherent_AM =>
 						CASE OPCODE IS
@@ -294,6 +295,9 @@ BEGIN
 								mux_RF_sel <= "000";
 								wr_dest <= Rz;
 								wr_en <= '1';
+								sel_ir <= '0';			-- added because bottom ir not loading in properly
+								ld_IR <= '1';
+								PC_reg_ld <= '1';		-- changed 12/05/2015
 							WHEN STR_I =>
 								mux_DMW_sel <= '0';
 								mux_DM_Data_sel <= "01";
@@ -332,6 +336,9 @@ BEGIN
 								mux_RF_sel <= "110";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								sel_ir <= '0';				-- Added because bottom ir was not loading in properly
+								ld_IR <= '1';
+								PC_reg_ld <= '1';		-- changed 12/05/2015  -- not sure if this has to be here
 							WHEN STR_I =>
 								mux_DMW_sel <= '1';
 								mux_DM_Data_sel <= "00";
@@ -376,6 +383,9 @@ BEGIN
 								mux_RF_sel <= "001";
 								wr_dest <= Rz;
 								wr_en <= '1';
+								sel_ir <= '0';			-- added because bottom ir not loading in properly
+								ld_IR <= '1';
+								PC_reg_ld <= '1';		-- changed 12/05/2015  -- not sure if this has to be here
 							WHEN STR_I =>
 								sel_x <= RX;
 								mux_DMW_sel <= '0';

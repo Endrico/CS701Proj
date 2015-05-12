@@ -29,7 +29,7 @@ begin
 				elsif (enable = '1' and sel = '0') then
 					tmp_bot <= input;
 				end if;
-				output<= tmp_top & tmp_bot;
 			end if;
 	end process;
+	output<= tmp_top & tmp_bot;
 end behaviour; 

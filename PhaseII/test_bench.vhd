@@ -107,13 +107,11 @@ BEGIN
 	
    rst_process :process
    begin
+		RST <= '0';
+		wait for 10 ns; 
         RST <= '1';
-        wait for 10 ns;  --for 0.5 ns signal is '0'.
+        wait for 20 ns;  --for 0.5 ns signal is '0'.
         RST <= '0';
-        wait for 2000 ns;  --for next 0.5 ns signal is '1'.
-		  RST <= '1';
-		wait for 10 ns;  --for 0.5 ns signal is '0'.
-			RST <= '0';
 		  wait;
    end process;
    
