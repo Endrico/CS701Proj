@@ -38,6 +38,7 @@ ARCHITECTURE bhvr OF CONTROLUNIT IS
 	signal OPCODE : STD_LOGIC_VECTOR(5 downto 0);
 	signal RX : STD_LOGIC_VECTOR(3 downto 0);
 	signal RZ : STD_LOGIC_VECTOR(3 downto 0);
+	signal LOCK : STD_LOGIC := 0;
 
 	-- Addressing mode bits
 	constant Inherent_AM  : std_logic_vector(1 downto 0) := "00";
@@ -118,7 +119,17 @@ BEGIN
 				WHEN T1 =>
 					STATE <= T2;
 				WHEN T2 =>
-					IF(debug_hold = '1') THEN
+					IF(LOCK = '1') THEN
+						IF(ld_dprr_done = '0') THEN
+							IF(debug_hold = '1') THEN
+								STATE <= TEST;
+							ELSE
+								STATE <= E0;
+							END IF;
+						ELSE
+							STATE <= T2;
+						END IF;
+					ELSIF(debug_hold = '1') THEN
 						STATE <= TEST;
 					ELSE
 						STATE <= E0;
@@ -317,8 +328,20 @@ BEGIN
 							WHEN DCALLBL_I =>
 								-- TODO
 								--DPCR <- Rx & Operand
-								DPCR_mux_sel <= '1';			-- sel in1
-								dpcr_en <= '1';
+								IF(LOCK = '0' AND DPC = '0') THEN
+									DPCR_mux_sel <= '1';			-- sel in1
+									dpcr_en <= '1';
+									DPC <= '1';
+									LOCK <= '1';
+									ld_dprr_done <= '1';
+								ELSIF(LOCK = '1' AND IRQ = '1') THEN
+									wr_dest <= x"0";
+									wr_en <= '1';
+									mux_RF_sel <= "111"; -- TODO check if this is connected correctly
+									ld_dprr_done <= '0';
+									DPC <= '0';
+									-- dpcr_clr <= '1'; -- TODO add clr to dpcr mux
+								END IF;
 							WHEN DCALLNB_I =>
 								-- TODO
 								--DPCR <- Rx & Operand
@@ -406,12 +429,24 @@ BEGIN
 							WHEN DCALLBL_I =>
 								-- TODO
 								--DPCR <- R7 & Rx
-								DPCR_mux_sel <= '1';			-- sel in0
-								dpcr_en <= '1';
+								IF(LOCK = '0' AND DPC = '0') THEN
+									DPCR_mux_sel <= '0';			-- sel in0
+									dpcr_en <= '1';
+									DPC <= '1';
+									LOCK <= '1';
+									ld_dprr_done <= '1';
+								ELSIF(LOCK = '1' AND IRQ = '1') THEN
+									wr_dest <= x"0";
+									wr_en <= '1';
+									mux_RF_sel <= "111"; -- TODO check if this is connected correctly
+									ld_dprr_done <= '0';
+									DPC <= '0';
+									-- dpcr_clr <= '1'; -- TODO add clr to dpcr mux
+								END IF;
 							WHEN DCALLNB_I =>
 								-- TODO
 								--DPCR <- R7 & Rx
-								DPCR_mux_sel <= '1';			-- sel in0
+								DPCR_mux_sel <= '0';			-- sel in0
 								dpcr_en <= '1';
 							WHEN LER_I =>
 								mux_RF_sel <= "101";
