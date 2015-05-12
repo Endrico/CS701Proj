@@ -7,7 +7,7 @@ ENTITY CONTROLUNIT IS
 	PORT
 	(
 	CLK, RST_L, nios_control, debug_hold, start_hold, start : IN STD_LOGIC;
-	zout : IN STD_LOGIC;
+	zout, rzout : IN STD_LOGIC;
 	I_code : IN STD_LOGIC_VECTOR(15 downto 0);
 
 	--mem_sel, WE : OUT STD_LOGIC;
@@ -149,6 +149,7 @@ BEGIN
 				data_write <= '0';
 				mux_PC_sel <= "00";
 			WHEN E0 =>
+				en_z <='0';			-- Added 12/05/2015
 				wr_en <= '0';
 				ld_IR <= '0';
 				sel_ir <= '0';					-- added
@@ -224,12 +225,18 @@ BEGIN
 						ER_Ld_Reg <= '1';
 					WHEN LSIP_I =>
 						SIP_Ld_Reg <= '1';
+					WHEN PRESENT_I =>	-- dont think we need any of this
+						en_z <= '1';		--changed from clrz
+						--alu_op <= "11";		--changed from 00
+						--sel_x <= "0000";	-- do we need this?
+						sel_z <= RZ;
+						--mux_A_sel <= "00";
+						--mux_B_sel <= '0';
 					WHEN OTHERS =>
 				END CASE;
 			WHEN T2 =>
 				ld_IR <= '0';
 				PC_reg_ld <= '0';
-				--sel_ir <= '0';
 				CASE AM IS
 					WHEN Inherent_AM =>
 						CASE OPCODE IS
@@ -242,14 +249,7 @@ BEGIN
 							WHEN SEOT_I =>
 								seteot <= '1';
 							WHEN NOOP_I =>
-													-- added but didnt fix issue
-							WHEN PRESENT_I =>
-								clrz <= '1';
-								alu_op <= "00";
-								sel_x <= "0000";
-								sel_z <= RZ;
-								mux_A_sel <= "00";
-								mux_B_sel <= '0';
+							-- took out present from here
 							WHEN OTHERS =>
 						END CASE;
 					WHEN Immediate_AM =>
@@ -262,6 +262,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN OR_I =>
 								alu_op <= "11";
 								sel_x <= RX;
@@ -270,6 +271,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN ADD_I =>
 								alu_op <= "00";
 								sel_x <= RX;
@@ -278,6 +280,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN SUBV_I =>
 								alu_op <= "01";
 								sel_x <= RX;
@@ -286,18 +289,18 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN SUB_I =>
 								alu_op <= "01";
 								sel_x <= RX;
 								mux_A_sel <= "01";
 								mux_B_sel <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN LDR_I =>
 								mux_RF_sel <= "000";
 								wr_dest <= Rz;
 								wr_en <= '1';
 								sel_ir <= '0';			-- added because bottom ir not loading in properly
-								--ld_IR <= '1';
-								--PC_reg_ld <= '1';		-- changed 12/05/2015
 							WHEN STR_I =>
 								mux_DMW_sel <= '0';
 								mux_DM_Data_sel <= "01";
@@ -305,9 +308,9 @@ BEGIN
 							WHEN JMP_I =>
 								mux_PC_sel <= "01";
 								PC_reg_ld <= '1';
-							WHEN PRESENT_I =>
+							WHEN PRESENT_I =>		-- need to have it read the port where rzout comes in and checks if it is Zero not zout from alu. ie bypass alu
 								clrz <= '0';
-								IF(zout = '1') THEN
+								IF(rzout = '1') THEN
 									mux_PC_sel <= "01";
 									PC_reg_ld <= '1';
 								END IF;
@@ -360,6 +363,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN OR_I =>
 								alu_op <= "11";
 								sel_x <= RX;
@@ -369,6 +373,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN ADD_I =>
 								alu_op <= "00";
 								sel_x <= RX;
@@ -378,6 +383,7 @@ BEGIN
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
+								en_z <='1';			-- Added 12/05/2015
 							WHEN LDR_I =>
 								sel_x <= RX;
 								mux_RF_sel <= "001";

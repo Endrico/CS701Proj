@@ -69,7 +69,8 @@ ENTITY Datapath IS
 		SVOP_OUT			:	OUT 	STD_LOGIC_VECTOR(15 DOWNTO 0) ;
 		z_en				: 	IN 	STD_LOGIC;
 		clr_z				: 	IN 	STD_LOGIC;
-		z_ext_out		: 	OUT 	STD_LOGIC
+		z_ext_out		: 	OUT 	STD_LOGIC;
+		rz_out_cu		: OUT 	STD_LOGIC
 	);
 END Datapath;
 
@@ -181,7 +182,8 @@ COMPONENT rf
 		 wraddress : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 Out_X : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 Out_Z : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 Out_R7	: OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		 Out_R7	: OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 rzout_cu	: OUT 	STD_LOGIC
 	);
 END COMPONENT;
 
@@ -384,7 +386,9 @@ PORT MAP(clock => CLK_OUT,
 		 wraddress => wr_addr_rf,
 		 Out_X => RX_OUT,
 		 Out_R7 => r_seven,
-		 Out_Z => RZ_OUT);
+		 Out_Z => RZ_OUT,
+		 rzout_cu => rz_out_cu
+		 );
 
 
 b2v_RF_MUX : mux8

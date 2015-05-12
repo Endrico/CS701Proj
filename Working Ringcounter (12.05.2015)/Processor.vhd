@@ -59,7 +59,7 @@ COMPONENT controlunit
 		 debug_hold : IN STD_LOGIC;
 		 start_hold : IN STD_LOGIC;
 		 start : IN STD_LOGIC;
-		 zout : IN STD_LOGIC;
+		 zout, rzout : IN STD_LOGIC;		-- added rzout
 		 ld_dprr_done : INOUT STD_LOGIC;
 		 DPC : INOUT STD_LOGIC;
 		 IRQ : INOUT STD_LOGIC;
@@ -135,7 +135,7 @@ COMPONENT datapath
 		 wr_addr_rf : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 x_sel : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 z_sel : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 eot_out : OUT STD_LOGIC;
+		 eot_out, rz_out_cu : OUT STD_LOGIC;				-- added rz_out_cu
 		 er_out : OUT STD_LOGIC;
 		 z_ext_out : OUT STD_LOGIC;
 		 dpcr_out : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -176,7 +176,7 @@ SIGNAL	rf_z_sel :  STD_LOGIC_VECTOR(3 DOWNTO 0);
 SIGNAL	sel_dpcr_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL	sel_mux_b :  STD_LOGIC;
 SIGNAL	write_data_dm_en :  STD_LOGIC;
-SIGNAL	z_clr :  STD_LOGIC;
+SIGNAL	z_clr, rz_out_signal :  STD_LOGIC;
 
 
 BEGIN 
@@ -227,7 +227,9 @@ PORT MAP(CLK => clock,
 		 mux_RF_sel => rf_sel_mux,
 		 sel_x => rf_x_sel,
 		 sel_z => rf_z_sel,
-		 wr_dest => rf_wr_dest);
+		 wr_dest => rf_wr_dest,
+		 rzout => rz_out_signal						-- added for rz out
+		 );
 
 
 b2v_Datapath : datapath
@@ -271,7 +273,9 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 dpcr_out => dpcrout,
 		 instruction => Instructions,
 		 SOP_OUT => out_sop,
-		 SVOP_OUT => out_svop);
+		 SVOP_OUT => out_svop,
+		 rz_out_cu => rz_out_signal					-- added for rz out
+		 );
 
 Load_Ir <= Load_Ir_ALTERA_SYNTHESIZED;
 clock <= CLK;

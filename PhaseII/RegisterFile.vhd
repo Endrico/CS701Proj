@@ -11,15 +11,16 @@ use IEEE.NUMERIC_STD.ALL;
 ENTITY RF IS
 	PORT
 	(
-		clock		: IN STD_LOGIC  := '1';
-		data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-		Sel_X		: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-		Sel_Z		: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-		wraddress		: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-		wren		: IN STD_LOGIC  := '0';
-		Out_X		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-		Out_Z		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-		Out_R7	: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+		clock		: IN 	STD_LOGIC  := '1';
+		data		: IN 	STD_LOGIC_VECTOR (15 DOWNTO 0);
+		Sel_X		: IN 	STD_LOGIC_VECTOR (3 DOWNTO 0);
+		Sel_Z		: IN 	STD_LOGIC_VECTOR (3 DOWNTO 0);
+		wraddress	: IN 	STD_LOGIC_VECTOR (3 DOWNTO 0);
+		wren		: IN 	STD_LOGIC  := '0';
+		rzout_cu	: OUT 	STD_LOGIC;
+		Out_X		: OUT 	STD_LOGIC_VECTOR (15 DOWNTO 0);
+		Out_Z		: OUT 	STD_LOGIC_VECTOR (15 DOWNTO 0);
+		Out_R7		: OUT 	STD_LOGIC_VECTOR (15 DOWNTO 0)
 	);
 END RF;
 
@@ -29,6 +30,7 @@ ARCHITECTURE behaviour OF RF IS
 	--PROGRAM HERE
 		others => x"0000");
 	signal DATA_MEM : DMEMORY := dataInit;
+	
 BEGIN
 	
 	memory_access: process(clock)
@@ -41,6 +43,9 @@ BEGIN
 	end process memory_access; 
 	Out_X <= DATA_MEM(to_integer(unsigned(Sel_X(3 downto 0))));
 	Out_Z <= DATA_MEM(to_integer(unsigned(Sel_Z(3 downto 0))));
-	Out_R7<= DATA_MEM(7);	
+	Out_R7<= DATA_MEM(7);
+	
+	rzout_cu <= '1' when DATA_MEM(to_integer(unsigned(Sel_Z(3 downto 0)))) = x"0000" else
+			 '0';
 	
 END behaviour;
