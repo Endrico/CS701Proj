@@ -38,7 +38,7 @@ ENTITY Datapath IS
 		wr_addr_rf 		:  IN  	STD_LOGIC_VECTOR(3 DOWNTO 0);
 		
 		dpcr_en			:	IN 	STD_LOGIC; 											--DPCR enable port
-		dpcr_out			:	OUT 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		dpcr_out		:	OUT 	STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		dprr_en			:	IN 	STD_LOGIC; 	
 		dprr_in			:	IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -57,7 +57,7 @@ ENTITY Datapath IS
 		mux_dm_sel 		: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
 		mux_dmr_sel		: 	IN 	STD_LOGIC;
 		mux_dmw_sel 	: 	IN 	STD_LOGIC;
-		mux_dpcr_sel 	: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
+		mux_dpcr_sel 	: 	IN 	STD_LOGIC;
 		ir_sel 			: 	IN 	STD_LOGIC;
 		ir_en				: 	IN 	STD_LOGIC;
 		mux_rf_sel 		: 	IN 	STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -210,7 +210,7 @@ SIGNAL	RZ_OUT 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_16 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_17 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_2 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	SYNTHESIZED_WIRE_3 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	data_rd_addr	 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_4 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_5 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 SIGNAL	SYNTHESIZED_WIRE_8 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -287,7 +287,7 @@ b2v_DM_inst : data_mem
 PORT MAP(clock => CLK_OUT,
 		 wren => wr_en_datamem,
 		 data => SYNTHESIZED_WIRE_2,
-		 rdaddress => SYNTHESIZED_WIRE_3,
+		 rdaddress => data_rd_addr,
 		 wraddress => SYNTHESIZED_WIRE_4,
 		 q => SYNTHESIZED_WIRE_18);
 
@@ -296,7 +296,7 @@ b2v_DMR_MUX : mux2
 PORT MAP(In0 => RX_OUT,
 		 In1 => IReg(15 DOWNTO 0),
 		 Sel => mux_dmr_sel,
-		 Output => SYNTHESIZED_WIRE_3);
+		 Output => data_rd_addr);
 
 
 b2v_DMW_MUX : mux2
@@ -306,11 +306,9 @@ PORT MAP(In0 => RZ_OUT,
 		 Output => SYNTHESIZED_WIRE_4);
 
 
-b2v_DPCR_MUX : mux4
-PORT MAP(In0 => RX_OUT,
-			In1 => r_seven,
-			In2 => const_0,
-			In3 => IReg(15 DOWNTO 0),
+b2v_DPCR_MUX : mux2		-- changed this on 12/05/2015
+PORT MAP(	In0 => r_seven & RX_OUT ,
+			In1 => RX_OUT  & IReg(15 DOWNTO 0),
 			Sel => mux_dpcr_sel,
 			Output => DPCR(15 DOWNTO 0));
 

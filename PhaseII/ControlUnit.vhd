@@ -15,9 +15,9 @@ ENTITY CONTROLUNIT IS
 	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir: OUT STD_LOGIC;
 	ER_Ld_Reg, SIP_Ld_Reg, SOP_Ld_Reg, SVOP_Ld_Reg : OUT STD_LOGIC;
 	mux_B_sel, PC_reg_ld, data_write : OUT STD_LOGIC;
-	mux_DMR_sel, mux_DMW_sel : OUT STD_LOGIC;
+	mux_DMR_sel, mux_DMW_sel, DPCR_mux_sel : OUT STD_LOGIC;
 
-	alu_op, mux_A_sel, mux_PC_sel, DPCR_mux_sel : OUT STD_LOGIC_VECTOR(1 downto 0);
+	alu_op, mux_A_sel, mux_PC_sel : OUT STD_LOGIC_VECTOR(1 downto 0);
 	mux_DM_Data_sel : OUT STD_LOGIC_VECTOR(1 downto 0);
 	mux_RF_sel : OUT STD_LOGIC_VECTOR(2 downto 0);
 	sel_x, sel_z, wr_dest : OUT STD_LOGIC_VECTOR(3 downto 0);
@@ -149,7 +149,7 @@ BEGIN
 				data_write <= '0';
 				mux_PC_sel <= "00";
 			WHEN E0 =>
-				en_z <='0';			-- Added 12/05/2015
+				en_z <='0';						-- Added 12/05/2015
 				wr_en <= '0';
 				ld_IR <= '0';
 				sel_ir <= '0';					-- added
@@ -158,6 +158,7 @@ BEGIN
 				SIP_Ld_Reg <= '0';
 				SVOP_Ld_Reg <= '0';
 				SOP_Ld_Reg <= '0';
+				dpcr_en <= '0';
 				clrz <= '0';
 				clrer <= '0';
 				clreot <= '0';
@@ -176,6 +177,10 @@ BEGIN
 				END IF;
 			WHEN E1 =>
 				-- MR[R15] <= DPRR
+					--dprr_en <= '1';			-- added to ld dprr register
+					--sel_x <= "1110";		-- added to select R15 so its contents is the memory address.
+					--mux_DMR_sel <= "";
+					
 			WHEN E1bis =>
 				IF(unsigned(HP) - unsigned(FLMR) /= 0) THEN
 					HP <= std_logic_vector(unsigned(HP) + 1);
@@ -227,11 +232,7 @@ BEGIN
 						SIP_Ld_Reg <= '1';
 					WHEN PRESENT_I =>	-- dont think we need any of this
 						en_z <= '1';		--changed from clrz
-						--alu_op <= "11";		--changed from 00
-						--sel_x <= "0000";	-- do we need this?
 						sel_z <= RZ;
-						--mux_A_sel <= "00";
-						--mux_B_sel <= '0';
 					WHEN OTHERS =>
 				END CASE;
 			WHEN T2 =>
@@ -249,7 +250,6 @@ BEGIN
 							WHEN SEOT_I =>
 								seteot <= '1';
 							WHEN NOOP_I =>
-							-- took out present from here
 							WHEN OTHERS =>
 						END CASE;
 					WHEN Immediate_AM =>
@@ -285,7 +285,7 @@ BEGIN
 								alu_op <= "01";
 								sel_x <= RX;
 								mux_A_sel <= "01";
-								mux_B_sel <= '1';			-- when we set this to 0 it kinda worked
+								mux_B_sel <= '1';
 								mux_RF_sel <= "010";
 								wr_dest <= RZ;
 								wr_en <= '1';
@@ -316,8 +316,14 @@ BEGIN
 								END IF;
 							WHEN DCALLBL_I =>
 								-- TODO
+								--DPCR <- Rx & Operand
+								DPCR_mux_sel <= '1';			-- sel in1
+								dpcr_en <= '1';
 							WHEN DCALLNB_I =>
 								-- TODO
+								--DPCR <- Rx & Operand
+								DPCR_mux_sel <= '1';			-- sel in1
+								dpcr_en <= '1';
 							WHEN SZ_I =>
 								IF(zout = '1') THEN
 									mux_PC_sel <= "01";
@@ -340,8 +346,6 @@ BEGIN
 								wr_dest <= RZ;
 								wr_en <= '1';
 								sel_ir <= '0';				-- Added because bottom ir was not loading in properly
-								--ld_IR <= '1';
-								--PC_reg_ld <= '1';		-- changed 12/05/2015  -- not sure if this has to be here
 							WHEN STR_I =>
 								mux_DMW_sel <= '1';
 								mux_DM_Data_sel <= "00";
@@ -390,8 +394,6 @@ BEGIN
 								wr_dest <= Rz;
 								wr_en <= '1';
 								sel_ir <= '0';			-- added because bottom ir not loading in properly
-								--ld_IR <= '1';
-								--PC_reg_ld <= '1';		-- changed 12/05/2015  -- not sure if this has to be here
 							WHEN STR_I =>
 								sel_x <= RX;
 								mux_DMW_sel <= '0';
@@ -403,8 +405,14 @@ BEGIN
 								PC_reg_ld <= '1';
 							WHEN DCALLBL_I =>
 								-- TODO
+								--DPCR <- R7 & Rx
+								DPCR_mux_sel <= '1';			-- sel in0
+								dpcr_en <= '1';
 							WHEN DCALLNB_I =>
 								-- TODO
+								--DPCR <- R7 & Rx
+								DPCR_mux_sel <= '1';			-- sel in0
+								dpcr_en <= '1';
 							WHEN LER_I =>
 								mux_RF_sel <= "101";
 								wr_dest <= RZ;
