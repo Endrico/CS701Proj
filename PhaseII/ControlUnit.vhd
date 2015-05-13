@@ -12,7 +12,7 @@ ENTITY CONTROLUNIT IS
 
 	--mem_sel, WE : OUT STD_LOGIC;
 	en_z, dpcr_en, dprr_en		:	OUT STD_LOGIC; -- need to assign
-	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir, clrdpc: OUT STD_LOGIC;
+	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir, clrdpc, reset_clrirq: OUT STD_LOGIC;
 	ER_Ld_Reg, SIP_Ld_Reg, SOP_Ld_Reg, SVOP_Ld_Reg : OUT STD_LOGIC;
 	mux_B_sel, PC_reg_ld, data_write : OUT STD_LOGIC;
 	mux_DMR_sel, mux_DMW_sel, DPCR_mux_sel : OUT STD_LOGIC;
@@ -22,9 +22,9 @@ ENTITY CONTROLUNIT IS
 	mux_RF_sel : OUT STD_LOGIC_VECTOR(2 downto 0);
 	sel_x, sel_z, wr_dest : OUT STD_LOGIC_VECTOR(3 downto 0);
 	
-	DPC			: IN STD_LOGIC;
-	CLR_IRQ,  DPC_set : OUT STD_LOGIC;
-	ld_dprr_done, IRQ : INOUT STD_LOGIC;
+	DPC, CLR_IRQ, IRQ		: IN STD_LOGIC;
+	CLR_IRQ_set,  DPC_set : OUT STD_LOGIC;
+	ld_dprr_done : INOUT STD_LOGIC;
 	HP : INOUT STD_LOGIC_VECTOR(15 downto 0);
 	TP : IN STD_LOGIC_VECTOR(15 downto 0);
 	FLMR : IN STD_LOGIC_VECTOR(15 downto 0);
@@ -180,11 +180,11 @@ BEGIN
 					-- R15 <= M[HP](7..0)
 				ELSIF(DPC = '0' AND IRQ = '0') THEN
 					IF(ld_dprr_done = '1') THEN
-						CLR_IRQ <= '0';
+						reset_clrirq <= '1' ;         -- set clr_irq register low
 					END IF;
 				ELSE
 					IF(IRQ = '0' AND ld_dprr_done = '1') THEN
-						CLR_IRQ <= '0';
+						reset_clrirq <= '1' ;         -- set clr_irq register low
 					END IF;
 				END IF;
 			WHEN E1 =>
@@ -200,8 +200,8 @@ BEGIN
 					HP <= FFMR;
 				END IF;
 				DPC_set <= '0';
-				IRQ <= '0';
-				CLR_IRQ <= '1';
+				--IRQ <= '0';				-- We dont set the IRQ register, The JVM does
+				CLR_IRQ_set <= '1' ;         -- set clr_irq register high
 				ld_dprr_done <= '0';
 			WHEN E2 =>
 				IF(unsigned(HP) - unsigned(TP) /= 0) THEN
@@ -209,7 +209,7 @@ BEGIN
 					ld_dprr_done <= '1';
 				ELSE
 					IF(IRQ = '0' AND ld_dprr_done = '1') THEN
-						CLR_IRQ <= '1';
+						CLR_IRQ_set <= '1' ;         -- set clr_irq register high
 					END IF;
 				END IF;
 			WHEN T0 =>

@@ -48,6 +48,10 @@ ENTITY Datapath IS
 		dpc_in			:	IN 	STD_LOGIC;
 		dpc_out			:	OUT	STD_LOGIC;
 		
+		clr_irq_en		:	IN	STD_LOGIC;
+		reset_clr_irq	:	IN	STD_LOGIC;
+		set_clr_irq		:	IN	STD_LOGIC;
+		clr_irq_out		:	OUT	STD_LOGIC;
 		
 		clr_eot			: 	IN 	STD_LOGIC;
 		eot_en			: 	IN 	STD_LOGIC;
@@ -274,6 +278,13 @@ PORT MAP(clk => CLK_OUT,
 			reset => clr_z,
 			input => zout,
 			output => z_ext_out);
+			
+b2v_clr_irq_reg : register_1bit
+PORT MAP(clk => CLK_OUT,
+			enable => 	clr_irq_en, -- changed 
+			reset => 	reset_clr_irq,
+			input => 	set_clr_irq,
+			output => 	clr_irq_out);
 		 
 b2v_dpc_reg : register_1bit
 PORT MAP(clk => CLK_OUT,
@@ -328,8 +339,8 @@ PORT MAP(In0 => RZ_OUT,
 		 Sel => mux_dmw_sel,
 		 Output => SYNTHESIZED_WIRE_4);
 
-R7Rx <= r_seven & RX_OUT;
-RxOperand <= RX_OUT  & IReg(15 DOWNTO 0);
+R7Rx <= r_seven & RX_OUT;					-- Concatenation of R7 & Rx
+RxOperand <= RX_OUT  & IReg(15 DOWNTO 0);	-- Concatenation of Rx & operand
 
 b2v_DPCR_MUX : mux2_32					-- changed this on 12/05/2015
 PORT MAP(	In0 => R7Rx,				--r_seven & RX_OUT ,			

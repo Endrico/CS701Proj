@@ -33,7 +33,7 @@ ENTITY Processor IS
 		start 			:  IN  STD_LOGIC;
 		lddprr_done 	:  INOUT  STD_LOGIC;
 		dpc_jop 		:  OUT  STD_LOGIC;
-		irq 			:  INOUT  STD_LOGIC;
+		--irq 			:  INOUT  STD_LOGIC;				-- this is incorrect as irq is based off the dprr register bits
 		dprr_in 		:  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		FFMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
 		FLMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -53,17 +53,20 @@ END Processor;
 ARCHITECTURE bdf_type OF Processor IS 
 
 COMPONENT controlunit
-	PORT(CLK : IN STD_LOGIC;
-		 RST_L : IN STD_LOGIC;
-		 nios_control : IN STD_LOGIC;
-		 debug_hold : IN STD_LOGIC;
-		 start_hold : IN STD_LOGIC;
-		 start : IN STD_LOGIC;
-		 zout, rzout : IN STD_LOGIC;		-- added rzout
-		 ld_dprr_done : INOUT STD_LOGIC;
-		 DPC : IN STD_LOGIC;
-		 DPC_set	: OUT STD_LOGIC;
-		 clrdpc		: OUT STD_LOGIC;
+	PORT(CLK 			:	IN STD_LOGIC;
+		 RST_L 			: 	IN STD_LOGIC;
+		 nios_control 	: 	IN STD_LOGIC;
+		 debug_hold 	: 	IN STD_LOGIC;
+		 start_hold 	: 	IN STD_LOGIC;
+		 start 			: 	IN STD_LOGIC;
+		 zout, rzout 	: 	IN STD_LOGIC;		-- added rzout
+		 ld_dprr_done 	: 	INOUT STD_LOGIC;
+		 DPC 			:	IN STD_LOGIC;
+		 DPC_set		: 	OUT STD_LOGIC;
+		 clrdpc			: 	OUT STD_LOGIC;
+		 CLR_IRQ_set	: 	OUT STD_LOGIC;
+		 CLR_IRQ		:	IN STD_LOGIC;
+		 reset_clrirq	:	OUT STD_LOGIC;
 		 IRQ : INOUT STD_LOGIC;
 		 FFMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 FLMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -89,7 +92,6 @@ COMPONENT controlunit
 		 data_write : OUT STD_LOGIC;
 		 mux_DMR_sel : OUT STD_LOGIC;
 		 mux_DMW_sel : OUT STD_LOGIC;
-		 CLR_IRQ : OUT STD_LOGIC;
 		 alu_op : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 DPCR_mux_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 mux_A_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -110,17 +112,20 @@ COMPONENT datapath
 		 mux_B_sel : IN STD_LOGIC;
 		 wr_en_datamem : IN STD_LOGIC;
 		 dpcr_en : IN STD_LOGIC;
-		 dprr_en : IN STD_LOGIC;
 		 clr_eot : IN STD_LOGIC;
 		 eot_en : IN STD_LOGIC;
 		 eot_in : IN STD_LOGIC;
 		 clr_er : IN STD_LOGIC;
 		 er_en : IN STD_LOGIC;
 		 er_in : IN STD_LOGIC;
-		 dpc_en			:	IN 	STD_LOGIC;
-		 clr_dpc		:	IN 	STD_LOGIC;
-		 dpc_in			:	IN 	STD_LOGIC;
-		 dpc_out		:	OUT	STD_LOGIC;
+		 dpc_en			:	IN 	STD_LOGIC;		-- added 13/05/2015
+		 clr_dpc		:	IN 	STD_LOGIC;		-- added 13/05/2015
+		 dpc_in			:	IN 	STD_LOGIC;		-- added 13/05/2015
+		 dpc_out		:	OUT	STD_LOGIC;		-- added 13/05/2015
+		 clr_irq_en		:	IN	STD_LOGIC;		-- added 13/05/2015
+		 reset_clr_irq	:	IN	STD_LOGIC;		-- added 13/05/2015
+		 set_clr_irq	:	IN	STD_LOGIC;		-- added 13/05/2015
+		 clr_irq_out	:	OUT	STD_LOGIC;		-- added 13/05/2015
 		 mux_dmr_sel : IN STD_LOGIC;
 		 mux_dmw_sel : IN STD_LOGIC;
 		 ir_sel : IN STD_LOGIC;
@@ -131,6 +136,8 @@ COMPONENT datapath
 		 z_en : IN STD_LOGIC;
 		 clr_z : IN STD_LOGIC;
 		 alu_op : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 dprr_en : IN STD_LOGIC;
+		 dprr_out	:	OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		 dprr_in : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 		 mux_A_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
 		 mux_dm_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -183,7 +190,9 @@ SIGNAL	sel_dpcr_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL	sel_mux_b :  STD_LOGIC;
 SIGNAL	write_data_dm_en :  STD_LOGIC;
 SIGNAL	z_clr, rz_out_signal :  STD_LOGIC;
-SIGNAL	dpc_en_and_set, clr_dpc_sig, dpc_sig :  STD_LOGIC;
+SIGNAL	dpc_en_and_set, clr_dpc_sig, dpc_sig :  STD_LOGIC;			-- added 13/05/2015
+SIGNAL	clr_irq_en_set, reset_clrirq_sig, clr_irq_sig : STD_LOGIC;	-- added 13/05/2015
+SIGNAL	dprr_out_sig		:	STD_LOGIC_VECTOR(31 DOWNTO 0);		-- added 13/05/2015
 
 BEGIN 
 
@@ -196,10 +205,13 @@ PORT MAP(CLK => clock,
 		 start => start,
 		 zout => out_z,
 		 ld_dprr_done => lddprr_done,
-		 DPC_set =>	dpc_en_and_set,
-		 DPC => dpc_sig,				-- Read the output of the DPC register
-		 clrdpc => clr_dpc_sig,
-		 IRQ => irq,
+		 DPC_set =>	dpc_en_and_set,					-- added 13/05/2015
+		 DPC => dpc_sig,							-- Read the output of the DPC register
+		 clrdpc => clr_dpc_sig,						-- added 13/05/2015
+		 CLR_IRQ_set => clr_irq_en_set,				-- added 13/05/2015
+		 CLR_IRQ => clr_irq_sig,					-- added 13/05/2015
+		 reset_clrirq => reset_clrirq_sig,			-- added 13/05/2015
+		 IRQ => dprr_out_sig(1),					-- this is different to the clear irq register
 		 FFMR => FFMR,
 		 FLMR => FLMR,
 		 HP => head_pointer,
@@ -207,7 +219,7 @@ PORT MAP(CLK => clock,
 		 TP => tail_pointer,
 		 en_z => ld_z,
 		 dpcr_en => ld_dpcr,
-		 dprr_en => ld_dprr,
+		 dprr_en => ld_dprr,				-- enable the dprr register to be loaded
 		 ld_IR => Load_Ir_ALTERA_SYNTHESIZED,
 		 clrz => z_clr,
 		 clrer => er_clr,
@@ -224,7 +236,6 @@ PORT MAP(CLK => clock,
 		 data_write => write_data_dm_en,
 		 mux_DMR_sel => dmr_sel_mux,
 		 mux_DMW_sel => dmw_sel_mux,
-		 CLR_IRQ => clr_irq,
 		 alu_op => op_alu,
 		 DPCR_mux_sel => sel_dpcr_mux,
 		 mux_A_sel => a_sel_mux,
@@ -246,17 +257,20 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 mux_B_sel => sel_mux_b,
 		 wr_en_datamem => write_data_dm_en,
 		 dpcr_en => ld_dpcr,
-		 dprr_en => ld_dprr,
 		 clr_eot => eot_clr,
 		 eot_en => eot_set,
 		 eot_in => eot_set,
 		 clr_er => er_clr,
 		 er_en => ld_er_reg,
 		 er_in => ER,
-		 dpc_en => dpc_en_and_set,
-		 dpc_in	=> dpc_en_and_set,
-		 clr_dpc => clr_dpc_sig,
-		 dpc_out => dpc_sig,
+		 clr_irq_en => clr_irq_en_set,		-- added 13/05/2015	
+		 set_clr_irq =>	clr_irq_en_set,		-- added 13/05/2015
+		 reset_clr_irq => reset_clrirq_sig,		-- added 13/05/2015
+		 clr_irq_out =>	clr_irq_sig,		-- added 13/05/2015
+		 dpc_en => dpc_en_and_set,			-- added 13/05/2015
+		 dpc_in	=> dpc_en_and_set,			-- added 13/05/2015
+		 clr_dpc => clr_dpc_sig,			-- added 13/05/2015
+		 dpc_out => dpc_sig,				-- added 13/05/2015
 		 mux_dmr_sel => dmr_sel_mux,
 		 mux_dmw_sel => dmw_sel_mux,
 		 ir_sel => ir_sel,
@@ -267,7 +281,9 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 z_en => ld_z,
 		 clr_z => z_clr,
 		 alu_op => op_alu,
-		 dprr_in => dprr_in,
+		 dprr_en => ld_dprr,				-- enable the dprr
+		 dprr_in => dprr_in,				-- dprr input to the datapath
+		 dprr_out => dprr_out_sig,						-- output from the dprr register which needs to be split
 		 mux_A_sel => a_sel_mux,
 		 mux_dm_sel => dm_data_sel_mux,
 		 mux_dpcr_sel => sel_dpcr_mux,
@@ -289,6 +305,7 @@ PORT MAP(wr_en_rf => rf_wr_en,
 
 Load_Ir <= Load_Ir_ALTERA_SYNTHESIZED;
 dpc_jop	<= dpc_sig;
+clr_irq <= clr_irq_sig;
 clock <= CLK;
 reset <= RST;
 

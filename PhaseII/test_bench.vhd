@@ -20,7 +20,7 @@ architecture behaviour of test_bench is
 			start			:  IN  STD_LOGIC;
 			lddprr_done :  INOUT  STD_LOGIC;
 			dpc			:  INOUT  STD_LOGIC;
-			irq			:  INOUT  STD_LOGIC;
+			--irq			:  INOUT  STD_LOGIC;
 			dprr_in :  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 			FFMR :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
 			FLMR :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -47,7 +47,7 @@ architecture behaviour of test_bench is
 	signal		start			:  STD_LOGIC := '0';
 	signal		lddprr_done : STD_LOGIC := '0';
 	signal		dpc			: STD_LOGIC := '1';
-	signal		irq			: STD_LOGIC := '0';
+	--signal		irq			: STD_LOGIC := '0';
 	signal		dprr_in 		:  STD_LOGIC_VECTOR(31 DOWNTO 0);
 	signal		FFMR 			:  STD_LOGIC_VECTOR(15 DOWNTO 0);
 	signal		FLMR			:  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -78,7 +78,7 @@ BEGIN
         start		=>	start,
         lddprr_done => lddprr_done,
         dpc	=> dpc,		
-        irq	=> irq,		
+       -- irq	=> irq,		
         dprr_in => dprr_in,		
         FFMR =>	FFMR,		
         FLMR =>	FLMR,		
