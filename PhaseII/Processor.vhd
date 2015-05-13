@@ -24,29 +24,29 @@ LIBRARY work;
 ENTITY Processor IS 
 	PORT
 	(
-		ER :  IN  STD_LOGIC;
-		CLK :  IN  STD_LOGIC;
-		RST :  IN  STD_LOGIC;
-		nios_input :  IN  STD_LOGIC;
-		debug_hold :  IN  STD_LOGIC;
-		start_hold :  IN  STD_LOGIC;
-		start :  IN  STD_LOGIC;
-		lddprr_done :  INOUT  STD_LOGIC;
-		dpc :  INOUT  STD_LOGIC;
-		irq :  INOUT  STD_LOGIC;
-		dprr_in :  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
-		FFMR :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		FLMR :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		head_pointer :  INOUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		SIPi :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		tail_pointer :  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		Load_Ir :  OUT  STD_LOGIC;
-		clr_irq :  OUT  STD_LOGIC;
-		eotout :  OUT  STD_LOGIC;
-		erout :  OUT  STD_LOGIC;
-		dpcrout :  OUT  STD_LOGIC_VECTOR(31 DOWNTO 0);
-		out_sop :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
-		out_svop :  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0)
+		ER 				:  IN  STD_LOGIC;
+		CLK 			:  IN  STD_LOGIC;
+		RST 			:  IN  STD_LOGIC;
+		nios_input 		:  IN  STD_LOGIC;
+		debug_hold 		:  IN  STD_LOGIC;
+		start_hold 		:  IN  STD_LOGIC;
+		start 			:  IN  STD_LOGIC;
+		lddprr_done 	:  INOUT  STD_LOGIC;
+		dpc_jop 		:  OUT  STD_LOGIC;
+		irq 			:  INOUT  STD_LOGIC;
+		dprr_in 		:  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		FFMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		FLMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		head_pointer	:  INOUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		SIPi 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		tail_pointer	:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		Load_Ir 		:  OUT  STD_LOGIC;
+		clr_irq 		:  OUT  STD_LOGIC;
+		eotout 			:  OUT  STD_LOGIC;
+		erout 			:  OUT  STD_LOGIC;
+		dpcrout 		:  OUT  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		out_sop 		:  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		out_svop 		:  OUT  STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
 END Processor;
 
@@ -61,7 +61,9 @@ COMPONENT controlunit
 		 start : IN STD_LOGIC;
 		 zout, rzout : IN STD_LOGIC;		-- added rzout
 		 ld_dprr_done : INOUT STD_LOGIC;
-		 DPC : INOUT STD_LOGIC;
+		 DPC : IN STD_LOGIC;
+		 DPC_set	: OUT STD_LOGIC;
+		 clrdpc		: OUT STD_LOGIC;
 		 IRQ : INOUT STD_LOGIC;
 		 FFMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		 FLMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -115,6 +117,10 @@ COMPONENT datapath
 		 clr_er : IN STD_LOGIC;
 		 er_en : IN STD_LOGIC;
 		 er_in : IN STD_LOGIC;
+		 dpc_en			:	IN 	STD_LOGIC;
+		 clr_dpc		:	IN 	STD_LOGIC;
+		 dpc_in			:	IN 	STD_LOGIC;
+		 dpc_out		:	OUT	STD_LOGIC;
 		 mux_dmr_sel : IN STD_LOGIC;
 		 mux_dmw_sel : IN STD_LOGIC;
 		 ir_sel : IN STD_LOGIC;
@@ -177,11 +183,9 @@ SIGNAL	sel_dpcr_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
 SIGNAL	sel_mux_b :  STD_LOGIC;
 SIGNAL	write_data_dm_en :  STD_LOGIC;
 SIGNAL	z_clr, rz_out_signal :  STD_LOGIC;
-
+SIGNAL	dpc_en_and_set, clr_dpc_sig, dpc_sig :  STD_LOGIC;
 
 BEGIN 
-
-
 
 b2v_ControlUnit : controlunit
 PORT MAP(CLK => clock,
@@ -192,7 +196,9 @@ PORT MAP(CLK => clock,
 		 start => start,
 		 zout => out_z,
 		 ld_dprr_done => lddprr_done,
-		 DPC => dpc,
+		 DPC_set =>	dpc_en_and_set,
+		 DPC => dpc_sig,				-- Read the output of the DPC register
+		 clrdpc => clr_dpc_sig,
 		 IRQ => irq,
 		 FFMR => FFMR,
 		 FLMR => FLMR,
@@ -247,6 +253,10 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 clr_er => er_clr,
 		 er_en => ld_er_reg,
 		 er_in => ER,
+		 dpc_en => dpc_en_and_set,
+		 dpc_in	=> dpc_en_and_set,
+		 clr_dpc => clr_dpc_sig,
+		 dpc_out => dpc_sig,
 		 mux_dmr_sel => dmr_sel_mux,
 		 mux_dmw_sel => dmw_sel_mux,
 		 ir_sel => ir_sel,
@@ -278,6 +288,7 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 );
 
 Load_Ir <= Load_Ir_ALTERA_SYNTHESIZED;
+dpc_jop	<= dpc_sig;
 clock <= CLK;
 reset <= RST;
 
