@@ -11,8 +11,8 @@ ENTITY CONTROLUNIT IS
 	I_code : IN STD_LOGIC_VECTOR(15 downto 0);
 
 	--mem_sel, WE : OUT STD_LOGIC;
-	en_z, dpcr_en, dprr_en		:	OUT STD_LOGIC; -- need to assign
-	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir, clrdpc, reset_clrirq: OUT STD_LOGIC;
+	en_z, dpcr_en, dprr_en : OUT STD_LOGIC; -- need to assign
+	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir : OUT STD_LOGIC;
 	ER_Ld_Reg, SIP_Ld_Reg, SOP_Ld_Reg, SVOP_Ld_Reg : OUT STD_LOGIC;
 	mux_B_sel, PC_reg_ld, data_write : OUT STD_LOGIC;
 	mux_DMR_sel, mux_DMW_sel, DPCR_mux_sel : OUT STD_LOGIC;
@@ -22,9 +22,9 @@ ENTITY CONTROLUNIT IS
 	mux_RF_sel : OUT STD_LOGIC_VECTOR(2 downto 0);
 	sel_x, sel_z, wr_dest : OUT STD_LOGIC_VECTOR(3 downto 0);
 	
-	DPC, CLR_IRQ, IRQ		: IN STD_LOGIC;
-	CLR_IRQ_set,  DPC_set : OUT STD_LOGIC;
-	ld_dprr_done : INOUT STD_LOGIC;
+	DPC : OUT STD_LOGIC;
+	CLR_IRQ : OUT STD_LOGIC;
+	ld_dprr_done : OUT STD_LOGIC;
 	HP : INOUT STD_LOGIC_VECTOR(15 downto 0);
 	TP : IN STD_LOGIC_VECTOR(15 downto 0);
 	FLMR : IN STD_LOGIC_VECTOR(15 downto 0);
@@ -40,6 +40,8 @@ ARCHITECTURE bhvr OF CONTROLUNIT IS
 	signal RX : STD_LOGIC_VECTOR(3 downto 0);
 	signal RZ : STD_LOGIC_VECTOR(3 downto 0);
 	signal LOCK : STD_LOGIC := '0';
+  signal IRQ : STD_LOGIC := '0';
+	signal DPC_int, CLR_IRQ_int : STD_LOGIC := '0';
 
 	-- Addressing mode bits
 	constant Inherent_AM  : std_logic_vector(1 downto 0) := "00";
@@ -76,6 +78,11 @@ BEGIN
 	OPCODE <= I_code(13 downto 8);
 	RZ <= I_code(7 downto 4);
 	RX <= I_code(3 downto 0);
+
+	IRQ <= DPRR(1);
+	DPC <= DPC_int;
+	CLR_IRQ <= CLR_IRQ_int;
+
 	Process(CLK)
 	BEGIN
 		IF(RST_L = '1') THEN
@@ -92,9 +99,9 @@ BEGIN
 				WHEN TEST =>
 				WHEN TEST2 =>
 				WHEN E0 =>
-					IF(DPC = '1' AND IRQ = '1') THEN
+					IF(DPC_int = '1' AND IRQ = '1') THEN
 						STATE <= E1;
-					ELSIF(DPC = '0' AND IRQ = '0') THEN
+					ELSIF(DPC_int = '0' AND IRQ = '0') THEN
 						STATE <= E2;
 					ELSE
 						STATE <= T0;
@@ -176,9 +183,10 @@ BEGIN
 				clreot <= '0';
 				seteot <= '0';
 				data_write <= '0';
-				IF(DPC = '1' AND IRQ = '1') THEN
+				LOCK <= '0';
+				IF(DPC_int = '1' AND IRQ = '1') THEN
 					-- R15 <= M[HP](7..0)
-				ELSIF(DPC = '0' AND IRQ = '0') THEN
+				ELSIF(DPC_int = '0' AND IRQ = '0') THEN
 					IF(ld_dprr_done = '1') THEN
 						reset_clrirq <= '1' ;         -- set clr_irq register low
 					END IF;
@@ -199,17 +207,17 @@ BEGIN
 				ELSE
 					HP <= FFMR;
 				END IF;
-				DPC_set <= '0';
+				DPC_int <= '0';
 				--IRQ <= '0';				-- We dont set the IRQ register, The JVM does
-				CLR_IRQ_set <= '1' ;         -- set clr_irq register high
+				CLR_IRQ_int <= '1' ;         -- set clr_irq register high
 				ld_dprr_done <= '0';
 			WHEN E2 =>
 				IF(unsigned(HP) - unsigned(TP) /= 0) THEN
-					DPC_set <= '1';
+					DPC_int <= '1';
 					ld_dprr_done <= '1';
 				ELSE
 					IF(IRQ = '0' AND ld_dprr_done = '1') THEN
-						CLR_IRQ_set <= '1' ;         -- set clr_irq register high
+						CLR_IRQ_int <= '0' ;         -- set clr_irq register high
 					END IF;
 				END IF;
 			WHEN T0 =>
@@ -329,18 +337,20 @@ BEGIN
 							WHEN DCALLBL_I =>
 								-- TODO
 								--DPCR <- Rx & Operand
-								IF(LOCK = '0' AND DPC = '0') THEN
+								IF(LOCK = '0') THEN
 									DPCR_mux_sel <= '1';			-- sel in1
 									dpcr_en <= '1';
-									DPC_set <= '1';
 									LOCK <= '1';
 									ld_dprr_done <= '1';
+								ELSIF(LOCK = '1' and DPC_int = '0') THEN
+									DPC_int <= '1';
 								ELSIF(LOCK = '1' AND IRQ = '1') THEN
 									wr_dest <= x"0";
 									wr_en <= '1';
 									mux_RF_sel <= "111"; -- TODO check if this is connected correctly
 									ld_dprr_done <= '0';
-									clrdpc <= '1';			--DPC <= '0';
+									DPC_int <= '0';
+									CLR_IRQ_int <= '1';
 									-- dpcr_clr <= '1'; -- TODO add clr to dpcr mux  <-- dont you mean register?
 								END IF;
 							WHEN DCALLNB_I =>
@@ -433,16 +443,18 @@ BEGIN
 								IF(LOCK = '0' AND DPC = '0') THEN
 									DPCR_mux_sel <= '0';			-- sel in0
 									dpcr_en <= '1';
-									DPC_set <= '1';
 									LOCK <= '1';
 									ld_dprr_done <= '1';
+								ELSIF(LOCK = '1' and DPC_int = '0') THEN
+									DPC_int <= '1';
 								ELSIF(LOCK = '1' AND IRQ = '1') THEN
 									wr_dest <= x"0";
 									wr_en <= '1';
 									mux_RF_sel <= "111"; -- TODO check if this is connected correctly
 									ld_dprr_done <= '0';
-									clrdpc <= '1';		--DPC <= '0';
-									-- dpcr_clr <= '1'; -- TODO add clr to dpcr mux
+									DPC_int <= '0';
+									CLR_IRQ_int <= '1';
+									-- dpcr_clr <= '1'; -- TODO add clr to dpcr mux  <-- dont you mean register?
 								END IF;
 							WHEN DCALLNB_I =>
 								-- TODO
