@@ -32,8 +32,7 @@ ENTITY Processor IS
 		start_hold 		:  IN  STD_LOGIC;
 		start 			:  IN  STD_LOGIC;
 		lddprr_done 	:  INOUT  STD_LOGIC;
-		dpc_jop 		:  OUT  STD_LOGIC;
-		--irq 			:  INOUT  STD_LOGIC;				-- this is incorrect as irq is based off the dprr register bits
+		dpc_jop 		:  INOUT  STD_LOGIC;
 		dprr_in 		:  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		FFMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
 		FLMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -41,7 +40,7 @@ ENTITY Processor IS
 		SIPi 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
 		tail_pointer	:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
 		Load_Ir 		:  OUT  STD_LOGIC;
-		clr_irq 		:  OUT  STD_LOGIC;
+		clrirq 			:  INOUT  STD_LOGIC;
 		eotout 			:  OUT  STD_LOGIC;
 		erout 			:  OUT  STD_LOGIC;
 		dpcrout 		:  OUT  STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -53,165 +52,150 @@ END Processor;
 ARCHITECTURE bdf_type OF Processor IS 
 
 COMPONENT controlunit
-	PORT(CLK 			:	IN STD_LOGIC;
-		 RST_L 			: 	IN STD_LOGIC;
-		 nios_control 	: 	IN STD_LOGIC;
-		 debug_hold 	: 	IN STD_LOGIC;
-		 start_hold 	: 	IN STD_LOGIC;
-		 start 			: 	IN STD_LOGIC;
-		 zout, rzout 	: 	IN STD_LOGIC;		-- added rzout
+	PORT(CLK 			:	IN 	STD_LOGIC;
+		 RST_L 			: 	IN 	STD_LOGIC;
+		 nios_control 	: 	IN 	STD_LOGIC;
+		 debug_hold 	: 	IN 	STD_LOGIC;
+		 start_hold 	: 	IN 	STD_LOGIC;
+		 start 			: 	IN 	STD_LOGIC;
+		 zout, rzout 	: 	IN 	STD_LOGIC;		-- added rzout
 		 ld_dprr_done 	: 	INOUT STD_LOGIC;
-		 DPC 			:	IN STD_LOGIC;
-		 DPC_set		: 	OUT STD_LOGIC;
-		 clrdpc			: 	OUT STD_LOGIC;
-		 CLR_IRQ_set	: 	OUT STD_LOGIC;
-		 CLR_IRQ		:	IN STD_LOGIC;
-		 reset_clrirq	:	OUT STD_LOGIC;
-		 IRQ : INOUT STD_LOGIC;
-		 FFMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 FLMR : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 HP : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 I_code : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 TP : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 en_z : OUT STD_LOGIC;
-		 dpcr_en : OUT STD_LOGIC;
-		 dprr_en : OUT STD_LOGIC;
-		 ld_IR : OUT STD_LOGIC;
-		 clrz : OUT STD_LOGIC;
-		 clrer : OUT STD_LOGIC;
-		 clreot : OUT STD_LOGIC;
-		 seteot : OUT STD_LOGIC;
-		 wr_en : OUT STD_LOGIC;
-		 sel_ir : OUT STD_LOGIC;
-		 ER_Ld_Reg : OUT STD_LOGIC;
-		 SIP_Ld_Reg : OUT STD_LOGIC;
-		 SOP_Ld_Reg : OUT STD_LOGIC;
-		 SVOP_Ld_Reg : OUT STD_LOGIC;
-		 mux_B_sel : OUT STD_LOGIC;
-		 PC_reg_ld : OUT STD_LOGIC;
-		 data_write : OUT STD_LOGIC;
-		 mux_DMR_sel : OUT STD_LOGIC;
-		 mux_DMW_sel : OUT STD_LOGIC;
-		 alu_op : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 DPCR_mux_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_A_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_DM_Data_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_PC_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_RF_sel : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
-		 sel_x : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 sel_z : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 wr_dest : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+		 DPC 			:	INOUT 	STD_LOGIC;
+		 CLR_IRQ		:	INOUT 	STD_LOGIC;
+		 DPRR 			: 	IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 FFMR 			: 	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 FLMR 			: 	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 HP 			: 	INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 I_code 		: 	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 TP 			: 	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 en_z 			: 	OUT STD_LOGIC;
+		 dpcr_en 		: 	OUT STD_LOGIC;
+		 dprr_en 		: 	OUT STD_LOGIC;
+		 ld_IR 			: 	OUT STD_LOGIC;
+		 clrz 			: 	OUT STD_LOGIC;
+		 clrer 			: 	OUT STD_LOGIC;
+		 clreot 		: 	OUT STD_LOGIC;
+		 seteot 		: 	OUT STD_LOGIC;
+		 wr_en 			: 	OUT STD_LOGIC;
+		 sel_ir 		: 	OUT STD_LOGIC;
+		 ER_Ld_Reg 		: 	OUT STD_LOGIC;
+		 SIP_Ld_Reg 	: 	OUT STD_LOGIC;
+		 SOP_Ld_Reg 	: 	OUT STD_LOGIC;
+		 SVOP_Ld_Reg 	: 	OUT STD_LOGIC;
+		 mux_B_sel 		: 	OUT STD_LOGIC;
+		 PC_reg_ld 		: 	OUT STD_LOGIC;
+		 data_write 	: 	OUT STD_LOGIC;
+		 mux_DMR_sel 	: 	OUT STD_LOGIC;
+		 mux_DMW_sel 	: 	OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 alu_op 		: 	OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 DPCR_mux_sel 	: 	OUT STD_LOGIC;
+		 mux_A_sel 		: 	OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_DM_Data_sel: 	OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_PC_sel 	: 	OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_RF_sel 	: 	OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+		 sel_x 			: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 sel_z 			: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 wr_dest 		: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
 	);
 END COMPONENT;
 
 COMPONENT datapath
-	PORT(wr_en_rf : IN STD_LOGIC;
-		 PC_ld_reg : IN STD_LOGIC;
-		 CLK : IN STD_LOGIC;
-		 RST : IN STD_LOGIC;
-		 mux_B_sel : IN STD_LOGIC;
-		 wr_en_datamem : IN STD_LOGIC;
-		 dpcr_en : IN STD_LOGIC;
-		 clr_eot : IN STD_LOGIC;
-		 eot_en : IN STD_LOGIC;
-		 eot_in : IN STD_LOGIC;
-		 clr_er : IN STD_LOGIC;
-		 er_en : IN STD_LOGIC;
-		 er_in : IN STD_LOGIC;
-		 dpc_en			:	IN 	STD_LOGIC;		-- added 13/05/2015
-		 clr_dpc		:	IN 	STD_LOGIC;		-- added 13/05/2015
-		 dpc_in			:	IN 	STD_LOGIC;		-- added 13/05/2015
-		 dpc_out		:	OUT	STD_LOGIC;		-- added 13/05/2015
-		 clr_irq_en		:	IN	STD_LOGIC;		-- added 13/05/2015
-		 reset_clr_irq	:	IN	STD_LOGIC;		-- added 13/05/2015
-		 set_clr_irq	:	IN	STD_LOGIC;		-- added 13/05/2015
-		 clr_irq_out	:	OUT	STD_LOGIC;		-- added 13/05/2015
-		 mux_dmr_sel : IN STD_LOGIC;
-		 mux_dmw_sel : IN STD_LOGIC;
-		 ir_sel : IN STD_LOGIC;
-		 ir_en : IN STD_LOGIC;
-		 en_sip : IN STD_LOGIC;
-		 en_sop : IN STD_LOGIC;
-		 en_svop : IN STD_LOGIC;
-		 z_en : IN STD_LOGIC;
-		 clr_z : IN STD_LOGIC;
-		 alu_op : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 dprr_en : IN STD_LOGIC;
-		 dprr_out	:	OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		 dprr_in : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-		 mux_A_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_dm_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_dpcr_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_PC_sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		 mux_rf_sel : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-		 SIP_IN : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 wr_addr_rf : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 x_sel : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 z_sel : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+	PORT(wr_en_rf 		: 	IN	STD_LOGIC;
+		 PC_ld_reg 		: 	IN	STD_LOGIC;
+		 CLK 			: 	IN	STD_LOGIC;
+		 RST 			: 	IN	STD_LOGIC;
+		 mux_B_sel 		: 	IN 	STD_LOGIC;
+		 wr_en_datamem 	: 	IN 	STD_LOGIC;
+		 dpcr_en 		: 	IN 	STD_LOGIC;
+		 irq_dm_data	:	IN	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 irq_dm_addr	:	IN	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 clr_eot 		: 	IN 	STD_LOGIC;
+		 eot_en 		: 	IN 	STD_LOGIC;
+		 eot_in 		: 	IN 	STD_LOGIC;
+		 clr_er 		: 	IN 	STD_LOGIC;
+		 er_en 			: 	IN 	STD_LOGIC;
+		 er_in 			: 	IN 	STD_LOGIC;
+		 mux_dmr_sel 	: 	IN 	STD_LOGIC;
+		 mux_dmw_sel 	:	IN 	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 ir_sel 		: 	IN 	STD_LOGIC;
+		 ir_en 			: 	IN 	STD_LOGIC;
+		 en_sip 		: 	IN 	STD_LOGIC;
+		 en_sop 		: 	IN 	STD_LOGIC;
+		 en_svop 		: 	IN 	STD_LOGIC;
+		 z_en 			: 	IN 	STD_LOGIC;
+		 clr_z 			: 	IN 	STD_LOGIC;
+		 alu_op		 	: 	IN 	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 dprr_en 		: 	IN 	STD_LOGIC;
+		 dprr_output	:	OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 dprr_in 		: 	IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 mux_A_sel 		: 	IN 	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_dm_sel 	:	IN 	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_dpcr_sel 	: 	IN 	STD_LOGIC;
+		 mux_PC_sel 	: 	IN 	STD_LOGIC_VECTOR(1 DOWNTO 0);
+		 mux_rf_sel 	: 	IN 	STD_LOGIC_VECTOR(2 DOWNTO 0);
+		 SIP_IN 		: 	IN 	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 wr_addr_rf 	: 	IN 	STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 x_sel 			: 	IN 	STD_LOGIC_VECTOR(3 DOWNTO 0);
+		 z_sel 			: 	IN 	STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 eot_out, rz_out_cu : OUT STD_LOGIC;				-- added rz_out_cu
-		 er_out : OUT STD_LOGIC;
-		 z_ext_out : OUT STD_LOGIC;
-		 dpcr_out : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		 instruction : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 SOP_OUT : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
-		 SVOP_OUT : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		 er_out 		: 	OUT STD_LOGIC;
+		 z_ext_out 		: 	OUT STD_LOGIC;
+		 dpcr_out 		: 	OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		 instruction 	: 	OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 SOP_OUT 		: 	OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		 SVOP_OUT 		: 	OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
 END COMPONENT;
 
-SIGNAL	a_sel_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
-SIGNAL	clock :  STD_LOGIC;
+SIGNAL	a_sel_mux 		:  STD_LOGIC_VECTOR(1 DOWNTO 0);
+SIGNAL	clock 			:  STD_LOGIC;
 SIGNAL	dm_data_sel_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
-SIGNAL	dmr_sel_mux :  STD_LOGIC;
-SIGNAL	dmw_sel_mux :  STD_LOGIC;
-SIGNAL	eot_clr :  STD_LOGIC;
-SIGNAL	eot_set :  STD_LOGIC;
-SIGNAL	er_clr :  STD_LOGIC;
-SIGNAL	Instructions :  STD_LOGIC_VECTOR(15 DOWNTO 0);
-SIGNAL	ir_sel :  STD_LOGIC;
-SIGNAL	ld_dpcr :  STD_LOGIC;
-SIGNAL	ld_dprr :  STD_LOGIC;
-SIGNAL	ld_er_reg :  STD_LOGIC;
-SIGNAL	ld_pc_reg :  STD_LOGIC;
-SIGNAL	ld_sip_reg :  STD_LOGIC;
-SIGNAL	ld_sop_reg :  STD_LOGIC;
-SIGNAL	ld_svop_reg :  STD_LOGIC;
-SIGNAL	ld_z :  STD_LOGIC;
+SIGNAL	dmr_sel_mux 	:  STD_LOGIC;
+SIGNAL	dmw_sel_mux 	:  STD_LOGIC_VECTOR(1 DOWNTO 0);
+SIGNAL	eot_clr 		:  STD_LOGIC;
+SIGNAL	eot_set 		:  STD_LOGIC;
+SIGNAL	er_clr 			:  STD_LOGIC;
+SIGNAL	Instructions 	:  STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL	ir_sel 			:  STD_LOGIC;
+SIGNAL	ld_dpcr 		:  STD_LOGIC;
+SIGNAL	ld_dprr 		:  STD_LOGIC;
+SIGNAL	ld_er_reg 		:  STD_LOGIC;
+SIGNAL	ld_pc_reg 		:  STD_LOGIC;
+SIGNAL	ld_sip_reg 		:  STD_LOGIC;
+SIGNAL	ld_sop_reg 		:  STD_LOGIC;
+SIGNAL	ld_svop_reg 	:  STD_LOGIC;
+SIGNAL	ld_z 			:  STD_LOGIC;
 SIGNAL	Load_Ir_ALTERA_SYNTHESIZED :  STD_LOGIC;
-SIGNAL	op_alu :  STD_LOGIC_VECTOR(1 DOWNTO 0);
-SIGNAL	out_z :  STD_LOGIC;
-SIGNAL	pc_sel_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
-SIGNAL	reset :  STD_LOGIC;
-SIGNAL	rf_sel_mux :  STD_LOGIC_VECTOR(2 DOWNTO 0);
-SIGNAL	rf_wr_dest :  STD_LOGIC_VECTOR(3 DOWNTO 0);
-SIGNAL	rf_wr_en :  STD_LOGIC;
-SIGNAL	rf_x_sel :  STD_LOGIC_VECTOR(3 DOWNTO 0);
-SIGNAL	rf_z_sel :  STD_LOGIC_VECTOR(3 DOWNTO 0);
-SIGNAL	sel_dpcr_mux :  STD_LOGIC_VECTOR(1 DOWNTO 0);
-SIGNAL	sel_mux_b :  STD_LOGIC;
+SIGNAL	op_alu 			:  STD_LOGIC_VECTOR(1 DOWNTO 0);
+SIGNAL	out_z 			:  STD_LOGIC;
+SIGNAL	pc_sel_mux 		:  STD_LOGIC_VECTOR(1 DOWNTO 0);
+SIGNAL	reset 			:  STD_LOGIC;
+SIGNAL	rf_sel_mux 		:  STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL	rf_wr_dest 		:  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	rf_wr_en 		:  STD_LOGIC;
+SIGNAL	rf_x_sel 		:  STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	rf_z_sel 		:	STD_LOGIC_VECTOR(3 DOWNTO 0);
+SIGNAL	sel_dpcr_mux 	:  STD_LOGIC;
+SIGNAL	sel_mux_b 		:  STD_LOGIC;
 SIGNAL	write_data_dm_en :  STD_LOGIC;
 SIGNAL	z_clr, rz_out_signal :  STD_LOGIC;
-SIGNAL	dpc_en_and_set, clr_dpc_sig, dpc_sig :  STD_LOGIC;			-- added 13/05/2015
-SIGNAL	clr_irq_en_set, reset_clrirq_sig, clr_irq_sig : STD_LOGIC;	-- added 13/05/2015
 SIGNAL	dprr_out_sig		:	STD_LOGIC_VECTOR(31 DOWNTO 0);		-- added 13/05/2015
+SIGNAL	irqAddr			:	STD_LOGIC_VECTOR(15 DOWNTO 0); 
 
 BEGIN 
 
 b2v_ControlUnit : controlunit
 PORT MAP(CLK => clock,
 		 RST_L => reset,
+		 DPRR => dprr_out_sig,						-- DPRR added
 		 nios_control => nios_input,
 		 debug_hold => debug_hold,
 		 start_hold => start_hold,
 		 start => start,
 		 zout => out_z,
 		 ld_dprr_done => lddprr_done,
-		 DPC_set =>	dpc_en_and_set,					-- added 13/05/2015
-		 DPC => dpc_sig,							-- Read the output of the DPC register
-		 clrdpc => clr_dpc_sig,						-- added 13/05/2015
-		 CLR_IRQ_set => clr_irq_en_set,				-- added 13/05/2015
-		 CLR_IRQ => clr_irq_sig,					-- added 13/05/2015
-		 reset_clrirq => reset_clrirq_sig,			-- added 13/05/2015
-		 IRQ => dprr_out_sig(1),					-- this is different to the clear irq register
+		 DPC => dpc_jop,							-- Read the output of the DPC register
+		 CLR_IRQ => clrirq,					-- added 13/05/2015
 		 FFMR => FFMR,
 		 FLMR => FLMR,
 		 HP => head_pointer,
@@ -250,7 +234,10 @@ PORT MAP(CLK => clock,
 
 
 b2v_Datapath : datapath
-PORT MAP(wr_en_rf => rf_wr_en,
+PORT MAP(
+		 irq_dm_data =>	irqAddr,					--"000000000000000" & dprr_out_sig(0),
+		 irq_dm_addr =>	dprr_out_sig(17 DOWNTO 2),
+		 wr_en_rf => rf_wr_en,
 		 PC_ld_reg => ld_pc_reg,
 		 CLK => clock,
 		 RST => reset,
@@ -263,14 +250,6 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 clr_er => er_clr,
 		 er_en => ld_er_reg,
 		 er_in => ER,
-		 clr_irq_en => clr_irq_en_set,		-- added 13/05/2015	
-		 set_clr_irq =>	clr_irq_en_set,		-- added 13/05/2015
-		 reset_clr_irq => reset_clrirq_sig,		-- added 13/05/2015
-		 clr_irq_out =>	clr_irq_sig,		-- added 13/05/2015
-		 dpc_en => dpc_en_and_set,			-- added 13/05/2015
-		 dpc_in	=> dpc_en_and_set,			-- added 13/05/2015
-		 clr_dpc => clr_dpc_sig,			-- added 13/05/2015
-		 dpc_out => dpc_sig,				-- added 13/05/2015
 		 mux_dmr_sel => dmr_sel_mux,
 		 mux_dmw_sel => dmw_sel_mux,
 		 ir_sel => ir_sel,
@@ -283,7 +262,7 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 alu_op => op_alu,
 		 dprr_en => ld_dprr,				-- enable the dprr
 		 dprr_in => dprr_in,				-- dprr input to the datapath
-		 dprr_out => dprr_out_sig,						-- output from the dprr register which needs to be split
+		 dprr_output => dprr_out_sig,			-- output from the dprr register which needs to be split
 		 mux_A_sel => a_sel_mux,
 		 mux_dm_sel => dm_data_sel_mux,
 		 mux_dpcr_sel => sel_dpcr_mux,
@@ -302,10 +281,8 @@ PORT MAP(wr_en_rf => rf_wr_en,
 		 SVOP_OUT => out_svop,
 		 rz_out_cu => rz_out_signal					-- added for rz out
 		 );
-
+irqAddr <= "000000000000000" & dprr_out_sig(0);
 Load_Ir <= Load_Ir_ALTERA_SYNTHESIZED;
-dpc_jop	<= dpc_sig;
-clr_irq <= clr_irq_sig;
 clock <= CLK;
 reset <= RST;
 

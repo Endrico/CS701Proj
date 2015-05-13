@@ -42,16 +42,7 @@ ENTITY Datapath IS
 		
 		dprr_en			:	IN 	STD_LOGIC; 	
 		dprr_in			:	IN 	STD_LOGIC_VECTOR(31 DOWNTO 0);
-		
-		dpc_en			:	IN 	STD_LOGIC;
-		clr_dpc			:	IN 	STD_LOGIC;
-		dpc_in			:	IN 	STD_LOGIC;
-		dpc_out			:	OUT	STD_LOGIC;
-		
-		clr_irq_en		:	IN	STD_LOGIC;
-		reset_clr_irq	:	IN	STD_LOGIC;
-		set_clr_irq		:	IN	STD_LOGIC;
-		clr_irq_out		:	OUT	STD_LOGIC;
+		dprr_output		:	OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		
 		clr_eot			: 	IN 	STD_LOGIC;
 		eot_en			: 	IN 	STD_LOGIC;
@@ -66,8 +57,12 @@ ENTITY Datapath IS
 		instruction 	:  	OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		mux_dm_sel 		: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
 		mux_dmr_sel		: 	IN 	STD_LOGIC;
-		mux_dmw_sel 	: 	IN 	STD_LOGIC;
+		mux_dmw_sel 	: 	IN 	STD_LOGIC_VECTOR(1 downto 0);
 		mux_dpcr_sel 	: 	IN 	STD_LOGIC;
+		
+		irq_dm_data		:	IN	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		irq_dm_addr		:	IN	STD_LOGIC_VECTOR(15 DOWNTO 0);
+		
 		ir_sel 			: 	IN 	STD_LOGIC;
 		ir_en			: 	IN 	STD_LOGIC;
 		mux_rf_sel 		: 	IN 	STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -243,7 +238,6 @@ SIGNAL 	const_1 			: 	STD_LOGIC_VECTOR(15 downto 0) := x"0001";
 SIGNAL 	const_logic_0 	: 	STD_LOGIC := '0';
 SIGNAL 	r_seven			:	STD_LOGIC_VECTOR(15 downto 0);
 SIGNAL	zout 				:  STD_LOGIC;
-SIGNAL	dprr_out 		: STD_LOGIC_VECTOR(31 DOWNTO 0);
 SIGNAL	R7Rx			:	 STD_LOGIC_VECTOR(31 DOWNTO 0);
 SIGNAL	RxOperand		:	 STD_LOGIC_VECTOR(31 DOWNTO 0);
 
@@ -270,7 +264,7 @@ PORT MAP(clk => CLK_OUT,
 			enable => dprr_en,
 			reset => RST,
 			input => dprr_in,
-			output => dprr_out); -- dprr out needs to split into the data and the address which is sent to the data mem
+			output => dprr_output); -- dprr out needs to split into the data and the address which is sent to the data mem
 		 
 b2v_zero_flag_reg : register_1bit
 PORT MAP(clk => CLK_OUT,
@@ -278,20 +272,6 @@ PORT MAP(clk => CLK_OUT,
 			reset => clr_z,
 			input => zout,
 			output => z_ext_out);
-			
-b2v_clr_irq_reg : register_1bit
-PORT MAP(clk => CLK_OUT,
-			enable => 	clr_irq_en, -- changed 
-			reset => 	reset_clr_irq,
-			input => 	set_clr_irq,
-			output => 	clr_irq_out);
-		 
-b2v_dpc_reg : register_1bit
-PORT MAP(clk => CLK_OUT,
-			enable => 	dpc_en, 
-			reset => 	clr_dpc,
-			input => 	dpc_in,
-			output => 	dpc_out);
 		 
 b2v_er_reg : register_1bit -- register set high by env, once ER signal received, register value set low, EOT is emmitted
 PORT MAP(clk => CLK_OUT,
@@ -312,7 +292,7 @@ b2v_DM_DATA_MUX : mux4
 PORT MAP(In0 => RX_OUT,
 		 In1 => IReg(15 DOWNTO 0),
 		 In2 => PC_out,
-		 In3 => const_0,
+		 In3 => irq_dm_data,
 		 Sel => mux_dm_sel,
 		 Output => SYNTHESIZED_WIRE_2);
 
@@ -333,9 +313,11 @@ PORT MAP(In0 => RX_OUT,
 		 Output => data_rd_addr);
 
 
-b2v_DMW_MUX : mux2
+b2v_DMW_MUX : mux4
 PORT MAP(In0 => RZ_OUT,
 		 In1 => IReg(15 DOWNTO 0),
+		 In2 => irq_dm_addr,
+		 In3 => const_0,
 		 Sel => mux_dmw_sel,
 		 Output => SYNTHESIZED_WIRE_4);
 
@@ -444,7 +426,7 @@ PORT MAP(clk => CLK_OUT,
 			enable => en_sip,
 			reset => RST,
 			input => SIP_IN,
-		 output => SYNTHESIZED_WIRE_14);
+			output => SYNTHESIZED_WIRE_14);
 
 
 b2v_SOP : single_register
@@ -452,7 +434,7 @@ PORT MAP(clk => CLK_OUT,
 			enable => en_sop,
 			reset => RST,
 			output => SOP_OUT,
-		 input => RX_OUT);
+			input => RX_OUT);
 
 
 b2v_SVOP : single_register
@@ -460,7 +442,7 @@ PORT MAP(clk => CLK_OUT,
 			enable => en_svop,
 			reset => RST,
 			output => SVOP_OUT,
-		 input => RX_OUT);
+			input => RX_OUT);
 
 CLK_OUT <= CLK;
 instruction(15 DOWNTO 0) <= IReg(31 DOWNTO 16);

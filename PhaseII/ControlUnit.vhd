@@ -7,40 +7,41 @@ ENTITY CONTROLUNIT IS
 	PORT
 	(
 	CLK, RST_L, nios_control, debug_hold, start_hold, start : IN STD_LOGIC;
-	zout, rzout : IN STD_LOGIC;
-	I_code : IN STD_LOGIC_VECTOR(15 downto 0);
+	zout, rzout 											: IN STD_LOGIC;
+	I_code 													: IN STD_LOGIC_VECTOR(15 downto 0);
 
 	--mem_sel, WE : OUT STD_LOGIC;
-	en_z, dpcr_en, dprr_en : OUT STD_LOGIC; -- need to assign
-	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir : OUT STD_LOGIC;
-	ER_Ld_Reg, SIP_Ld_Reg, SOP_Ld_Reg, SVOP_Ld_Reg : OUT STD_LOGIC;
-	mux_B_sel, PC_reg_ld, data_write : OUT STD_LOGIC;
-	mux_DMR_sel, mux_DMW_sel, DPCR_mux_sel : OUT STD_LOGIC;
+	en_z, dpcr_en, dprr_en 								: OUT STD_LOGIC; -- need to assign
+	ld_IR, clrz, clrer, clreot, seteot, wr_en, sel_ir 	: OUT STD_LOGIC;
+	ER_Ld_Reg, SIP_Ld_Reg, SOP_Ld_Reg, SVOP_Ld_Reg 		: OUT STD_LOGIC;
+	mux_B_sel, PC_reg_ld, data_write 					: OUT STD_LOGIC;
+	mux_DMR_sel, DPCR_mux_sel 							: OUT STD_LOGIC;
 
-	alu_op, mux_A_sel, mux_PC_sel : OUT STD_LOGIC_VECTOR(1 downto 0);
-	mux_DM_Data_sel : OUT STD_LOGIC_VECTOR(1 downto 0);
-	mux_RF_sel : OUT STD_LOGIC_VECTOR(2 downto 0);
-	sel_x, sel_z, wr_dest : OUT STD_LOGIC_VECTOR(3 downto 0);
+	alu_op, mux_A_sel, mux_PC_sel, mux_DMW_sel			: OUT STD_LOGIC_VECTOR(1 downto 0);
+	mux_DM_Data_sel 									: OUT STD_LOGIC_VECTOR(1 downto 0);
+	mux_RF_sel 											: OUT STD_LOGIC_VECTOR(2 downto 0);
+	sel_x, sel_z, wr_dest 								: OUT STD_LOGIC_VECTOR(3 downto 0);
 	
-	DPC : OUT STD_LOGIC;
-	CLR_IRQ : OUT STD_LOGIC;
-	ld_dprr_done : OUT STD_LOGIC;
-	HP : INOUT STD_LOGIC_VECTOR(15 downto 0);
-	TP : IN STD_LOGIC_VECTOR(15 downto 0);
-	FLMR : IN STD_LOGIC_VECTOR(15 downto 0);
-	FFMR : IN STD_LOGIC_VECTOR(15 downto 0)
+	DPRR 			: IN STD_LOGIC_VECTOR(31 downto 0);
+	DPC 			: INOUT STD_LOGIC;				-- I dont believe this is correct
+	CLR_IRQ 		: OUT STD_LOGIC;
+	ld_dprr_done 	: INOUT STD_LOGIC;				-- I dont believe this is correct
+	HP 				: INOUT STD_LOGIC_VECTOR(15 downto 0);
+	TP 				: IN STD_LOGIC_VECTOR(15 downto 0);
+	FLMR 			: IN STD_LOGIC_VECTOR(15 downto 0);
+	FFMR 			: IN STD_LOGIC_VECTOR(15 downto 0)
 );
 END CONTROLUNIT;
 
 ARCHITECTURE bhvr OF CONTROLUNIT IS
 	type CU_STATE IS (Init, TEST, TEST2, E0, E1, E1bis, E2, T0, T1, T2, T3);
-	signal STATE, NEXT_STATE : CU_STATE := Init;
-	signal AM : STD_LOGIC_VECTOR(1 downto 0);
-	signal OPCODE : STD_LOGIC_VECTOR(5 downto 0);
-	signal RX : STD_LOGIC_VECTOR(3 downto 0);
-	signal RZ : STD_LOGIC_VECTOR(3 downto 0);
-	signal LOCK : STD_LOGIC := '0';
-  signal IRQ : STD_LOGIC := '0';
+	signal STATE, NEXT_STATE 	: CU_STATE := Init;
+	signal AM 					: STD_LOGIC_VECTOR(1 downto 0);
+	signal OPCODE 				: STD_LOGIC_VECTOR(5 downto 0);
+	signal RX 					: STD_LOGIC_VECTOR(3 downto 0);
+	signal RZ 					: STD_LOGIC_VECTOR(3 downto 0);
+	signal LOCK 				: STD_LOGIC := '0';
+	signal IRQ 					: STD_LOGIC := '0';
 	signal DPC_int, CLR_IRQ_int : STD_LOGIC := '0';
 
 	-- Addressing mode bits
@@ -188,11 +189,11 @@ BEGIN
 					-- R15 <= M[HP](7..0)
 				ELSIF(DPC_int = '0' AND IRQ = '0') THEN
 					IF(ld_dprr_done = '1') THEN
-						reset_clrirq <= '1' ;         -- set clr_irq register low
+						CLR_IRQ <= '1' ;         -- set clr_irq register low
 					END IF;
 				ELSE
 					IF(IRQ = '0' AND ld_dprr_done = '1') THEN
-						reset_clrirq <= '1' ;         -- set clr_irq register low
+						CLR_IRQ <= '1' ;         -- set clr_irq register low
 					END IF;
 				END IF;
 			WHEN E1 =>
@@ -322,7 +323,7 @@ BEGIN
 								wr_en <= '1';
 								sel_ir <= '0';			-- added because bottom ir not loading in properly
 							WHEN STR_I =>
-								mux_DMW_sel <= '0';
+								mux_DMW_sel <= "00";
 								mux_DM_Data_sel <= "01";
 								data_write <= '1';
 							WHEN JMP_I =>
@@ -347,7 +348,7 @@ BEGIN
 								ELSIF(LOCK = '1' AND IRQ = '1') THEN
 									wr_dest <= x"0";
 									wr_en <= '1';
-									mux_RF_sel <= "111"; -- TODO check if this is connected correctly
+									mux_RF_sel <= "110"; -- TODO check if this is connected correctly
 									ld_dprr_done <= '0';
 									DPC_int <= '0';
 									CLR_IRQ_int <= '1';
@@ -381,11 +382,11 @@ BEGIN
 								wr_en <= '1';
 								sel_ir <= '0';				-- Added because bottom ir was not loading in properly
 							WHEN STR_I =>
-								mux_DMW_sel <= '1';
+								mux_DMW_sel <= "01";
 								mux_DM_Data_sel <= "00";
 								data_write <= '1';
 							WHEN STRPC_I =>
-								mux_DMW_sel <= '1';
+								mux_DMW_sel <= "01";
 								mux_DM_Data_sel <= "10";
 								data_write <= '1';
 							WHEN OTHERS =>
@@ -430,7 +431,7 @@ BEGIN
 								sel_ir <= '0';			-- added because bottom ir not loading in properly
 							WHEN STR_I =>
 								sel_x <= RX;
-								mux_DMW_sel <= '0';
+								mux_DMW_sel <= "00";
 								mux_DM_Data_sel <= "00";
 								data_write <= '1';
 							WHEN JMP_I =>
@@ -444,6 +445,7 @@ BEGIN
 									DPCR_mux_sel <= '0';			-- sel in0
 									dpcr_en <= '1';
 									LOCK <= '1';
+									dprr_en <= '1';			-- Enable dprr register to load
 									ld_dprr_done <= '1';
 								ELSIF(LOCK = '1' and DPC_int = '0') THEN
 									DPC_int <= '1';
