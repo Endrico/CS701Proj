@@ -102,13 +102,13 @@ BEGIN
                 WHEN TEST =>
                 WHEN TEST2 =>
                 WHEN E0 =>
-                    -- IF(DPC = '1' AND IRQ = '1') THEN     --Changed
-                        -- STATE <= E1;
-                    -- ELSIF(DPC = '0' AND IRQ = '0') THEN  --Changed
-                        -- STATE <= E2;
-                    -- ELSE
+                    IF(DPC_int = '1' AND IRQ = '1') THEN     --Changed
+                        STATE <= E1;
+                    ELSIF(DPC_int = '0' AND IRQ = '0') THEN  --Changed
+                        STATE <= E2;
+                    ELSE
                         STATE <= T0;
-                --  END IF;
+                END IF;
                 WHEN E1 =>
                     STATE <= E1bis;
                 WHEN E1bis =>
@@ -195,11 +195,11 @@ BEGIN
                     -- R15 <= M[HP](7..0)
                 ELSIF(DPC_int = '0' AND IRQ = '0') THEN
                     IF(ld_dprr_done = '1') THEN
-                        CLR_IRQ <= '1' ;         -- set clr_irq register low
+                        CLR_IRQ_int <= '1' ;         -- set clr_irq register low
                     END IF;
                 ELSE
                     IF(IRQ = '0' AND ld_dprr_done = '1') THEN
-                        CLR_IRQ <= '1' ;         -- set clr_irq register low
+                        CLR_IRQ_int <= '1' ;         -- set clr_irq register low
                     END IF;
                 END IF;
             WHEN E1 =>
