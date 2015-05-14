@@ -20,7 +20,7 @@ ENTITY CONTROLUNIT IS
     alu_op, mux_A_sel, mux_PC_sel, mux_DMW_sel          : OUT STD_LOGIC_VECTOR(1 downto 0);
     mux_DM_Data_sel                                     : OUT STD_LOGIC_VECTOR(1 downto 0);
     mux_RF_sel                                          : OUT STD_LOGIC_VECTOR(2 downto 0);
-    sel_x, sel_z, wr_dest                               : OUT STD_LOGIC_VECTOR(3 downto 0);
+    sel_x, sel_z, wr_dest, state_out                    : OUT STD_LOGIC_VECTOR(3 downto 0);
     
     DPRR            : IN STD_LOGIC_VECTOR(31 downto 0);
     DPC             : OUT STD_LOGIC;                -- I dont believe this is correct
@@ -84,8 +84,6 @@ BEGIN
     DPC <= DPC_int;
     CLR_IRQ <= CLR_IRQ_int;
     
-  
-
     Process(CLK)
     BEGIN
         IF(RST_L = '1') THEN
@@ -102,13 +100,13 @@ BEGIN
                 WHEN TEST =>
                 WHEN TEST2 =>
                 WHEN E0 =>
-                    IF(DPC_int = '1' AND IRQ = '1') THEN     --Changed
-                        STATE <= E1;
-                    ELSIF(DPC_int = '0' AND IRQ = '0') THEN  --Changed
-                        STATE <= E2;
-                    ELSE
+--                    IF(DPC_int = '1' AND IRQ = '1') THEN     --Changed
+--                        STATE <= E1;
+--                    ELSIF(DPC_int = '0' AND IRQ = '0') THEN  --Changed
+--                        STATE <= E2;
+--                    ELSE
                         STATE <= T0;
-                END IF;
+--                END IF;
                 WHEN E1 =>
                     STATE <= E1bis;
                 WHEN E1bis =>
@@ -174,6 +172,7 @@ BEGIN
                 mux_PC_sel <= "00";
                 DPC_int <= '0';         --Changed
                 dprr_en <= '1'; -- always enabled
+					 state_out <= "0000";
             WHEN E0 =>
                 en_z <='0';                     -- Added 12/05/2015
                 wr_en <= '0';
@@ -191,6 +190,7 @@ BEGIN
                 seteot <= '0';
                 data_write <= '0';
                 LOCK <= '0';
+					 state_out <= "0001";
                 IF(DPC_int = '1' AND IRQ = '1') THEN
                     -- R15 <= M[HP](7..0)
                 ELSIF(DPC_int = '0' AND IRQ = '0') THEN
@@ -204,11 +204,12 @@ BEGIN
                 END IF;
             WHEN E1 =>
                 -- MR[R15] <= DPRR
-                    dprr_en <= '1';         -- added to ld dprr register from the jop (or environment)
                     --sel_x <= "1110";      -- added to select R15 so its contents is the memory address.
                     --mux_DMR_sel <= "";
+						  state_out <= "0010";
                     
             WHEN E1bis =>
+				state_out <= "0011";
                 IF(unsigned(HP) - unsigned(FLMR) /= 0) THEN
                     HP <= std_logic_vector(unsigned(HP) + 1);
                 ELSE
@@ -219,6 +220,7 @@ BEGIN
                 CLR_IRQ_int <= '1' ;         -- set clr_irq register high
                 ld_dprr_done <= '0';
             WHEN E2 =>
+				state_out <= "0100";
                 IF(unsigned(HP) - unsigned(TP) /= 0) THEN
                     DPC_int <= '1';             --Changed
                     ld_dprr_done <= '1';
@@ -228,11 +230,13 @@ BEGIN
                     END IF;
                 END IF;
             WHEN T0 =>
+					state_out <= "0101";
                 ld_IR <= '1';
                 sel_ir <= '1';              -- Added
                 mux_PC_sel <= "00";
                 PC_reg_ld <= '1';           -- changed from 0 12/05
             WHEN T1 =>
+				state_out <= "0110";
                 CASE AM IS
                     WHEN Inherent_AM =>
                         ld_IR <= '0';
@@ -263,6 +267,7 @@ BEGIN
                     WHEN OTHERS =>
                 END CASE;
             WHEN T2 =>
+				state_out <= "0111";
                 ld_IR <= '0';
                 PC_reg_ld <= '0';
                 CASE AM IS
@@ -464,9 +469,12 @@ BEGIN
                 END CASE;
                 ld_dprr_done <= '1';
             WHEN T3 =>
+				state_out <= "1000";
             WHEN T2b1 =>
                 DPC_int <= '1';
+					 state_out <= "1001";
             WHEN T2b2 =>
+				state_out <= "1010";
                 IF(IRQ = '1') THEN
                     mux_DMW_sel <= "10";
                     mux_DM_Data_sel <= "11";
@@ -476,7 +484,7 @@ BEGIN
                     -- mux_RF_sel <= "111"; -- TODO check if this is connected correctly
                     ld_dprr_done <= '0';
                     DPC_int <= '0';         --Changed
-                    CLR_IRQ_int <= '1';
+                    CLR_IRQ_int <= '1';		-- Might affect running with the jop might need to change
                     -- dpcr_clr <= '1'; -- TODO add clr to dpcr mux  <-- dont you mean register?
                 END IF;
             WHEN OTHERS =>

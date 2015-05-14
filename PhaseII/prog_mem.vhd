@@ -22,12 +22,12 @@ END prog_mem;
 ARCHITECTURE behaviour OF prog_mem IS
     type DMEMORY is array(0 to 65535) of std_logic_vector(15 downto 0); --16K Memory
     constant dataInit : DMEMORY := (
-  x"3400",x"4010",x"0001",  --noop --ld -- opearnd
-  x"4040",x"0010",x"4344", --load --opernad --subv
-  x"0001", --x"6805",x"0004", --operand 	-- DCALLBL -- operand
-  x"5C40",x"0000",
+  x"3400", x"6805",x"0004",	-- DCALLBL 
+  x"4010",x"0001", 
+  x"4040",x"0010",x"4344",
+  x"0001", x"5C40",x"0000",
   x"F811",x"F700",x"CC01",
-  x"FA00",x"4030",x"0001",	-- changed x"4030" x"FFFF" to x"4030" x"0001"
+  x"FA00",x"4030",x"FFFF",	-- changed x"4030" x"FFFF" to x"4030" x"0001"
   x"4333",x"0001",x"5C30",
         x"0005", --Address 0
         x"5800", --Address 1

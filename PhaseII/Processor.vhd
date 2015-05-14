@@ -32,6 +32,7 @@ ENTITY Processor IS
 		start_hold 		:  IN  STD_LOGIC;
 		start 			:  IN  STD_LOGIC;
 		lddprr_done 	:  INOUT  STD_LOGIC;
+		state				:	out std_logic_vector(3 Downto 0);
 		dpc_jop 		:  OUT  STD_LOGIC;
 		dprr_in 		:  IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 		FFMR 			:  IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -95,7 +96,7 @@ COMPONENT controlunit
 		 mux_RF_sel 	: 	OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
 		 sel_x 			: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		 sel_z 			: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-		 wr_dest 		: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+		 wr_dest, state_out 		: 	OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
 	);
 END COMPONENT;
 
@@ -187,7 +188,8 @@ SIGNAL 	const_0 			: 	STD_LOGIC_VECTOR(31 downto 0) := x"00000000";
 BEGIN 
 
 b2v_ControlUnit : controlunit
-PORT MAP(CLK => clock,
+PORT MAP( state_out => state,
+			CLK => clock,
 		 RST_L => reset,
 		 DPRR => dprr_out_sig,						-- DPRR added
 		 nios_control => nios_input,
