@@ -103,7 +103,7 @@ BEGIN
    dpc_jop_process :process
    begin
         IF(dpc = '1') THEN
-			wait for 20 ns;  --for 0.5 ns signal is '0'.
+			wait for 100 ns;  --for 0.5 ns signal is '0'.
 			dprr_in <= "00000000000000000000000000000011";
 		ELSIF(dpc = '0' and clrirq = '1') THEN
 			dprr_in <= "00000000000000000000000000000000";
