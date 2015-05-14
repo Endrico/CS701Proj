@@ -7,11 +7,11 @@ SC_MODULE(RF)
 {
   sc_in<bool> RST;
   sc_in<bool> CLK;
-  sc_in<sc_bv<4> > sel_x;
-  sc_in<sc_bv<4> > sel_z;
+  sc_in<sc_uint<4> > sel_x;
+  sc_in<sc_uint<4> > sel_z;
 
   sc_in<bool> wr_en;
-  sc_in<sc_bv<4> > wr_dest;
+  sc_in<sc_uint<4> > wr_dest;
   sc_in<sc_int<16> > wr_data;
 
   sc_out<sc_int<16> > X;

@@ -3,12 +3,13 @@
 
 #include "systemc.h"
 
+template<int SIZE>
 SC_MODULE(Mul2)
 {
   sc_in<bool> select;
-  sc_in<sc_int<16> > in1;
-  sc_in<sc_int<16> > in2;
-  sc_out<sc_int<16> > out;
+  sc_in<sc_uint<SIZE> > in1;
+  sc_in<sc_uint<SIZE> > in2;
+  sc_out<sc_uint<SIZE> > out;
 
   void my_mul2( );
 

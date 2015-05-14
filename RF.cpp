@@ -10,11 +10,11 @@ void RF::my_RF()
   } else {
     if(CLK.pos()) {
       if(wr_en) {
-        Reg[wr_dest.read().to_uint()] = wr_data;
+        Reg[wr_dest.read()] = wr_data;
       }
     }
-    X = Reg[sel_x.read().to_uint()];
-    Z = Reg[sel_z.read().to_uint()];
+    X = Reg[sel_x.read()];
+    Z = Reg[sel_z.read()];
     ccd = Reg[7];
     pcd = Reg[8];
   }

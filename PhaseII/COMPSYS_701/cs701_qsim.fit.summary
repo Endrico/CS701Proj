@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed May 06 17:05:52 2015
+Quartus II Version : 11.0 Build 208 07/03/2011 SP 1 SJ Full Version
+Revision Name : cs701_qsim
+Top-level Entity Name : Processor
+Family : Cyclone III
+Device : EP3C55F484C6
+Timing Models : Final
+Total logic elements : 716 / 55,856 ( 1 % )
+    Total combinational functions : 683 / 55,856 ( 1 % )
+    Dedicated logic registers : 140 / 55,856 ( < 1 % )
+Total registers : 140
+Total pins : 52 / 328 ( 16 % )
+Total virtual pins : 0
+Total memory bits : 2,097,664 / 2,396,160 ( 88 % )
+Embedded Multiplier 9-bit elements : 0 / 312 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )
