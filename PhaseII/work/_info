@@ -2,285 +2,955 @@ m255
 K3
 13
 cModel Technology
-Z0 dC:\Users\Noah\Documents\GitHub\CS701Proj\PhaseII
+dC:\Users\Noah\Documents\GitHub\CS701Proj\PhaseII
 Ealu
-Z1 w1430098416
-Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
-Z3 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
-Z4 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
-Z5 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
-Z6 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
-Z7 dC:\Users\Noah\Documents\GitHub\CS701Proj\PhaseII
-Z8 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd
-Z9 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd
+Z0 w1430727493
+Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z2 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
+Z4 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z5 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z6 dE:\Documents\GitHub\CS701Proj\PhaseII
+Z7 8E:/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd
+Z8 FE:/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd
 l0
 L6
-VF]nY;laH_iI_NUz<gb[iV2
-Z10 OV;C;10.1d;51
+VG]VX;T[ABKgFFhi>:Qlf?2
+Z9 OE;C;10.1c;51
 32
-Z11 !s108 1430099955.533000
-Z12 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd|
-Z13 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd|
-Z14 o-work work -O0
-Z15 tExplicit 1
-!s100 a?4GWd^DECnQ]z=^F5oPA2
+Z10 !s108 1433503366.644000
+Z11 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd|
+Z12 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/ALU.vhd|
+Z13 o-work work
+Z14 tExplicit 1
+!s100 JI7hRa7eU>jnnSXLb@;EG1
 !i10b 1
 Abhvr
+R1
 R2
 R3
 R4
 R5
-R6
-DEx4 work 3 alu 0 22 F]nY;laH_iI_NUz<gb[iV2
-l24
-L17
-VoK1VnW0=[D9N;Kg5H::aC1
-R10
+DEx4 work 3 alu 0 22 G]VX;T[ABKgFFhi>:Qlf?2
 32
+l23
+L16
+VF50QXO3RJUK][3zjIKE?n2
+R9
+R10
 R11
 R12
 R13
 R14
-R15
-!s100 Nc8_i`5[K3VeXPa`KWE6H1
+!s100 D0JR]aAA3YRBfTiQaM6cg2
+!i10b 1
+Ebcdsevenseg
+Z15 w1431457682
+R3
+R2
+R4
+R5
+R6
+Z16 8E:/Documents/GitHub/CS701Proj/PhaseII/bcdsevenseg.vhd
+Z17 FE:/Documents/GitHub/CS701Proj/PhaseII/bcdsevenseg.vhd
+l0
+L6
+V>MPMLfJcJP@bjAhMfJaUF1
+R9
+32
+Z18 !s108 1433503366.832000
+Z19 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/bcdsevenseg.vhd|
+Z20 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/bcdsevenseg.vhd|
+R13
+R14
+!s100 Qk@6PU23Qm4eI4nEWzAk@0
+!i10b 1
+Abehavioral
+R3
+R2
+R4
+R5
+DEx4 work 11 bcdsevenseg 0 22 >MPMLfJcJP@bjAhMfJaUF1
+l16
+L14
+V]SIdZ:NbTMHO?>`o6Ba833
+R9
+32
+R18
+R19
+R20
+R13
+R14
+!s100 j_P=47_7SFEo76U?Zh4UD1
+!i10b 1
+Eclk200hz
+Z21 w1432195110
+R4
+R5
+R6
+Z22 8E:/Documents/GitHub/CS701Proj/PhaseII/clkdiv.vhd
+Z23 FE:/Documents/GitHub/CS701Proj/PhaseII/clkdiv.vhd
+l0
+L7
+VQJ@HJ:>hz2>3MM_SS3I?N1
+R9
+32
+Z24 !s108 1433503367.188000
+Z25 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/clkdiv.vhd|
+Z26 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/clkdiv.vhd|
+R13
+R14
+!s100 h4[II>ghZY8DR?YE4D?F]3
+!i10b 1
+Abehavioral
+R4
+R5
+DEx4 work 8 clk200hz 0 22 QJ@HJ:>hz2>3MM_SS3I?N1
+l18
+L15
+VHegVhF:M3K>h61EY@MVb?1
+R9
+32
+R24
+R25
+R26
+R13
+R14
+!s100 aP5d8gGY?H8YC[0j0g<_W1
 !i10b 1
 Econtrolunit
-Z16 w1430727236
+Z27 w1433504220
+R1
 R2
 R3
 R4
 R5
 R6
-Z17 dE:\Documents\GitHub\CS701Proj\PhaseII
-Z18 8E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd
-Z19 FE:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd
+Z28 8E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd
+Z29 FE:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd
 l0
 L6
-V9^oH>7E<JL:3NdET5DMLS1
-!s100 DF5dB>MM9Q[KYlQHG`mAo1
-R10
+VPZiam2jDW]41m?bgePe?81
+R9
 32
-!i10b 1
-Z20 !s108 1430727240.855000
-Z21 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd|
-Z22 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd|
+Z30 !s108 1433504231.482000
+Z31 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd|
+Z32 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/ControlUnit.vhd|
+R13
 R14
-R15
+!s100 G3DQCS^:j]8`ijaZQ_[k70
+!i10b 1
 Abhvr
+R1
 R2
 R3
 R4
 R5
-R6
-DEx4 work 11 controlunit 0 22 9^oH>7E<JL:3NdET5DMLS1
-l71
-L33
-Vlg4]9WUF5kjPN@;904TSm1
-!s100 [27Yg_SFD7UKNbkJm>A8T2
-R10
+DEx4 work 11 controlunit 0 22 PZiam2jDW]41m?bgePe?81
 32
-!i10b 1
-R20
-R21
-R22
+l77
+L36
+V?O<=z:jaYRPdYS^Vm9=oU0
+R9
+R30
+R31
+R32
+R13
 R14
-R15
-Emax
-Z23 w1430104375
+!s100 @3]:cKo0;aj8=]oEg>TT90
+!i10b 1
+Edata_mem
+Z33 w1430616000
+R1
 R2
 R3
 R4
 R5
 R6
-R7
-Z24 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd
-Z25 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd
+Z34 8E:/Documents/GitHub/CS701Proj/PhaseII/data_mem.vhd
+Z35 FE:/Documents/GitHub/CS701Proj/PhaseII/data_mem.vhd
+l0
+L10
+V>C5;dmAPIfW=IF`D7<kF42
+R9
+32
+Z36 !s108 1433503367.538000
+Z37 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/data_mem.vhd|
+Z38 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/data_mem.vhd|
+R13
+R14
+!s100 c@XNfl^CZOdePBDA3_g[Z2
+!i10b 1
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 8 data_mem 0 22 >C5;dmAPIfW=IF`D7<kF42
+32
+l28
+L22
+V`j5O:2;aN`4gEdh>Cj0g21
+R9
+R36
+R37
+R38
+R13
+R14
+!s100 Kf?A^lX6nb6X^PTG<XnH11
+!i10b 1
+Edatapath
+Z39 w1431588993
+R4
+R5
+R6
+Z40 8E:/Documents/GitHub/CS701Proj/PhaseII/Datapath.vhd
+Z41 FE:/Documents/GitHub/CS701Proj/PhaseII/Datapath.vhd
+l0
+L24
+V2KT3@Tg6^VfVU_mS^llW61
+R9
+32
+Z42 !s108 1433503367.712000
+Z43 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Datapath.vhd|
+Z44 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Datapath.vhd|
+R13
+R14
+!s100 9CKmNBn`PnB2i=Ef2bZMA3
+!i10b 1
+Abdf_type
+R4
+R5
+DEx4 work 8 datapath 0 22 2KT3@Tg6^VfVU_mS^llW61
+32
+l245
+L82
+VQ4FA>T<_`@HS3B^I9fzU@1
+R9
+R42
+R43
+R44
+R13
+R14
+!s100 E4UBiVP0U?1ReA8JLWblR0
+!i10b 1
+Einstruction_register
+R15
+R3
+R2
+R4
+R5
+R6
+Z45 8E:/Documents/GitHub/CS701Proj/PhaseII/instruction_register.vhd
+Z46 FE:/Documents/GitHub/CS701Proj/PhaseII/instruction_register.vhd
 l0
 L6
-V2Fm9k77SeUXzmoXL]7ik12
-R10
+VaaT]MVjH`L3iU<DfC51b20
+R9
 32
-Z26 !s108 1430104383.935000
-Z27 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd|
-Z28 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd|
+Z47 !s108 1433503367.856000
+Z48 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/instruction_register.vhd|
+Z49 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/instruction_register.vhd|
+R13
 R14
-R15
+!s100 [gQONLZ123_?`?oE56Vz03
+!i10b 1
+Abehaviour
+R3
+R2
+R4
+R5
+DEx4 work 20 instruction_register 0 22 aaT]MVjH`L3iU<DfC51b20
+32
+l19
+L17
+VnENWV8kCTQ?0^zjJ_e2c61
+R9
+R47
+R48
+R49
+R13
+R14
+!s100 `X^??WFPkRDCmYf50mn760
+!i10b 1
+Emax
+Z50 w1430169077
+R1
+R2
+R3
+R4
+R5
+R6
+Z51 8E:/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd
+Z52 FE:/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd
+l0
+L6
+VTzBf3ZzKn:gPIJ55m;Obi3
+R9
+32
+Z53 !s108 1433503368.035000
+Z54 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd|
+Z55 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/MAX.vhd|
+R13
+R14
 !s100 K64n<YfzkCNU:oiCfin@80
 !i10b 1
 Abhvr
+R1
+R2
+R3
+R4
+R5
+DEx4 work 3 max 0 22 TzBf3ZzKn:gPIJ55m;Obi3
+32
+l15
+L14
+VEN=YE?B>z<T7VM@7AGIIN0
+R9
+R53
+R54
+R55
+R13
+R14
+!s100 NmiRIk`5Znl78AZE>JdzU0
+!i10b 1
+Emux2
+R50
+R4
+R5
+R6
+Z56 8E:/Documents/GitHub/CS701Proj/PhaseII/Mux2.vhd
+Z57 FE:/Documents/GitHub/CS701Proj/PhaseII/Mux2.vhd
+l0
+L4
+VUe67Rd1Q;:GDO]QOSL5P>0
+R9
+32
+Z58 !s108 1433503368.239000
+Z59 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Mux2.vhd|
+Z60 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Mux2.vhd|
+R13
+R14
+!s100 _BK^7;PTaMN=@<jSO8Oeh0
+!i10b 1
+Abehavior
+R4
+R5
+DEx4 work 4 mux2 0 22 Ue67Rd1Q;:GDO]QOSL5P>0
+32
+l13
+L12
+Vdid0HC6SQS?OXhI2;^BH:1
+R9
+R58
+R59
+R60
+R13
+R14
+!s100 =^F?e1MYElQ`^KiAdlXLS2
+!i10b 1
+Emux2_32
+R39
+R4
+R5
+R6
+Z61 8E:/Documents/GitHub/CS701Proj/PhaseII/Mux2_32.vhd
+Z62 FE:/Documents/GitHub/CS701Proj/PhaseII/Mux2_32.vhd
+l0
+L4
+VD7<e0U6VF5Hd:PYbbJL3X0
+R9
+32
+Z63 !s108 1433503368.620000
+Z64 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Mux2_32.vhd|
+Z65 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Mux2_32.vhd|
+R13
+R14
+!s100 N`_kllk6N`3C3;L5KiNig3
+!i10b 1
+Abehavior
+R4
+R5
+DEx4 work 7 mux2_32 0 22 D7<e0U6VF5Hd:PYbbJL3X0
+32
+l13
+L12
+VZZFH:jkTDQX<Ak5P:9^KH1
+R9
+R63
+R64
+R65
+R13
+R14
+!s100 Lb<Vm@oi3ZX[P>=5:_gj61
+!i10b 1
+Emux4
+R50
+R4
+R5
+R6
+Z66 8E:/Documents/GitHub/CS701Proj/PhaseII/Mux4.vhd
+Z67 FE:/Documents/GitHub/CS701Proj/PhaseII/Mux4.vhd
+l0
+L4
+VaMfiWfYWjI105aEYljkic2
+R9
+32
+Z68 !s108 1433503369.003000
+Z69 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Mux4.vhd|
+Z70 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Mux4.vhd|
+R13
+R14
+!s100 5KzU_PY_bYbmeV_M2:I>U3
+!i10b 1
+Abehavior
+R4
+R5
+DEx4 work 4 mux4 0 22 aMfiWfYWjI105aEYljkic2
+32
+l15
+L14
+VzH`zOQ]aMQa2c;eO4YDO22
+R9
+R68
+R69
+R70
+R13
+R14
+!s100 JATXOW7c^lXMi5X[o2dkX3
+!i10b 1
+Emux8
+R50
+R4
+R5
+R6
+Z71 8E:/Documents/GitHub/CS701Proj/PhaseII/Mux8.vhd
+Z72 FE:/Documents/GitHub/CS701Proj/PhaseII/Mux8.vhd
+l0
+L4
+V=I[;AE>@F`km;F4@_c9h>2
+R9
+32
+Z73 !s108 1433503369.377000
+Z74 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Mux8.vhd|
+Z75 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Mux8.vhd|
+R13
+R14
+!s100 TI1l=a>N;`B0gXdRScPP>0
+!i10b 1
+Abehavior
+R4
+R5
+DEx4 work 4 mux8 0 22 =I[;AE>@F`km;F4@_c9h>2
+32
+l19
+L18
+V]nkijUgGzY;cZQYO`W]l>1
+R9
+R73
+R74
+R75
+R13
+R14
+!s100 G0czMAUQ6?f;T;SfZ[fni3
+!i10b 1
+Epcplus1
+R50
+R3
+R2
+R1
+R4
+R5
+R6
+Z76 8E:/Documents/GitHub/CS701Proj/PhaseII/PCadd.vhd
+Z77 FE:/Documents/GitHub/CS701Proj/PhaseII/PCadd.vhd
+l0
+L7
+Vjn@WCEbU;AgMccBncNgCP2
+R9
+32
+Z78 !s108 1433503369.562000
+Z79 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/PCadd.vhd|
+Z80 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/PCadd.vhd|
+R13
+R14
+!s100 KzlX62fIFcdB]UFNdzM3Q2
+!i10b 1
+Abehavior
+R3
+R2
+R1
+R4
+R5
+DEx4 work 7 pcplus1 0 22 jn@WCEbU;AgMccBncNgCP2
+32
+l16
+L13
+V2]11h2c15LXg]C2Y88i813
+R9
+R78
+R79
+R80
+R13
+R14
+!s100 VMWN>AjH^b@9izFa7i]_V1
+!i10b 1
+Eprocessor
+R21
+R4
+R5
+R6
+Z81 8E:/Documents/GitHub/CS701Proj/PhaseII/Processor.vhd
+Z82 FE:/Documents/GitHub/CS701Proj/PhaseII/Processor.vhd
+l0
+L24
+V7@0C15idDHEKRY2g0K8l10
+R9
+32
+Z83 !s108 1433503369.928000
+Z84 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/Processor.vhd|
+Z85 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/Processor.vhd|
+R13
+R14
+!s100 ]ZokFA6jAE`aea5UM4JLG1
+!i10b 1
+Abdf_type
+R4
+R5
+DEx4 work 9 processor 0 22 7@0C15idDHEKRY2g0K8l10
+32
+l188
+L53
+V63]N?feho0j^9Xd^4Vo9X0
+R9
+R83
+R84
+R85
+R13
+R14
+!s100 kXB4MRYDCM>^HY4=]AfLM0
+!i10b 1
+Eprog_mem
+Z86 w1433504323
+R1
 R2
 R3
 R4
 R5
 R6
-DEx4 work 3 max 0 22 2Fm9k77SeUXzmoXL]7ik12
-l15
-L14
-VcoSIAJ^MAO4G;VXb`5SdM0
-R10
+Z87 8E:/Documents/GitHub/CS701Proj/PhaseII/prog_mem.vhd
+Z88 FE:/Documents/GitHub/CS701Proj/PhaseII/prog_mem.vhd
+l0
+L10
+V52C98[i<J9EamJ94;S3Og3
+R9
 32
-R26
-R27
-R28
+Z89 !s108 1433504341.289000
+Z90 !s90 -reportprogress|300|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/prog_mem.vhd|
+Z91 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/prog_mem.vhd|
+R13
 R14
-R15
-!s100 NmiRIk`5Znl78AZE>JdzU0
+!s100 ?DMRGQm8C=d4ekFWUIZLR2
 !i10b 1
-Esingle_register
-Z29 w1430105858
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 8 prog_mem 0 22 52C98[i<J9EamJ94;S3Og3
+32
+l37
+L22
+VI48=d7o3UAb6_WZ0Do7:o0
+R9
+R89
+R90
+R91
+R13
+R14
+!s100 Mn`0NdR7WO8iW24`F]o4Y3
+!i10b 1
+Eregister_1bit
+Z92 w1431329322
+R4
 R5
 R6
-R7
-Z30 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
-Z31 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
+Z93 8E:/Documents/GitHub/CS701Proj/PhaseII/register_1bit.vhd
+Z94 FE:/Documents/GitHub/CS701Proj/PhaseII/register_1bit.vhd
 l0
 L4
-V7do_Uc@PJ_^9TS1VbUZME3
-R10
+VV>i2>_0BQh9`hMm4gQA@40
+R9
 32
-Z32 !s108 1430105977.327000
-Z33 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
-Z34 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
+Z95 !s108 1433503370.592000
+Z96 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/register_1bit.vhd|
+Z97 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/register_1bit.vhd|
+R13
 R14
+!s100 HG<[S4=fRf32B@E]]JK5<2
+!i10b 1
+Abehaviour
+R4
+R5
+DEx4 work 13 register_1bit 0 22 V>i2>_0BQh9`hMm4gQA@40
+32
+l15
+L14
+VizT_gbLmo6KbnlL@eJ7B13
+R9
+R95
+R96
+R97
+R13
+R14
+!s100 @:3CICkFLY<9^8JTNDI`Q0
+!i10b 1
+Eregister_32
+Z98 w1430819798
+R4
+R5
+R6
+Z99 8E:/Documents/GitHub/CS701Proj/PhaseII/register_32.vhd
+Z100 FE:/Documents/GitHub/CS701Proj/PhaseII/register_32.vhd
+l0
+L4
+VRe@aEOT^aA`zk:8WAhO0g0
+R9
+32
+Z101 !s108 1433503370.968000
+Z102 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/register_32.vhd|
+Z103 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/register_32.vhd|
+R13
+R14
+!s100 nP?dWEn7bZI8oAc_V_i>43
+!i10b 1
+Abehaviour
+R4
+R5
+DEx4 work 11 register_32 0 22 Re@aEOT^aA`zk:8WAhO0g0
+32
+l15
+L14
+VboK99DcjFSjmO6[UXPQC_2
+R9
+R101
+R102
+R103
+R13
+R14
+!s100 EmU`5IMKWz?Ka0FRB]TI?3
+!i10b 1
+Eregister_er
+Z104 w1430727467
+R4
+R5
+R6
+Z105 8E:/Documents/GitHub/CS701Proj/PhaseII/register_ER.vhd
+Z106 FE:/Documents/GitHub/CS701Proj/PhaseII/register_ER.vhd
+l0
+L4
+VOPeLKWT796];dCETBz==K1
+R9
+32
+Z107 !s108 1433503371.178000
+Z108 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/register_ER.vhd|
+Z109 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/register_ER.vhd|
+R13
+R14
+!s100 PY^AcOXmmTzZl:]ABaAJb3
+!i10b 1
+Abehaviour
+R4
+R5
+DEx4 work 11 register_er 0 22 OPeLKWT796];dCETBz==K1
+l15
+L14
+VZeKJ0CE`QUfUkPOIczl<32
+R9
+32
+R107
+R108
+R109
+R13
+R14
+!s100 2n`K7f15@iUzoS2GX1@h53
+!i10b 1
+Erf
 R15
+R1
+R2
+R3
+R4
+R5
+R6
+Z110 8E:/Documents/GitHub/CS701Proj/PhaseII/RegisterFile.vhd
+Z111 FE:/Documents/GitHub/CS701Proj/PhaseII/RegisterFile.vhd
+l0
+L11
+VSMLUz1[TjZ0T0@10kUU2[2
+R9
+32
+Z112 !s108 1433503371.574000
+Z113 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/RegisterFile.vhd|
+Z114 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/RegisterFile.vhd|
+R13
+R14
+!s100 Af?JS`ehn87U]ag^;k^WF0
+!i10b 1
+Abehaviour
+R1
+R2
+R3
+R4
+R5
+DEx4 work 2 rf 0 22 SMLUz1[TjZ0T0@10kUU2[2
+32
+l34
+L27
+V[kE7^f_EX94Dl;^KD`Ie70
+R9
+R112
+R113
+R114
+R13
+R14
+!s100 I<@m[Re1NFjL3Vhmcl9902
+!i10b 1
+Esingle_register
+R50
+R4
+R5
+R6
+Z115 8E:/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
+Z116 FE:/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd
+l0
+L4
+VPzI2M6d4V0adN>E`FGTZf0
+R9
+32
+Z117 !s108 1433503371.931000
+Z118 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
+Z119 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/single_register.vhd|
+R13
+R14
 !s100 :?i8GSgOjDBG5LjJCcl;F3
 !i10b 1
 Abehaviour
+R4
 R5
-R6
-DEx4 work 15 single_register 0 22 7do_Uc@PJ_^9TS1VbUZME3
+DEx4 work 15 single_register 0 22 PzI2M6d4V0adN>E`FGTZf0
+32
 l15
 L14
-Vhd[5AR_HG@BYE?Hk7C03T0
-R10
-32
-R32
-R33
-R34
+VVW9I:z9Yho9<RFkN^8iFg2
+R9
+R117
+R118
+R119
+R13
 R14
-R15
 !s100 oHhcOOb3MF[G`zndmTnW42
 !i10b 1
 Etest_alu
-Z35 w1430099948
+R50
+R1
 R2
 R3
 R4
 R5
 R6
-R7
-Z36 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
-Z37 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
+Z120 8E:/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
+Z121 FE:/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd
 l0
 L6
-VE@c;R58KJT@TKMU@<OVJS2
-R10
+VmChg2@d]bO7Bfb_6588ze3
+R9
 32
-Z38 !s108 1430099955.859000
-Z39 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
-Z40 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
+Z122 !s108 1433503372.128000
+Z123 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
+Z124 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/test_ALU.vhd|
+R13
 R14
-R15
 !s100 [^=A3`lZSf@eKI[MeLQjh1
 !i10b 1
 Abhvr
+R1
 R2
 R3
 R4
 R5
-R6
-DEx4 work 8 test_alu 0 22 E@c;R58KJT@TKMU@<OVJS2
+DEx4 work 8 test_alu 0 22 mChg2@d]bO7Bfb_6588ze3
 l24
 L9
-Vk3M<_IehCTn^MSCE^A>a>0
-R10
+VlAd4izzWa^:PFfRKm:SZQ2
+R9
 32
-R38
-R39
-R40
+R122
+R123
+R124
+R13
 R14
-R15
 !s100 PeUcaV5O6e;K7KzIfihYV3
 !i10b 1
+Etest_bench
+R39
+R3
+R2
+R4
+R5
+R6
+Z125 8E:/Documents/GitHub/CS701Proj/PhaseII/test_bench.vhd
+Z126 FE:/Documents/GitHub/CS701Proj/PhaseII/test_bench.vhd
+l0
+L7
+VXKcTZ:PJa>ES:57eFjcB?0
+R9
+32
+Z127 !s108 1433503372.499000
+Z128 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/test_bench.vhd|
+Z129 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/test_bench.vhd|
+R13
+R14
+!s100 nmG;aQ=NBDSbY94ge_he?2
+!i10b 1
+Abehaviour
+R3
+R2
+R4
+R5
+DEx4 work 10 test_bench 0 22 XKcTZ:PJa>ES:57eFjcB?0
+32
+l64
+L10
+VLF<ECAYoUM=N?^ohgP@f53
+R9
+R127
+R128
+R129
+R13
+R14
+!s100 OA2aW`z6L`fP7IgY5?kNo3
+!i10b 1
 Etest_max
-Z41 w1430104347
+R50
+R1
 R2
 R3
 R4
 R5
 R6
-R7
-Z42 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
-Z43 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
+Z130 8E:/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
+Z131 FE:/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd
 l0
 L6
-VmCWW_SKN1B23MHN]bS7N43
-R10
+VU<=c3G2CUSnCC<6Q[GkJH3
+R9
 32
-Z44 !s108 1430104384.357000
-Z45 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
-Z46 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+Z132 !s108 1433503372.867000
+Z133 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+Z134 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/test_MAX.vhd|
+R13
 R14
-R15
 !s100 g=5b[8HZOkcAiD`G[Q<be3
 !i10b 1
 Abhvr
+R1
 R2
 R3
 R4
 R5
-R6
-DEx4 work 8 test_max 0 22 mCWW_SKN1B23MHN]bS7N43
+DEx4 work 8 test_max 0 22 U<=c3G2CUSnCC<6Q[GkJH3
 l19
 L9
-Vka^65P>?lfPF5:?EKRnnG0
-R10
+V3IKNEg=clkiShPa[eoQ:R0
+R9
 32
-R44
-R45
-R46
+R132
+R133
+R134
+R13
 R14
-R15
 !s100 z8:8Ydj8[SHE327Vj:4d10
 !i10b 1
 Etest_single_register
-Z47 w1430106092
+R50
+R1
 R2
 R3
 R4
 R5
 R6
-R7
-Z48 8C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
-Z49 FC:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
+Z135 8E:/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
+Z136 FE:/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd
 l0
 L6
-VIlH`Ig@24c@[Db0NfeV@_2
-R10
+VojC=6UUIncg`PWHLzF01Y2
+R9
 32
-Z50 !s108 1430106114.600000
-Z51 !s90 -reportprogress|300|-work|work|C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
-Z52 !s107 C:/Users/Noah/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
+Z137 !s108 1433503373.039000
+Z138 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
+Z139 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/test_single_register.vhd|
+R13
 R14
-R15
 !s100 QfA@AlVWcU0e0SWVJe8AZ0
 !i10b 1
 Abhvr
+R1
+R2
+R3
+R4
+R5
+DEx4 work 20 test_single_register 0 22 ojC=6UUIncg`PWHLzF01Y2
+l23
+L9
+VF08k5;SJmh^VBRKiz2BTG0
+R9
+32
+R137
+R138
+R139
+R13
+R14
+!s100 0=gHU3_;L8<S]cYeOWZ1?0
+!i10b 1
+Etest_tb
+R92
 R2
 R3
 R4
 R5
 R6
-DEx4 work 20 test_single_register 0 22 IlH`Ig@24c@[Db0NfeV@_2
-l23
-L9
-VNb3c[Y7zHGPW3:C?5>zAc3
-R10
+Z140 8E:/Documents/GitHub/CS701Proj/PhaseII/test_delete_me.vhd
+Z141 FE:/Documents/GitHub/CS701Proj/PhaseII/test_delete_me.vhd
+l0
+L6
+VDnHHH49zgnC9RP?IR7G870
+R9
 32
-R50
-R51
-R52
+Z142 !s108 1433503372.673000
+Z143 !s90 -reportprogress|30|-work|work|E:/Documents/GitHub/CS701Proj/PhaseII/test_delete_me.vhd|
+Z144 !s107 E:/Documents/GitHub/CS701Proj/PhaseII/test_delete_me.vhd|
+R13
 R14
-R15
-!s100 0=gHU3_;L8<S]cYeOWZ1?0
+!s100 >1am`QZh:0zezz<LJ8X]?2
+!i10b 1
+Abehavior
+R2
+R3
+R4
+R5
+DEx4 work 7 test_tb 0 22 DnHHH49zgnC9RP?IR7G870
+l26
+L9
+VZ0V@gmaodf?=NE5Mcoa5?1
+R9
+32
+R142
+R143
+R144
+R13
+R14
+!s100 ZW?;1AndX=EfT1h6>hS5;0
 !i10b 1
